@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# This is a private design-review prototype for Lion Creatives.
+# It is intentionally UNINDEXED via <meta name="robots" content="noindex, nofollow, noarchive">
+# on every page. Crawling is deliberately permitted so that review tools and
+# automated fetchers can read the prototype for evaluation.
