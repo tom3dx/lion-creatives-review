@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Typography Deck — Lion Creatives V9</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Geist+Mono:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,401&display=swap">
+<style>
+:root{--void:#0a0a0b;--plane:#17171a;--hair:rgba(255,255,255,.12);--signal:#da1f26;
+  --fg:#f7f6f3;--muted:#b8b7b3;--dim:#8b8b8e;
+  --f-studio:'Fraunces',Georgia,serif;--f-work:'Archivo',system-ui,sans-serif;
+  --f-machine:'Geist Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--fg);font-family:var(--f-work);
+  font-synthesis:none;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:clamp(1.4rem,4vw,3rem)}
+img{max-width:100%;display:block}
+h1{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 0;font-weight:300;
+  font-size:clamp(2rem,5vw,3.6rem);line-height:.95;margin:0 0 .5rem;letter-spacing:-.025em}
+h1 i{color:var(--signal)}
+h2{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 0;font-weight:400;
+  font-size:1.7rem;margin:3rem 0 .8rem;border-top:1px solid var(--hair);padding-top:1.8rem}
+.label{font-family:var(--f-machine);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);margin:0}
+.lede{color:var(--muted);max-width:76ch}
+a{color:var(--fg)}
+.roles{display:grid;gap:0;border:1px solid var(--hair);margin-top:1rem}
+.role{display:grid;grid-template-columns:170px 1fr;gap:1.2rem;padding:1.15rem 1.3rem;
+  border-bottom:1px solid var(--hair);align-items:baseline}
+.role:last-child{border-bottom:0}
+.role .k{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim);line-height:1.5}
+.role .k b{display:block;color:var(--signal);font-weight:400}
+@media(max-width:700px){.role{grid-template-columns:1fr;gap:.4rem}}
+
+/* the eight roles, exactly as the site sets them */
+.r-display{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 0;font-weight:300;
+  font-size:clamp(2.1rem,5vw,3.6rem);line-height:.92;letter-spacing:-.028em}
+.r-scene{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 0;font-weight:400;
+  font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.02;letter-spacing:-.018em}
+.r-editorial{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 30,'wght' 400,'SOFT' 40;font-weight:400;font-style:italic;
+  font-size:clamp(1.1rem,1.9vw,1.5rem);line-height:1.3}
+.r-tech{font-family:var(--f-work);font-stretch:88%;font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.3rem,2.4vw,1.9rem);line-height:1.04}
+.r-proj{font-family:var(--f-work);font-stretch:118%;font-weight:600;font-size:1.2rem}
+.r-body{font-family:var(--f-work);font-stretch:100%;font-weight:400;font-size:1.02rem;color:var(--muted)}
+.r-meta{font-family:var(--f-machine);font-weight:400;font-size:.72rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim);font-variant-numeric:tabular-nums slashed-zero}
+.r-nav{font-family:var(--f-work);font-stretch:92%;font-weight:500;font-size:.92rem}
+.r-cta{font-family:var(--f-machine);font-weight:600;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid currentColor;padding:.7rem 1.1rem;display:inline-block}
+.sig{color:var(--signal)}
+
+.grid2{display:grid;gap:1.2rem;grid-template-columns:1fr}
+@media(min-width:860px){.grid2{grid-template-columns:1fr 1fr}}
+.panel{border:1px solid var(--hair);background:var(--plane);padding:1.4rem}
+.panel.bad{opacity:.9}
+.panel h3{font-family:var(--f-machine);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 1rem;font-weight:400}
+.panel h3 em{font-style:normal;color:#c96a6e}
+.panel h3 b{font-weight:400;color:#7dba84}
+/* the two rejected systems, rendered honestly for comparison */
+.old-hubot{font-family:'Archivo',system-ui,sans-serif;font-stretch:112%;font-weight:800;
+  font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.0;letter-spacing:-.01em}
+.old-instr-1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;
+  font-size:clamp(1.9rem,4vw,3rem);line-height:1.0}
+.old-instr-2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;
+  color:var(--signal);font-size:clamp(1.9rem,4vw,3rem);line-height:1.0}
+.old-body{font-family:'Satoshi',system-ui,sans-serif;font-size:1rem;color:var(--muted)}
+.verdict{margin-top:1rem;font-size:.87rem;color:var(--dim);border-left:3px solid var(--signal);
+  padding-left:.75em}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:.8rem}
+td,th{border:1px solid var(--hair);padding:.6rem .75rem;text-align:left;vertical-align:top}
+th{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);font-weight:400}
+code{font-family:var(--f-machine);font-size:.86em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="label">Lion Creatives · V9 · founder decision document</p>
+<h1>Typography Deck — <i>three voices, eight jobs.</i></h1>
+<p class="lede">The founder's criticism was specific: <strong>multiple headlines shared the same scale, weight, spacing and voice, so the page read flat.</strong> This system fixes that structurally. Three families — chosen because each carries an <em>axis</em> the others don't — cover eight distinct roles. Every face is free and properly licensed (Google Fonts, OFL); nothing here requires a purchase. <strong>Founder typography approval: PENDING.</strong></p>
+
+<h2>1 · The three voices</h2>
+<table>
+<tr><th>Voice</th><th>Family</th><th>Axis that earns its place</th><th>Licence</th></tr>
+<tr><td><strong>Studio</strong> — the cinema</td><td>Fraunces</td><td><code>opsz 9–144</code> — a real optical-size axis, so a 6.6rem display line and a 2.3rem section head are different <em>textures</em>, not one face at two sizes. This is the specific thing Instrument Serif structurally cannot do.</td><td>OFL</td></tr>
+<tr><td><strong>Work</strong> — the doing</td><td>Archivo</td><td><code>wdth 62–125</code> — width carries meaning: navigation condenses (92%), body sits normal (100%), project names expand (118%), the technology register compresses and goes uppercase (88%).</td><td>OFL</td></tr>
+<tr><td><strong>Machine</strong> — the instruments</td><td>Geist Mono</td><td><code>wght 100–900</code> plus tabular figures and a slashed zero, so metadata, technical readouts and CTAs separate by weight instead of all being one mono.</td><td>OFL</td></tr>
+</table>
+<p class="lede" style="font-size:.9rem;margin-top:.8rem">Verified in the browser before the build, not assumed: each axis was rendered at both extremes and measured to confirm it is live rather than silently falling back to a static instance — the failure mode that would collapse the whole system back to “flat”.</p>
+
+<h2>2 · The eight roles, in the type they actually use</h2>
+<div class="roles">
+  <div class="role"><span class="k"><b>1 Display</b>Fraunces · opsz 144 · wght 300<br>−0.028em · 0.92 lh</span>
+    <span class="r-display">Stories on screen<span class="sig">.</span></span></div>
+  <div class="role"><span class="k"><b>2 Scene head</b>Fraunces · opsz 60 · wght 400<br>−0.018em</span>
+    <span class="r-scene">Commissioned <i>photography.</i></span></div>
+  <div class="role"><span class="k"><b>3 Editorial</b>Fraunces · opsz 30 · SOFT 40<br>italic — warmer terminals</span>
+    <span class="r-editorial">Lion Creatives was hired to film a surprise proposal on the water.</span></div>
+  <div class="role"><span class="k"><b>4 Technical</b>Archivo · wdth 88 · wght 700<br>uppercase</span>
+    <span class="r-tech">We design and build the web.</span></div>
+  <div class="role"><span class="k"><b>5 Project identity</b>Archivo · wdth 118 · wght 600</span>
+    <span class="r-proj">A proposal, then a wedding</span></div>
+  <div class="role"><span class="k"><b>6 Body</b>Archivo · wdth 100 · wght 400</span>
+    <span class="r-body">We direct commercial film and photography — and design and build the platforms they run on.</span></div>
+  <div class="role"><span class="k"><b>7 Metadata</b>Geist Mono · 0.13em<br>tabular · slashed zero</span>
+    <span class="r-meta">4K · TWO SHOOTS · 13 ROUTES · 1440 PX → 390 PX</span></div>
+  <div class="role"><span class="k"><b>8 Nav &amp; CTA</b>Archivo wdth 92 · Geist Mono 600</span>
+    <span><span class="r-nav">Work &nbsp; Services &nbsp; Engagements &nbsp; Studio</span> &nbsp;&nbsp; <span class="r-cta">Start a project</span></span></div>
+</div>
+
+<h2>3 · The hero pair — the exact thing the founder flagged</h2>
+<div class="grid2">
+  <div class="panel bad">
+    <h3><em>Rejected</em> — V8: one family, two sizes</h3>
+    <div><span class="old-instr-1">Stories on screen.</span><br><span class="old-instr-2">Systems behind them.</span></div>
+    <p class="old-body" style="margin-top:1rem">We direct commercial film and photography.</p>
+    <p class="verdict">Both halves are the same face at nearly the same size. The italic and the red do the only differentiating, so the pair reads as one thought in two lines — not as two disciplines. Instrument Serif ships a single weight, so there was no way out of it.</p>
+  </div>
+  <div class="panel">
+    <h3><b>In the build</b> — V9: two voices, one thought</h3>
+    <div>
+      <span style="font-family:var(--f-studio);font-optical-sizing:none;font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 0;font-weight:300;font-size:clamp(1.9rem,4.2vw,3rem);line-height:.94;letter-spacing:-.028em;display:block">Stories on screen<span class="sig">.</span></span>
+      <span style="font-family:var(--f-work);font-stretch:86%;font-weight:800;text-transform:uppercase;font-size:clamp(1rem,1.8vw,1.42rem);letter-spacing:.005em;display:block;margin-top:.45em">Systems <span class="sig">behind</span> them.</span>
+    </div>
+    <p class="r-body" style="margin-top:1rem;font-size:.98rem">We direct commercial film and photography — and design and build the platforms they run on.</p>
+    <p class="verdict">A light serif at full optical size against a black condensed uppercase sans. The creative half and the technology half are now different <em>kinds</em> of type, not different sizes of the same type — which is the contrast the founder asked for.</p>
+  </div>
+</div>
+
+<h2>4 · In context — real moments from the build</h2>
+<div class="grid2">
+  <div class="panel">
+    <h3>Hero</h3>
+    <img src="assets/regression/v9-hero.webp" alt="The V9 hero: descriptor, display pair, lede, two buttons and the film plate" loading="lazy">
+  </div>
+  <div class="panel">
+    <h3>Technology — the technical register</h3>
+    <img src="assets/regression/v9-tech.webp" alt="The technology scene: condensed uppercase heading, mono readouts and the captured site surface" loading="lazy">
+  </div>
+  <div class="panel">
+    <h3>Photography — the editorial register</h3>
+    <img src="assets/regression/v9-photo.webp" alt="The photography scene: scene head and caption beside the frames" loading="lazy">
+  </div>
+  <div class="panel">
+    <h3>Finale — display at full size</h3>
+    <img src="assets/regression/v9-finale.webp" alt="The finale: the assembled mark beside the closing display line" loading="lazy">
+  </div>
+</div>
+
+<h2>5 · Honest limits</h2>
+<p class="lede">Fraunces has a WONK axis that substitutes flared, eccentric letterforms. It is charming at 120px and reads as “artisanal” — off-brand here — so it is set to 0 everywhere, deliberately. Archivo's italic is not loaded (about 60KB saved); italics are Fraunces only. Geist Mono is used at three weights, not as decoration. Sub-routes still carry the earlier faces: they are re-set once a system is approved, because restyling ten pages in an unapproved system would be wasted work.</p>
+
+<p class="label" style="margin-top:3rem">Founder typography approval: <strong style="color:var(--signal)">PENDING</strong> · <a href="index.html">the prototype</a> · <a href="copy-deck.html">copy deck</a> · <a href="regression.html">A–G regression</a></p>
+</div>
+</body>
+</html>
