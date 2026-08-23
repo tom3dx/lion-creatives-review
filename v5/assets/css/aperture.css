@@ -499,7 +499,8 @@ section{padding-block:var(--sec);position:relative;background:var(--bg);color:va
   width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
   padding:.72rem 0;font-size:1rem;color:var(--fg);transition:border-color var(--d-micro) var(--ease);
 }
-.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{outline:none;border-bottom-color:var(--signal)}
+.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-bottom-color:var(--signal)}
+.fgroup input:focus-visible,.fgroup select:focus-visible,.fgroup textarea:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 .fgroup select{cursor:pointer}
 .fgroup select option{background:var(--plane);color:var(--chalk)}
 .field-light .fgroup select option{background:var(--field);color:#141416}
@@ -732,3 +733,52 @@ html.no-js .loader{animation:none}
 .cap{font-size:.72rem}
 .eyebrow .n{font-size:.72rem}
 .menu a .idx{font-size:.72rem}
+
+/* ---------- 30. GUIDELINES AUDIT FIXES ----------
+   Every item below was found by the web-design-guidelines audit and verified. */
+
+/* Brand red as small text needs a darkened derivative per field, not one value.
+   Measured: #da1f26 is 3.34:1 on --plane and 3.93:1 on the light field. */
+.team-member .role{color:#ff6b6e;font-size:.72rem}                     /* 6.02:1 on --plane */
+.field-light .team-member .role{color:#a3161d}        /* 6.05:1 on the light field */
+.field-plane .team-member .role{color:#ff6b6e}
+.fgroup .req{color:#a3161d}                           /* required marker, light field */
+.fgroup label span[style*="opacity"]{opacity:1 !important;color:var(--muted)}
+
+/* WCAG 2.2.2 - looping motion over 5s must be stoppable. */
+.motion-toggle{position:fixed;right:1rem;bottom:1rem;z-index:120;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.6rem .8rem;border:1px solid var(--edge);background:rgba(11,11,12,.9);
+  color:var(--fg);cursor:pointer;backdrop-filter:blur(6px)}
+.motion-toggle:hover,.motion-toggle:focus-visible{border-color:var(--signal)}
+@media print{.motion-toggle{display:none}}
+
+/* SVG polygons rotate about the user-space origin unless told otherwise. */
+.fmark polygon{transform-box:fill-box;transform-origin:center}
+
+/* ---------- 31. TASTE + EMIL AUDIT FIXES ---------- */
+
+/* REAL DEFECT: .field-light remapped --line but never --hair, and both light-field
+   structures hardcode --hair. rgba(255,255,255,.13) over #e6e4df is a 3-point
+   delta - section 05's rails and cell gaps were effectively invisible. */
+.field-light{--hair:rgba(0,0,0,.15)}
+
+/* REAL DEFECT: the decorative footer sign-off was 120px against an 89.6px H1 -
+   34% larger than the page's actual headline, inverting the hierarchy. */
+.foot-mega{font-size:clamp(2rem,6vw,4.6rem)}
+
+/* REAL DEFECT: overflow:hidden + line-height .86 clips descenders in the masked
+   headline ("Engineered like" loses the g's tail). */
+.reveal-type{padding-bottom:.12em;margin-bottom:-.12em}
+
+/* Emil: no pressed state anywhere. A button that does not acknowledge the press
+   feels broken on touch, where there is no hover to fall back on. */
+.btn:active{transform:translateY(1px)}
+.vwork:active .frame{transform:scale(.995)}
+.vwork .frame{transition:transform 160ms var(--ease)}
+
+/* Emil: hover choreography should not fire on touch, where it sticks. */
+@media(hover:none){
+  .ap-mask:hover > .media{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+  .work-media:hover .media{transform:none}
+}

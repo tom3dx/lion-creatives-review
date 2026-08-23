@@ -152,12 +152,14 @@
       if (!isMedia && !isHeroType) return;
       var r = n.getBoundingClientRect();
       if (r.top < vh * 0.92 && r.bottom > 0) {
-        // in view at load: arm + reveal in the same frame so the load
-        // choreography still plays, with no window where content can stick hidden
+        // In view at load. Arm, then release AFTER the loader curtain has lifted,
+        // otherwise the whole reveal plays behind an opaque overlay and the
+        // visitor sees a finished page with no choreography at all.
         n.classList.add('rv-armed');
-        requestAnimationFrame(function () {
+        var delay = document.body.classList.contains('ready') ? 60 : 420;
+        setTimeout(function () {
           requestAnimationFrame(function () { n.classList.add('revealed'); });
-        });
+        }, delay);
       } else {
         n.classList.add('rv-armed');
         pending.push(n);
@@ -280,6 +282,9 @@
 
     // engineered layer: a lattice on the mark's angle family, reacting to pointer
     function draw() {
+      if (document.documentElement.getAttribute('data-motion') === 'paused') {
+        raf = requestAnimationFrame(draw); return;   // hold the frame, stop advancing
+      }
       t += 0.0045;
       ctx.clearRect(0, 0, w, h);
       var step = Math.max(38, w / 22);
@@ -439,15 +444,51 @@
       else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
     });
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) vids.forEach(function (v) { v.pause(); });
+      if (document.hidden) { vids.forEach(function (v) { v.pause(); }); return; }
+      // resume only what is actually on screen and not user-paused
+      if (document.documentElement.getAttribute('data-motion') === 'paused') return;
+      vids.forEach(function (v) {
+        var r = v.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        }
+      });
     });
+  }
+
+  /* ---------- 11. MOTION TOGGLE (WCAG 2.2.2) ----------
+     Four sources loop indefinitely: the hero video, two commercial films and
+     the canvas lattice. Anything auto-playing past 5s must be stoppable. */
+  function motionToggle() {
+    var vids = document.querySelectorAll('video[data-auto]');
+    var cv = document.getElementById('duality');
+    if (!vids.length && !cv) return;
+    var btn = document.createElement('button');
+    btn.className = 'motion-toggle';
+    btn.type = 'button';
+    var paused = reduced;
+    function label() {
+      btn.textContent = paused ? 'Play motion' : 'Pause motion';
+      btn.setAttribute('aria-pressed', String(paused));
+    }
+    btn.addEventListener('click', function () {
+      paused = !paused;
+      document.documentElement.setAttribute('data-motion', paused ? 'paused' : 'running');
+      vids.forEach(function (v) {
+        if (paused) { v.pause(); }
+        else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+      label();
+    });
+    label();
+    document.body.appendChild(btn);
   }
 
   /* ---------- boot ---------- */
   function init() {
     loader(); nav(); menu(); reveals(); cursor();
     pillars(); heroDuality(); markPlanes(); enquiry(); video();
-    readout(); footerMark();
+    readout(); footerMark(); motionToggle();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

@@ -56,7 +56,7 @@ document.documentElement.classList.remove('no-js');</script>
 </header>
 
 <!-- MOBILE MENU -->
-<div class="menu" id="menu" data-open="false">
+<div class="menu" id="menu" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
   <button class="btn menu-close" aria-label="Close menu">Close</button>
   <nav aria-label="Mobile">
     <a href="work.html"><span class="idx">01</span>Work</a>
@@ -251,7 +251,6 @@ document.documentElement.classList.remove('no-js');</script>
     <div class="grid g-2">
 
       <div class="rv-safe" id="book" style="border:1px solid var(--line);padding:clamp(1.4rem,3vw,2.2rem)">
-        <div class="sheet" aria-hidden="true"></div>
         <h3>Book a call</h3>
         <p style="margin-top:.9rem;color:var(--muted);max-width:46ch">Bring the problem, not a brief. We will tell you whether this is ours to do, what it would take, and which band it lands in — on the call, not three emails later.</p>
         <div style="border:1px dashed var(--line);padding:1.1rem;margin-block:1.4rem">
