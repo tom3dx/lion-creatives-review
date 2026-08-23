@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Typography Deck — Lion Creatives V8</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,401&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@400,401,700,701&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fragment+Mono:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{--void:#0a0a0b;--plane:#17171a;--hair:rgba(255,255,255,.12);--signal:#da1f26;
+  --fg:#f7f6f3;--muted:#b8b7b3;--dim:#8b8b8e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--fg);font-family:'Satoshi',system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:1200px;margin:0 auto;padding:clamp(1.4rem,4vw,3rem)}
+img{max-width:100%;display:block}
+.deck-label{font-family:'Fragment Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.deck-h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,4.5vw,3.4rem);margin:0 0 .4rem}
+.deck-h1 i{color:var(--signal)}
+.lede{color:var(--muted);max-width:75ch}
+a{color:var(--fg)}
+
+/* ---- per-system tokens ---- */
+.sys{border:1px solid var(--hair);margin:3rem 0;background:var(--plane)}
+.sys-head{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:baseline;justify-content:space-between;
+  padding:1.1rem 1.4rem;border-bottom:1px solid var(--hair)}
+.sys-name{font-size:1.05rem;font-weight:700;letter-spacing:.02em}
+.sys-faces{font-family:'Fragment Mono',monospace;font-size:.7rem;color:var(--dim);letter-spacing:.06em}
+.pill{font-family:'Fragment Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--signal);padding:.25rem .55rem}
+.moment{padding:1.6rem 1.4rem;border-bottom:1px solid var(--hair)}
+.moment:last-child{border-bottom:0}
+.m-tag{font-family:'Fragment Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 1rem}
+.verdict{padding:1.2rem 1.4rem;background:rgba(218,31,38,.05)}
+.verdict p{margin:.3rem 0;color:var(--muted);font-size:.9rem;max-width:80ch}
+
+/* system 1 — the build */
+.s1{--d:'Instrument Serif',Georgia,serif;--b:'Satoshi',system-ui,sans-serif;--m:'Fragment Mono',monospace;
+  --dw:400;--dstyle:normal;--dls:0;--dtt:none}
+/* system 2 — grotesk authority */
+.s2{--d:'Cabinet Grotesk',system-ui,sans-serif;--b:'Switzer',system-ui,sans-serif;--m:'JetBrains Mono',monospace;
+  --dw:800;--dstyle:normal;--dls:-.02em;--dtt:none}
+/* system 3 — fashion serif */
+.s3{--d:'Zodiak',Georgia,serif;--b:'General Sans',system-ui,sans-serif;--m:'IBM Plex Mono',monospace;
+  --dw:700;--dstyle:normal;--dls:0;--dtt:none}
+
+.sys .eyebrow{font-family:var(--m);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 .9rem}
+.sys .hero-h{font-family:var(--d);font-weight:var(--dw);letter-spacing:var(--dls);font-size:clamp(2.2rem,5.5vw,4.6rem);
+  line-height:1.02;margin:0 0 1rem;text-wrap:balance}
+.sys .hero-h i{font-style:italic;color:var(--signal)}
+.s2 .hero-h i,.s2 .proj-h i,.s2 .ph-cap i{font-style:normal;color:var(--signal)} /* grotesk carries emphasis by colour, not slant */
+.sys .support{font-family:var(--b);color:var(--muted);font-size:1.02rem;max-width:52ch;margin:0 0 1.2rem}
+.sys .cta{display:inline-block;font-family:var(--b);font-weight:600;font-size:.9rem;color:var(--fg);
+  border:1px solid var(--fg);padding:.7rem 1.3rem;text-decoration:none}
+.sys .cta.red{border-color:var(--signal);background:var(--signal)}
+
+.frame-row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:1.4rem;align-items:start}
+@media (max-width:760px){.frame-row{grid-template-columns:1fr}}
+.sys .proj-h{font-family:var(--d);font-weight:var(--dw);letter-spacing:var(--dls);font-size:clamp(1.5rem,2.8vw,2.3rem);line-height:1.05;margin:.1rem 0 .6rem}
+.sys .fact{font-family:var(--m);font-size:.74rem;color:var(--dim);letter-spacing:.05em;line-height:1.7;margin:0 0 1rem}
+.sys .bodycopy{font-family:var(--b);font-size:1rem;color:var(--muted);max-width:62ch;margin:0}
+.sys .navrow{display:flex;gap:1.6rem;flex-wrap:wrap;font-family:var(--b);font-weight:500;font-size:.86rem;letter-spacing:.04em}
+.sys .navrow span{color:var(--muted)}
+.sys .navrow .on{color:var(--fg);border-bottom:2px solid var(--signal);padding-bottom:.2em}
+.sys .ph-band{position:relative}
+.sys .ph-band img{width:100%;height:280px;object-fit:cover;object-position:50% 30%}
+.sys .ph-cap{font-family:var(--d);font-weight:var(--dw);font-size:clamp(1.4rem,2.6vw,2rem);margin:.8rem 0 .2rem}
+.sys .ph-note{font-family:var(--m);font-size:.7rem;color:var(--dim);letter-spacing:.08em;margin:0}
+.mobile-sim{width:min(390px,100%);border:1px solid var(--hair);padding:1.2rem 1rem 1.4rem;background:var(--void)}
+.mobile-sim .hero-h{font-size:2rem}
+.mobile-sim .support{font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="deck-label">Lion Creatives · V8 · founder decision document</p>
+<h1 class="deck-h1">Typography Deck — <i>three systems, same moments.</i></h1>
+<p class="lede">Hubot Sans is retired. Each system below is rendered on the <strong>same real V8 moments</strong> — hero, a project headline beside a real frame, body copy, metadata, navigation, CTA, a photography heading, and a mobile hero — so the comparison is about the type, not the demo. All faces are properly licensed and free (Fontshare ITF / Google Fonts OFL); nothing here needs a purchase. <strong>Founder typography approval: PENDING.</strong></p>
+<p class="lede" style="font-size:.9rem;color:var(--dim)">Standing rule in every system: type sits beside or above media on its own ground — never across faces, never across film frames, never across UI screenshots.</p>
+
+<!-- ================= SYSTEM 01 ================= -->
+<section class="sys s1">
+  <div class="sys-head">
+    <span class="sys-name">System 01 · Editorial Cinema <span class="pill">in the build</span></span>
+    <span class="sys-faces">INSTRUMENT SERIF display · SATOSHI body · FRAGMENT MONO labels</span>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 1 · Hero</p>
+    <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+    <h2 class="hero-h">Stories on screen.<br><i>Systems behind them.</i></h2>
+    <p class="support">We direct commercial film and photography — and design and build the digital platforms they live on.</p>
+    <a class="cta red" href="work.html">See the work</a>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 2 · Project headline beside a real frame — type never crosses the media</p>
+    <div class="frame-row">
+      <img src="assets/media/pw-crowning-960.webp" alt="Wedding crowning ceremony frame" loading="lazy">
+      <div>
+        <h3 class="proj-h">A proposal, then a wedding</h3>
+        <p class="fact">EVENT FILM · 4K · PROPOSAL + CHURCH CEREMONY</p>
+        <p class="bodycopy">Hired to film a surprise proposal, then the church ceremony. The frame stays clean; the title holds its own column.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 3 · Digital scene — technology stated in the same voice</p>
+    <div class="frame-row">
+      <div>
+        <h3 class="proj-h">We design <i style="font-style:italic;color:var(--signal)">and build</i> the web.</h3>
+        <p class="fact">DUNAMIS HOSTING · LIVE COMMERCE PLATFORM · 13 ROUTES</p>
+        <p class="bodycopy">Six product lines, checkout and client area, designed and built end to end.</p>
+      </div>
+      <img src="assets/media/dun-pricing-1600.webp" alt="Dunamis Hosting pricing page" loading="lazy">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 4 · Photography heading — its own band above the pictures</p>
+    <div class="ph-band">
+      <p class="ph-cap">Commissioned <i style="font-style:italic;color:var(--signal)">photography.</i></p>
+      <p class="ph-note">A STYLED FAMILY CELEBRATION · NINE FRAMES FROM THE DAY</p>
+      <img src="assets/media/ph-group-1600.webp" alt="Family celebration group photograph" loading="lazy" style="margin-top:1rem">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 5 · Navigation &amp; metadata</p>
+    <nav class="navrow" style="margin-bottom:1.2rem"><span class="on">Work</span><span>Services</span><span>Engagements</span><span>Studio</span><span>Contact</span></nav>
+    <p class="fact">SCENE 05 · CINEMA — A PROPOSAL, THEN A WEDDING · EVENT FILM · 4K</p>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 6 · Mobile hero (390px)</p>
+    <div class="mobile-sim">
+      <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+      <p class="hero-h" style="margin-bottom:.8rem">Stories on screen.<br><i>Systems behind them.</i></p>
+      <p class="support">We direct commercial film and photography — and build the platforms they live on.</p>
+      <a class="cta red" href="work.html" style="font-size:.82rem">See the work</a>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <p><strong>Character:</strong> cinema in the serif italics, engineering in the mono, calm authority in Satoshi. The red italic is the brand's recurring gesture.</p>
+    <p><strong>Honest risk:</strong> Instrument Serif ships one weight — hierarchy must come from size, italics and colour, not weight. The build already works this way.</p>
+  </div>
+</section>
+
+<!-- ================= SYSTEM 02 ================= -->
+<section class="sys s2">
+  <div class="sys-head">
+    <span class="sys-name">System 02 · Grotesk Authority</span>
+    <span class="sys-faces">CABINET GROTESK display · SWITZER body · JETBRAINS MONO labels</span>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 1 · Hero</p>
+    <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+    <h2 class="hero-h">Stories on screen.<br><i>Systems behind them.</i></h2>
+    <p class="support">We direct commercial film and photography — and design and build the digital platforms they live on.</p>
+    <a class="cta red" href="work.html">See the work</a>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 2 · Project headline beside a real frame — type never crosses the media</p>
+    <div class="frame-row">
+      <img src="assets/media/pw-crowning-960.webp" alt="Wedding crowning ceremony frame" loading="lazy">
+      <div>
+        <h3 class="proj-h">A proposal, then a wedding</h3>
+        <p class="fact">EVENT FILM · 4K · PROPOSAL + CHURCH CEREMONY</p>
+        <p class="bodycopy">Hired to film a surprise proposal, then the church ceremony. The frame stays clean; the title holds its own column.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 3 · Digital scene — technology stated in the same voice</p>
+    <div class="frame-row">
+      <div>
+        <h3 class="proj-h">We design <i style="color:var(--signal)">and build</i> the web.</h3>
+        <p class="fact">DUNAMIS HOSTING · LIVE COMMERCE PLATFORM · 13 ROUTES</p>
+        <p class="bodycopy">Six product lines, checkout and client area, designed and built end to end.</p>
+      </div>
+      <img src="assets/media/dun-pricing-1600.webp" alt="Dunamis Hosting pricing page" loading="lazy">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 4 · Photography heading — its own band above the pictures</p>
+    <div class="ph-band">
+      <p class="ph-cap">Commissioned <i style="font-style:normal;color:var(--signal)">photography.</i></p>
+      <p class="ph-note">A STYLED FAMILY CELEBRATION · NINE FRAMES FROM THE DAY</p>
+      <img src="assets/media/ph-group-1600.webp" alt="Family celebration group photograph" loading="lazy" style="margin-top:1rem">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 5 · Navigation &amp; metadata</p>
+    <nav class="navrow" style="margin-bottom:1.2rem"><span class="on">Work</span><span>Services</span><span>Engagements</span><span>Studio</span><span>Contact</span></nav>
+    <p class="fact">SCENE 05 · CINEMA — A PROPOSAL, THEN A WEDDING · EVENT FILM · 4K</p>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 6 · Mobile hero (390px)</p>
+    <div class="mobile-sim">
+      <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+      <p class="hero-h" style="margin-bottom:.8rem">Stories on screen.<br><i>Systems behind them.</i></p>
+      <p class="support">We direct commercial film and photography — and build the platforms they live on.</p>
+      <a class="cta red" href="work.html" style="font-size:.82rem">See the work</a>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <p><strong>Character:</strong> one confident voice — a heavy characterful grotesk (round terminals, tall x-height) that reads technology-first and lets the film footage supply all the cinema. Closest in spirit to the premium ABC Whyte direction, at zero cost.</p>
+    <p><strong>Honest risk:</strong> without a serif, the "directed like cinema" half of the brand is carried entirely by imagery. If the founder wants this direction executed with a licensed premium grotesk (e.g. ABC Whyte), that is a purchase decision — flagged, not made.</p>
+  </div>
+</section>
+
+<!-- ================= SYSTEM 03 ================= -->
+<section class="sys s3">
+  <div class="sys-head">
+    <span class="sys-name">System 03 · Sharp Serif</span>
+    <span class="sys-faces">ZODIAK display · GENERAL SANS body · IBM PLEX MONO labels</span>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 1 · Hero</p>
+    <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+    <h2 class="hero-h">Stories on screen.<br><i>Systems behind them.</i></h2>
+    <p class="support">We direct commercial film and photography — and design and build the digital platforms they live on.</p>
+    <a class="cta red" href="work.html">See the work</a>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 2 · Project headline beside a real frame — type never crosses the media</p>
+    <div class="frame-row">
+      <img src="assets/media/pw-crowning-960.webp" alt="Wedding crowning ceremony frame" loading="lazy">
+      <div>
+        <h3 class="proj-h">A proposal, then a wedding</h3>
+        <p class="fact">EVENT FILM · 4K · PROPOSAL + CHURCH CEREMONY</p>
+        <p class="bodycopy">Hired to film a surprise proposal, then the church ceremony. The frame stays clean; the title holds its own column.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 3 · Digital scene — technology stated in the same voice</p>
+    <div class="frame-row">
+      <div>
+        <h3 class="proj-h">We design <i style="font-style:italic;color:var(--signal)">and build</i> the web.</h3>
+        <p class="fact">DUNAMIS HOSTING · LIVE COMMERCE PLATFORM · 13 ROUTES</p>
+        <p class="bodycopy">Six product lines, checkout and client area, designed and built end to end.</p>
+      </div>
+      <img src="assets/media/dun-pricing-1600.webp" alt="Dunamis Hosting pricing page" loading="lazy">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 4 · Photography heading — its own band above the pictures</p>
+    <div class="ph-band">
+      <p class="ph-cap">Commissioned <i style="font-style:italic;color:var(--signal)">photography.</i></p>
+      <p class="ph-note">A STYLED FAMILY CELEBRATION · NINE FRAMES FROM THE DAY</p>
+      <img src="assets/media/ph-group-1600.webp" alt="Family celebration group photograph" loading="lazy" style="margin-top:1rem">
+    </div>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 5 · Navigation &amp; metadata</p>
+    <nav class="navrow" style="margin-bottom:1.2rem"><span class="on">Work</span><span>Services</span><span>Engagements</span><span>Studio</span><span>Contact</span></nav>
+    <p class="fact">SCENE 05 · CINEMA — A PROPOSAL, THEN A WEDDING · EVENT FILM · 4K</p>
+  </div>
+
+  <div class="moment">
+    <p class="m-tag">Moment 6 · Mobile hero (390px)</p>
+    <div class="mobile-sim">
+      <p class="eyebrow">Lion Creatives · Creative &amp; Technology Agency</p>
+      <p class="hero-h" style="margin-bottom:.8rem">Stories on screen.<br><i>Systems behind them.</i></p>
+      <p class="support">We direct commercial film and photography — and build the platforms they live on.</p>
+      <a class="cta red" href="work.html" style="font-size:.82rem">See the work</a>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <p><strong>Character:</strong> a sharp high-contrast serif with real edge — the most luxurious of the three, closest to fashion-editorial. Multiple weights give it hierarchy Instrument Serif can't offer.</p>
+    <p><strong>Honest risk:</strong> can tilt the brand toward "fashion magazine" and away from "technology studio". The mono and General Sans pull it back, but the serif dominates first impressions.</p>
+  </div>
+</section>
+
+<h2 class="deck-h1" style="font-size:1.6rem;border-top:1px solid var(--hair);padding-top:1.8rem">Recommendation</h2>
+<p class="lede"><strong>System 01 (Editorial Cinema)</strong> is in the V8 build and is the recommendation: it is the only system where both halves of the company — cinema and engineering — are visible in the type itself. System 02 is the strongest alternative if the founder wants a more technological, less romantic register. System 03 is shown so the serif direction has a serious high-contrast option on the table, not to pad the deck.</p>
+<p class="deck-label" style="margin-top:3rem">Founder typography approval: <strong style="color:var(--signal)">PENDING</strong> · <a href="index.html">back to the prototype</a> · <a href="copy-deck.html">copy deck</a></p>
+</div>
+</body>
+</html>
