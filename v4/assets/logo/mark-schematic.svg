@@ -1,0 +1,26 @@
+<svg class="schematic" viewBox="60 40 460 480" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+<rect x="108.3" y="83.0" width="333.4" height="384.0" class="sk-bbox"/>
+<line x1="108.3" y1="65.0" x2="441.7" y2="65.0" class="sk-dim"/>
+<line x1="108.3" y1="59.0" x2="108.3" y2="71.0" class="sk-dim"/>
+<line x1="441.7" y1="59.0" x2="441.7" y2="71.0" class="sk-dim"/>
+<text x="275.0" y="55.0" class="sk-t" text-anchor="middle">333.36</text>
+<line x1="90.3" y1="83.0" x2="90.3" y2="467.0" class="sk-dim"/>
+<text x="84.3" y="275.0" class="sk-t" text-anchor="middle" transform="rotate(-90 84.3 275.0)">384.02</text>
+<polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05" class="sk-poly"/>
+<text x="209.9" y="121.3" class="sk-t sk-id" text-anchor="middle">P1</text>
+<polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19" class="sk-poly"/>
+<text x="180.2" y="302.0" class="sk-t sk-id" text-anchor="middle">P2</text>
+<polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93" class="sk-poly sk-signal"/>
+<text x="267.4" y="412.9" class="sk-t sk-id" text-anchor="middle">P3</text>
+<polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03" class="sk-poly"/>
+<text x="341.3" y="388.1" class="sk-t sk-id" text-anchor="middle">P4</text>
+<polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74" class="sk-poly"/>
+<text x="351.0" y="247.1" class="sk-t sk-id" text-anchor="middle">P5</text>
+<circle cx="236.1" cy="365.9" r="2.4" class="sk-v"/>
+<circle cx="395.4" cy="467.0" r="2.4" class="sk-v"/>
+<circle cx="258.2" cy="461.6" r="2.4" class="sk-v"/>
+<circle cx="211.1" cy="404.3" r="2.4" class="sk-v"/>
+<text x="243.1" y="359.9" class="sk-t">236.1, 365.9</text>
+<text x="402.4" y="461.0" class="sk-t">395.4, 467.0</text>
+<text x="218.1" y="398.3" class="sk-t">211.1, 404.3</text>
+</svg>
