@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Typography Comparison — System A vs System B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@10..48,75..100,200..800&family=Archivo:wdth,wght@62..125,300..800&family=Martian+Mono:wdth,wght@75..112.5,300..700&family=Anton&family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --void:#0b0b0c; --plane:#1e1e1e; --edge:#353535; --hair:#232325;
+    --signal:#da1f26; --fg:#f7f6f4; --muted:#b9b8b6; --dim:#8b8b8e; --field:#e6e4df;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--void);color:var(--fg);
+    font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1400px;margin:0 auto;padding:clamp(1.2rem,3vw,2.6rem)}
+  header{border-bottom:1px solid var(--hair);padding-bottom:1.4rem;margin-bottom:2rem}
+  h1.page{font-size:clamp(1.6rem,3vw,2.4rem);margin:.2rem 0 .6rem;letter-spacing:-.02em}
+  .note{color:var(--muted);max-width:78ch;line-height:1.6;font-size:.95rem}
+  .lbl{font-family:'Martian Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim)}
+
+  /* ── the two systems. Only these three properties differ. ── */
+  .sysA{--display:'Bricolage Grotesque';--body:Archivo;--mono:'Martian Mono'}
+  .sysB{--display:Anton;--body:'Space Grotesk';--mono:'IBM Plex Mono'}
+
+  .pair{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);margin-bottom:2.6rem}
+  @media(min-width:1000px){.pair{grid-template-columns:1fr 1fr}}
+  .cell{background:var(--void);padding:clamp(1.1rem,2.2vw,2rem);min-width:0}
+  .cell.light{background:var(--field);color:#17171a}
+  .cell.light .lbl{color:#5d5b57}
+  .cell.light .sub{color:#4a4a4c}
+  .cell-head{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--hair);padding-bottom:.6rem;margin-bottom:1.4rem}
+  .cell.light .cell-head{border-color:#cfcdc7}
+
+  .mega{font-family:var(--display),sans-serif;font-size:clamp(2.2rem,5.2vw,4.2rem);
+    line-height:.88;letter-spacing:-.035em;margin:0}
+  .mega .sig{color:var(--signal)}
+  .h2{font-family:var(--display),sans-serif;font-size:clamp(1.5rem,3vw,2.3rem);
+    line-height:1.02;letter-spacing:-.02em;margin:0 0 .6rem}
+  .sub{font-family:var(--body),sans-serif;font-size:1rem;line-height:1.55;color:var(--muted);
+    max-width:52ch;margin:.9rem 0 0}
+  .body{font-family:var(--body),sans-serif;font-size:.95rem;line-height:1.62;max-width:60ch}
+  .micro{font-family:var(--mono),monospace;font-size:.72rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--dim);display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.2rem}
+  .rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    border-top:1px solid var(--hair);margin-top:1.4rem}
+  .cell.light .rail{border-color:#cfcdc7}
+  .rail div{padding:.9rem .9rem .9rem 0}
+  .rail dt{font-family:var(--mono),monospace;font-size:.66rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--dim)}
+  .rail dd{margin:.4rem 0 0;font-family:var(--body),sans-serif;font-size:1rem}
+  .num{font-family:var(--mono),monospace;font-variant-numeric:tabular-nums}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.4rem;
+    border:1px solid var(--signal);background:var(--signal);color:#fff;
+    font-family:var(--mono),monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+  .btn.ghost{background:none;color:inherit;border-color:currentColor}
+  .row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem}
+  .field{margin-top:1.2rem;max-width:34ch}
+  .field label{display:block;font-family:var(--mono),monospace;font-size:.72rem;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem}
+  .field input{width:100%;padding:.8rem .9rem;background:transparent;border:1px solid var(--edge);
+    color:inherit;font-family:var(--body),sans-serif;font-size:1rem}
+  .cell.light .field input{border-color:#bfbdb7}
+  .member{border-top:1px solid var(--hair);padding-top:.9rem;margin-top:.9rem}
+  .cell.light .member{border-color:#cfcdc7}
+  .member h3{font-family:var(--body),sans-serif;font-size:1.05rem;margin:0 0 .2rem}
+  .member .role{font-family:var(--mono),monospace;font-size:.68rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--signal)}
+  .phone{width:170px;aspect-ratio:9/16;border:1px solid var(--edge);
+    background:linear-gradient(155deg,#26262a,#111113);display:grid;align-content:end;padding:.8rem;margin-top:1rem}
+  .phone .t{font-family:var(--display),sans-serif;font-size:1.05rem;line-height:1.05}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="lbl">Lion Creatives · Typography decision package</p>
+  <h1 class="page">System A vs System B — identical content, identical layout</h1>
+  <p class="note">
+    The only variables are the display, body and mono families. Every measurement, colour, spacing value and
+    string is identical on both sides, so any difference you see is typographic.
+    <strong>System A</strong> is the current free system already running in V5.
+    <strong>System B</strong> is a legally-usable stand-in for the premium direction — Anton, Space Grotesk and
+    IBM Plex Mono — used to test the <em>character</em> of a tighter, heavier condensed display voice
+    without licensing or embedding any commercial font file.
+  </p>
+</header>
+
+<!-- 1 · HERO -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">01 — Homepage hero</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A — free</span><span class="lbl">Bricolage · Archivo · Martian</span></div>
+      <h2 class="mega">Directed like <span class="sig">cinema.</span><br>Engineered like software.</h2>
+      <p class="sub">Film, photography, brand and the technology it runs on, directed and built by one studio.</p>
+      <div class="micro"><span>MARK 5 PLANES · 41 VERTICES</span><span>DELIVERY 4K · 2.22:1 &amp; 9:16</span></div>
+      <div class="row"><span class="btn">See the work</span><span class="btn ghost">Start a project</span></div>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B — premium direction</span><span class="lbl">Anton · Space Grotesk · Plex Mono</span></div>
+      <h2 class="mega">Directed like <span class="sig">cinema.</span><br>Engineered like software.</h2>
+      <p class="sub">Film, photography, brand and the technology it runs on, directed and built by one studio.</p>
+      <div class="micro"><span>MARK 5 PLANES · 41 VERTICES</span><span>DELIVERY 4K · 2.22:1 &amp; 9:16</span></div>
+      <div class="row"><span class="btn">See the work</span><span class="btn ghost">Start a project</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · COMMERCIAL PROJECT HEADLINE -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">02 — Commercial project headline</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">Beauty · Social</span></div>
+      <h3 class="h2">A career told as a before and after</h3>
+      <p class="body">A brow studio's founder walks through the professions she left behind. Shot, cut and titled as one piece.</p>
+      <div class="phone"><span class="t">A sponsorship brief that had to travel</span></div>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">Beauty · Social</span></div>
+      <h3 class="h2">A career told as a before and after</h3>
+      <p class="body">A brow studio's founder walks through the professions she left behind. Shot, cut and titled as one piece.</p>
+      <div class="phone"><span class="t">A sponsorship brief that had to travel</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · CASE-STUDY EDITORIAL (light field) -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">03 — Case-study editorial heading, light field</p>
+  <div class="pair">
+    <div class="cell light sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">01 — The challenge</span></div>
+      <h3 class="h2">One take. No reshoots. Twice.</h3>
+      <p class="body">A surprise proposal happens exactly once. There is no second take, no blocking rehearsal with the person it is for, and no way to ask the light to wait.</p>
+    </div>
+    <div class="cell light sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">01 — The challenge</span></div>
+      <h3 class="h2">One take. No reshoots. Twice.</h3>
+      <p class="body">A surprise proposal happens exactly once. There is no second take, no blocking rehearsal with the person it is for, and no way to ask the light to wait.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · SERVICES + ENGAGEMENTS DATA -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">04 — Services heading and engagement rail (numerals under test)</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">Capability</span></div>
+      <h3 class="h2">Four disciplines. One team.</h3>
+      <dl class="rail">
+        <div><dt>Projects</dt><dd>Four, published</dd></div>
+        <div><dt>Formats</dt><dd class="num">2.22:1 &amp; 9:16</dd></div>
+        <div><dt>Delivery</dt><dd class="num">3840×2160</dd></div>
+        <div><dt>Base</dt><dd>Maryland</dd></div>
+      </dl>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">Capability</span></div>
+      <h3 class="h2">Four disciplines. One team.</h3>
+      <dl class="rail">
+        <div><dt>Projects</dt><dd>Four, published</dd></div>
+        <div><dt>Formats</dt><dd class="num">2.22:1 &amp; 9:16</dd></div>
+        <div><dt>Delivery</dt><dd class="num">3840×2160</dd></div>
+        <div><dt>Base</dt><dd>Maryland</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · STUDIO / TEAM -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">05 — Studio team block</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">The team</span></div>
+      <h3 class="h2">Four people. Named.</h3>
+      <div class="member"><h3>Thomas Asfaw</h3><p class="role">Founder — Creative Director</p></div>
+      <div class="member"><h3>Bisrat Asfaw</h3><p class="role">Lead Software Engineer</p></div>
+      <div class="member"><h3>Gelila Assefa</h3><p class="role">AI &amp; Data Engineer</p></div>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">The team</span></div>
+      <h3 class="h2">Four people. Named.</h3>
+      <div class="member"><h3>Thomas Asfaw</h3><p class="role">Founder — Creative Director</p></div>
+      <div class="member"><h3>Bisrat Asfaw</h3><p class="role">Lead Software Engineer</p></div>
+      <div class="member"><h3>Gelila Assefa</h3><p class="role">AI &amp; Data Engineer</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · CONTACT FORM -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">06 — Contact form (UI legibility under test)</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">Step 01 of 03</span></div>
+      <h3 class="h2">Tell us what you are trying to make.</h3>
+      <div class="field"><label for="a1">Your name</label><input id="a1" placeholder="Jordan Blake"></div>
+      <div class="field"><label for="a2">Work email</label><input id="a2" placeholder="you@company.com"></div>
+      <div class="row"><span class="btn">Continue</span></div>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">Step 01 of 03</span></div>
+      <h3 class="h2">Tell us what you are trying to make.</h3>
+      <div class="field"><label for="b1">Your name</label><input id="b1" placeholder="Jordan Blake"></div>
+      <div class="field"><label for="b2">Work email</label><input id="b2" placeholder="you@company.com"></div>
+      <div class="row"><span class="btn">Continue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · MOBILE HERO -->
+<section>
+  <p class="lbl" style="margin-bottom:.7rem">07 — Mobile hero at 390px</p>
+  <div class="pair">
+    <div class="cell sysA">
+      <div class="cell-head"><span class="lbl">System A</span><span class="lbl">390px</span></div>
+      <div style="width:390px;max-width:100%;border:1px solid var(--hair);padding:1.2rem">
+        <p class="lbl" style="border:1px solid var(--edge);display:inline-block;padding:.4rem .6rem">Creative and technology agency</p>
+        <h2 class="mega" style="font-size:2.5rem;margin-top:.9rem">Directed like <span class="sig">cinema.</span><br>Engineered like software.</h2>
+        <p class="sub" style="font-size:.95rem">Film, photography, brand and the technology it runs on.</p>
+      </div>
+    </div>
+    <div class="cell sysB">
+      <div class="cell-head"><span class="lbl">System B</span><span class="lbl">390px</span></div>
+      <div style="width:390px;max-width:100%;border:1px solid var(--hair);padding:1.2rem">
+        <p class="lbl" style="border:1px solid var(--edge);display:inline-block;padding:.4rem .6rem">Creative and technology agency</p>
+        <h2 class="mega" style="font-size:2.5rem;margin-top:.9rem">Directed like <span class="sig">cinema.</span><br>Engineered like software.</h2>
+        <p class="sub" style="font-size:.95rem">Film, photography, brand and the technology it runs on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--hair);padding-top:1.4rem;color:var(--dim);font-size:.85rem;line-height:1.6">
+  <p><strong>No commercial font file is embedded in this page.</strong> System B uses openly licensed faces
+  chosen to stand in for the premium direction's <em>character</em> — condensed high-impact display, geometric
+  body, technical mono. It is a character test, not a specimen of any commercial family.
+  Licensing findings are recorded separately in <code>TYPOGRAPHY-DECISION.md</code>.</p>
+</footer>
+</div>
+</body>
+</html>
