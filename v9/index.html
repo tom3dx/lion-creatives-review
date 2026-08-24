@@ -289,109 +289,139 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
   </div>
 </section>
 
-<!-- ══ S6 · STUDIO — the field. Not cards. ══ -->
-<section class="scene" id="studio" data-len="2.6" aria-label="The team">
+<!-- ══ S6 · STUDIO — "The Light-Up" ══
+     Rebuilt from scratch. The unit is a CREDIT ROW (index · name · role), and
+     all five people get byte-identical treatment. A photograph is an extra that
+     three of them happen to have — so the two without portraits are not holes
+     in a grid, they are simply credits without a print. A warm key light travels
+     down the list, holding on each name, then all five come up together. ══ -->
+<section class="scene" id="studio" data-len="3" aria-label="The studio">
   <div class="stage">
-    <div class="field-head" data-beat="st-head">
-      <p class="label label-sig">05 — The studio</p>
-      <h2 class="t-scene" style="margin-top:.5rem">The team, <i>by name.</i></h2>
-      <p class="factline" style="margin-top:.9rem">Film, photography, design, engineering and data. Maryland-based, remote and on location.</p>
-    </div>
-    <div class="wrap" style="height:100%">
-      <div class="field">
-        <div class="pl">
-          <div class="pic"><img src="assets/media/team-thomas-600.webp" srcset="assets/media/team-thomas-400.webp 400w, assets/media/team-thomas-600.webp 600w" sizes="18vw" width="600" height="750" loading="lazy" decoding="async" alt="Thomas Asfaw, Founder and Creative Director at Lion Creatives"></div>
-          <p class="proj-name nm">Thomas Asfaw</p>
-          <p class="role">Founder — Creative Director</p>
-        </div>
-        <div class="pl">
-          <div class="pic"><img src="assets/media/team-tewodros-600.webp" srcset="assets/media/team-tewodros-400.webp 400w, assets/media/team-tewodros-600.webp 600w, assets/media/team-tewodros-900.webp 900w" sizes="16vw" width="600" height="750" loading="lazy" decoding="async" alt="Tewodros Teshome, Co-Founder at Lion Creatives"></div>
-          <p class="proj-name nm">Tewodros Teshome</p>
-          <p class="role">Co-Founder</p>
-        </div>
-        <div class="pl">
-          <div class="pic pending"><span class="initials" aria-hidden="true">BA</span></div>
-          <p class="proj-name nm">Bisrat Asfaw</p>
-          <p class="role">Lead Software Engineer</p>
-        </div>
-        <div class="pl">
-          <div class="pic pending"><span class="initials" aria-hidden="true">GA</span></div>
-          <p class="proj-name nm">Gelila Assefa</p>
-          <p class="role">AI &amp; Data Engineer</p>
-        </div>
-        <div class="pl">
-          <div class="pic"><img src="assets/media/team-michael-400.webp" width="400" height="500" sizes="15vw" loading="lazy" decoding="async" alt="Michael Bekele, Graphics Designer at Lion Creatives"></div>
-          <p class="proj-name nm">Michael Bekele</p>
-          <p class="role">Graphics Designer</p>
-        </div>
+    <span class="st-key" aria-hidden="true"></span>
+    <span class="st-grain" aria-hidden="true"></span>
+    <div class="wrap st-grid">
+
+      <div class="st-head" data-beat="st-head">
+        <p class="label label-sig">05 — The studio</p>
+        <h2 class="t-editorial" style="margin-top:.7rem">Who <i>made all of it.</i></h2>
+        <p class="factline" style="margin-top:.9rem">Film, photography, design, engineering and data. Maryland-based, remote and on location.</p>
+        <p class="spec st-line" data-beat="st-line" style="margin-top:1.6rem">MARYLAND, USA · REMOTE AND ON LOCATION</p>
+        <p class="spec" data-beat="st-line" style="margin-top:.5rem"><a href="studio.html">The studio page →</a></p>
       </div>
+
+      <ol class="st-credits">
+        <li class="st-row" data-i="0"><span class="st-n">01</span><span class="st-name">Thomas Asfaw</span><span class="st-role">Founder — Creative Director</span></li>
+        <li class="st-row" data-i="1"><span class="st-n">02</span><span class="st-name">Tewodros Teshome</span><span class="st-role">Co-Founder</span></li>
+        <li class="st-row" data-i="2"><span class="st-n">03</span><span class="st-name">Bisrat Asfaw</span><span class="st-role">Lead Software Engineer</span></li>
+        <li class="st-row" data-i="3"><span class="st-n">04</span><span class="st-name">Gelila Assefa</span><span class="st-role">AI &amp; Data Engineer</span></li>
+        <li class="st-row" data-i="4"><span class="st-n">05</span><span class="st-name">Michael Bekele</span><span class="st-role">Graphics Designer</span></li>
+      </ol>
+
+      <div class="st-prints">
+        <figure class="st-plate" data-for="0">
+          <img src="assets/media/team-thomas-600.webp" srcset="assets/media/team-thomas-400.webp 400w, assets/media/team-thomas-600.webp 600w, assets/media/team-thomas-1000.webp 1000w" sizes="(min-width:1100px) 300px, 40vw" width="600" height="750" loading="lazy" decoding="async" alt="Thomas Asfaw, Founder and Creative Director at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="1">
+          <img src="assets/media/team-tewodros-600.webp" srcset="assets/media/team-tewodros-400.webp 400w, assets/media/team-tewodros-600.webp 600w, assets/media/team-tewodros-900.webp 900w, assets/media/team-tewodros-1200.webp 1200w" sizes="(min-width:1100px) 300px, 40vw" width="600" height="750" loading="lazy" decoding="async" alt="Tewodros Teshome, Co-Founder at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="4">
+          <img src="assets/media/team-michael-400.webp" width="400" height="500" sizes="(min-width:1100px) 300px, 40vw" loading="lazy" decoding="async" alt="Michael Bekele, Graphics Designer at Lion Creatives">
+        </figure>
+      </div>
+
     </div>
-    <p class="label field-note" data-beat="st-note">Portraits stay in natural colour. Two are still being shot — initials until then, never stock or generated faces.</p>
   </div>
 </section>
 
-<!-- ══ S7 · CONVERSION — the open frame. The red band is gone. ══ -->
+<!-- ══ S7 · CONVERSION — "The Deck" ══
+     The dead full-bleed white field is gone. In its place: an inset, slightly
+     tilted, gradient-lit plane with mirrored shadows and a raking gleam that
+     travels across it as you scroll. It reads as a lit surface in a dark room,
+     not as paint. Content sits above the gleam, so light crosses the deck and
+     never the type. ══ -->
 <section class="scene" id="engage" data-len="2.2" aria-label="Start a project">
   <div class="stage">
-    <div class="eng-field" aria-hidden="true"></div>
+    <div class="eng-deck" aria-hidden="true"><span class="eng-gleam"></span></div>
     <div class="wrap eng-grid">
       <div class="eng-copy">
-        <p class="label label-sig" data-beat="eng-eyebrow" style="color:#5c5c64">06 — Start</p>
-        <h2 class="t-display" style="margin-top:.7rem">
-          <span class="ln"><i>You've seen</i></span>
-          <span class="ln"><i>the work. Now</i></span>
-          <span class="ln"><i>tell us about <span class="sig">yours.</span></i></span>
+        <div class="eng-top">
+          <p class="label label-sig" data-beat="eng-eyebrow">06 — Start</p>
+          <p class="spec eng-loc" data-beat="eng-eyebrow">MARYLAND, USA · REMOTE AND ON LOCATION</p>
+        </div>
+        <h2 class="t-display eng-head">
+          <span class="ln"><i>You've seen the work.</i></span>
+          <span class="ln"><i>Now tell us about</i></span>
+          <span class="ln"><i><span class="eng-yours" data-beat="eng-yours">yours.</span></i></span>
         </h2>
-        <p class="lede eng-sub" data-beat="eng-sub" style="color:#43434a">A film, a photography day, a website — or all three. A short brief is enough, and “not sure yet” is a valid budget.</p>
+        <span class="eng-axis" aria-hidden="true"></span>
+        <p class="lede eng-sub" data-beat="eng-sub">A film, a photography day, a website — or all three. A short brief is enough, and &ldquo;not sure yet&rdquo; is a valid budget.</p>
       </div>
+
       <div class="eng-panel" data-beat="eng-panel">
         <p class="label">Direct line</p>
         <div class="eng-actions">
-          <a class="btn btn-solid" href="contact.html"><span>Start a project</span><i class="tick" aria-hidden="true">→</i></a>
-          <a class="btn" href="contact.html#book"><span>Book a call</span></a>
+          <a class="btn btn-solid eng-primary" href="contact.html"><span>Start a project</span><i class="tick" aria-hidden="true">→</i></a>
+          <a class="btn eng-secondary" href="contact.html#book"><span>Book a call</span></a>
         </div>
-        <p class="spec" style="margin-top:1rem;color:#5c5c64">hello@lioncreatives.com</p>
+        <p class="spec eng-note" data-beat="eng-answer" data-review-state="no-scheduler">No scheduler connected yet — this opens a request for a time.</p>
+        <p class="spec eng-mail" data-beat="eng-answer"><a href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
       </div>
-      <div class="eng-trace" data-beat="eng-trace">
-        <div class="tr"><b>A proposal, then a wedding</b><span>Event film</span></div>
-        <div class="tr"><b>Ria Brows</b><span>Studio social film</span></div>
-        <div class="tr"><b>Love in Action</b><span>Nonprofit appeal</span></div>
-        <div class="tr"><b>Dunamis Hosting</b><span>Web platform</span></div>
-        <div class="tr"><b>Family celebration</b><span>Photography</span></div>
+
+      <div class="eng-rail" data-beat="eng-trace">
+        <p class="label">Shown on this page</p>
+        <ul class="eng-chips">
+          <li class="chip"><img src="assets/media/pw-crowning-560.webp" width="560" height="315" loading="lazy" decoding="async" alt=""><b>A proposal, then a wedding</b><span>Event film</span></li>
+          <li class="chip"><img src="assets/media/ria-after-900.webp" width="900" height="1600" loading="lazy" decoding="async" alt=""><b>Ria Brows</b><span>Studio social film</span></li>
+          <li class="chip"><img src="assets/media/lia-presenter-900.webp" width="900" height="1600" loading="lazy" decoding="async" alt=""><b>Love in Action</b><span>Nonprofit appeal</span></li>
+          <li class="chip"><img src="assets/media/dun-pricing-640.webp" width="640" height="400" loading="lazy" decoding="async" alt=""><b>Dunamis Hosting</b><span>Web platform</span></li>
+          <li class="chip"><img src="assets/media/ph-group-wide-900.webp" width="900" height="506" loading="lazy" decoding="async" alt=""><b>Family celebration</b><span>Photography</span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ S8 · FINALE — the plate. The planes come home and HOLD. ══ -->
-<section class="scene" id="finale" data-len="2" aria-labelledby="fin-h">
+<!-- ══ S8 · FINALE — "The Aperture Closes" ══
+     The five blades arrive along their OWN centroid rays — each carrying the
+     label of a scene the visitor has passed — the light changes from the
+     conversion deck's cream to void, the mark locks to exact canonical
+     geometry and holds, then the statement prints and the gate opens.
+     The polygon point strings are byte-identical to the nav and the loader. ══ -->
+<section class="scene" id="finale" data-len="3.2" aria-labelledby="fin-h">
   <div class="stage">
+    <span class="fin-ground" aria-hidden="true"></span>
     <div class="wrap fin-plate">
-      <div class="fin-body">
-        <div class="fin-mark" aria-hidden="true">
-          <span class="fin-glow"></span>
-          <svg viewBox="0 0 550 550">
-            <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
-            <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
-            <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
-            <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
-            <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
-          </svg>
-        </div>
-        <div class="fin-words">
-          <h2 id="fin-h" class="t-display">
-            <span class="l1"><i>Let's make something</i></span>
-            <span class="l2"><i>unmistakable.</i></span>
-          </h2>
-          <div class="fin-rule" aria-hidden="true"></div>
-        </div>
+      <div class="fin-mark" aria-hidden="true">
+        <span class="fin-core"></span>
+        <svg viewBox="0 0 550 550">
+        <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+        <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+        <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+        <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+        <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+        </svg>
       </div>
-      <div class="fin-div" aria-hidden="true"></div>
-      <div class="fin-base">
+
+      <div class="fin-words">
+        <h2 id="fin-h">
+          <span class="l1"><i>Directed</i></span>
+          <span class="l2"><i>and built</i></span>
+          <span class="l3"><i>by one team.</i></span>
+        </h2>
+        <span class="fin-seam" aria-hidden="true"></span>
+      </div>
+
+      <div class="fin-gate" data-beat="fin-act">
+        <a class="gate" href="contact.html">
+          <span class="gate-verb">Start a project</span>
+          <span class="gate-tick" aria-hidden="true">→</span>
+        </a>
+        <p class="spec gate-sub">MARYLAND · REMOTE · ON LOCATION</p>
+      </div>
+
+      <div class="fin-meta">
         <p class="spec" data-beat="fin-imprint">LION CREATIVES · CREATIVE AND TECHNOLOGY AGENCY · MARYLAND, USA</p>
-        <div data-beat="fin-act">
-          <a class="btn btn-solid" href="contact.html"><span>Start a project</span><i class="tick" aria-hidden="true">→</i></a>
-        </div>
+        <p class="spec" data-beat="fin-imprint"><a class="fin-mail" href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
       </div>
     </div>
   </div>
@@ -400,9 +430,19 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
 </main>
 
 <footer class="foot">
-  <div>
+  <div class="foot-id">
+    <span class="foot-mark" aria-hidden="true">
+      <svg viewBox="0 0 550 550">
+        <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+        <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+        <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+        <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+        <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+      </svg>
+    </span>
     <p class="label">Lion Creatives</p>
-    <p class="factline" style="margin-top:.6rem;max-width:34ch">A creative and technology agency. Maryland-based, working remotely and on location, across the U.S. and beyond.</p>
+    <p class="factline" style="margin-top:.6rem;max-width:32ch">A creative and technology agency. Maryland-based, working remotely and on location, across the U.S. and beyond.</p>
+    <p class="spec" style="margin-top:1rem"><a href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
   </div>
   <div>
     <p class="label">Explore</p>
@@ -416,12 +456,38 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
   </div>
   <div>
     <p class="label">Elsewhere</p>
-    <ul>
-      <li><a href="https://www.instagram.com/lioncreativess" rel="noopener" target="_blank">Instagram</a></li>
-      <li><span style="color:var(--muted)">YouTube — link pending</span></li>
+    <!-- SOCIAL: the founder will supply the three profile URLs after this pass.
+         Until then these are deliberately NOT links: no placeholder anchor, no guessed
+         profile, no generic instagram.com. They render as an inert, labelled
+         set so the layout is final and only the href has to be filled in. -->
+    <ul class="social" data-state="pending">
+      <li>
+        <span class="soc" role="img" aria-label="Instagram — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/>
+          </svg>
+        </span>
+      </li>
+      <li>
+        <span class="soc" role="img" aria-label="TikTok — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M13.2 2.6h2.6c.25 1.86 1.35 3.4 3.4 3.72v2.63c-1.3.06-2.5-.28-3.6-.98v6.36c0 3.3-2.4 5.77-5.6 5.77S4.4 17.63 4.4 14.33c0-3.1 2.3-5.5 5.4-5.7v2.75c-1.6.2-2.75 1.36-2.75 2.95 0 1.72 1.3 3.05 3 3.05 1.72 0 2.95-1.3 2.95-3.1V2.6z"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </li>
+      <li>
+        <span class="soc" role="img" aria-label="Facebook — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M14.6 21.4v-8.1h2.72l.4-3.16H14.6V8.1c0-.9.26-1.53 1.56-1.53h1.67V3.75c-.29-.04-1.28-.12-2.44-.12-2.42 0-4.07 1.47-4.07 4.19v2.32H8.6v3.16h2.72v8.1z"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </li>
     </ul>
-    <p class="label" style="margin-top:1.2rem">Say hello</p>
-    <ul><li><a href="mailto:hello@lioncreatives.com">hello@lioncreatives.com</a></li></ul>
+    <p class="spec soc-note">Profile links pending — supplied by the founder, then wired.</p>
   </div>
   <div class="foot-legal">
     <span>© 2026 Lion Creatives · Maryland, USA</span>

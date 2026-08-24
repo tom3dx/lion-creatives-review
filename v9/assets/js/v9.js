@@ -463,100 +463,200 @@
   function cinemaUpdate(p, sc, app) {
     var closeT = easeIO(seg(p, 0, .26));
     var releaseT = easeIO(seg(p, .92, 1));
-    sc.el.style.setProperty('--barh', (mix(0, 13, closeT) * (1 - releaseT)) + 'svh');
+    var barSvh = mix(0, 13, closeT) * (1 - releaseT);
+    sc.el.style.setProperty('--barh', barSvh + 'svh');
+    /* The title is light ink because it sits ON the black letterbox bar. When the
+       bar collapses at the scene edges that same light ink lands on the cream
+       field and vanishes — the exact invisible-title failure the founder caught
+       once already. So the title's visibility is driven by the bar that carries
+       it, never by a beat alone. */
+    var title = $('.cin-title', sc.el);
+    if (title) {
+      var barPx = barSvh / 100 * innerHeight;
+      var tH = title.offsetHeight || 46;
+      title.style.opacity = String(clamp((barPx - tH * 0.62) / (tH * 0.5), 0, 1));
+    }
     var strip = $('.strip', sc.el), peak = $('.peak', strip);
     var max = peak.offsetLeft - (strip.parentElement.clientWidth - peak.offsetWidth) / 2;
     strip.style.transform = 'translateX(' + (-easeIO(seg(p, .24, .84)) * Math.max(0, max)) + 'px)';
     beat(sc, 'cin-head', app > .5 || p > .10);
   }
 
-  /* ---------- S6 STUDIO — the field ----------
-     Not cards. Five plates arriving out of depth, recomposing mid-scene, and
-     resolving into one group frame. Portraits are never filtered. */
-  var FIELD_A = [[52, 26, 16], [77, 24, 13], [30, 74, 14], [54, 76, 12], [80, 72, 12]];
-  var FIELD_B = [[47, 25, 17], [72, 23, 14], [25, 74, 15], [49, 77, 13], [75, 73, 13]];
+  /* ---------- S6 STUDIO — "The Light-Up" ----------
+     A warm key light travels down the five credit rows, DWELLING on each name
+     rather than sweeping past it, then all five come up together. Focus is
+     carried by light and weight only: no portrait is ever desaturated, blurred
+     away or hidden, which is what made people look "missing" before. */
+  var ST_N = 5;
   function studioUpdate(p, sc, app) {
-    var pls = $$('.pl', sc.el);
-    var recomp = easeIO(seg(p, .30, .52));
-    var group = easeIO(seg(p, .72, .90));
-    pls.forEach(function (el, i) {
-      var a = FIELD_A[i] || FIELD_A[0], b = FIELD_B[i] || FIELD_B[0];
-      var s = .10 + i * .11;
-      var arrive = easeOutQ(Math.max(seg(p, s, s + .26), clamp(app - .4, 0, 1) * (i === 0 ? 1 : 0)));
-      var x = mix(a[0], b[0], recomp), y = mix(a[1], b[1], recomp), w = mix(a[2], b[2], recomp);
-      if (!isMobile()) {
-        el.style.left = x + '%'; el.style.top = y + '%';
-        el.style.setProperty('--w', w + '%');
-      }
-      var z = mix(-460, 0, arrive);
-      var base = isMobile() ? '' : 'translate(-50%,-50%) ';
-      el.style.transform = base + 'translateZ(' + (isMobile() ? z * .3 : z) + 'px) translateY('
-        + mix(isMobile() ? 3 : 6, 0, arrive) + 'svh)';
-      el.style.opacity = String(arrive);
-      el.style.filter = 'blur(' + mix(10, 0, arrive) + 'px)';   /* focus, never colour */
-      /* one person in focus at a time, until the group frame equalises them */
-      var focusIdx = Math.floor(clamp(seg(p, .14, .72), 0, .999) * pls.length);
-      var isFocus = i === focusIdx;
-      var dim = mix(isFocus ? 1 : .52, 1, group);
-      el.style.opacity = String(arrive * dim);
-      el.style.zIndex = String(isFocus ? 6 : 3);
+    var pre = easeOutQ(clamp((app - .10) / .50, 0, 1));
+    var key = $('.st-key', sc.el);
+    var rows = $$('.st-row', sc.el);
+    var plates = $$('.st-plate', sc.el);
+    var narrow = innerWidth <= 1099;
+
+    /* ACT 1 — the travelling light. A dwell warp holds the light on each name. */
+    var a1 = seg(p, .10, .72);
+    var warped = (function (t) {
+      var x = t * ST_N, i = Math.floor(x), f = x - i;
+      var held = f < .45 ? 0 : (f - .45) / .55;          // hold, then move on
+      return Math.min(ST_N - .001, i + easeIO(held));
+    })(a1);
+    var assembly = easeIO(seg(p, .72, .88));
+    var handoff = easeIO(seg(p, .90, 1));
+
+    rows.forEach(function (row, i) {
+      var arrive = easeOut(Math.max(pre, seg(p, .02 + i * .03, .18 + i * .03)));
+      var d = Math.abs(warped - i);
+      var travelLit = clamp(1 - d * 1.35, 0, 1);
+      var lit = Math.max(travelLit, assembly);
+      row.style.opacity = String(arrive * mix(.62, 1, lit));   // never below .62 — nobody vanishes
+      row.style.transform = 'translateY(' + mix(16, 0, arrive) + 'px)';
+      row.classList.toggle('lit', lit > .55);
     });
-    beat(sc, 'st-head', app > .3 || p > .01);
-    beat(sc, 'st-note', p > .80);
+
+    if (key) {
+      var kx = narrow ? mix(-24, 24, a1) : mix(-14, 10, a1);
+      var ky = narrow ? 0 : mix(-26, 26, a1);
+      key.style.opacity = String(mix(0, 1, Math.max(pre, seg(p, 0, .06))) * mix(1, .8, handoff));
+      key.style.transform = 'translate3d(' + (kx + handoff * 16) + 'vw,' + ky + 'svh,0) scale('
+        + mix(.86, 1, Math.max(pre, seg(p, 0, .10))) + ')';
+    }
+
+    /* the prints cross-fade to whoever the light is on; when nobody with a
+       print is lit, the last print holds rather than leaving an empty column */
+    if (!narrow) {
+      var nearest = null, best = 1e9;
+      plates.forEach(function (pl) {
+        var idx = +pl.getAttribute('data-for');
+        var d2 = Math.abs(warped - idx);
+        if (d2 < best) { best = d2; nearest = pl; }
+      });
+      /* If the lit credit has no print, the held print steps back so it never
+         reads as belonging to the person whose name is up. Honest, and it keeps
+         the column from going empty. */
+      var litIdx = Math.round(warped);
+      var litHasPrint = plates.some(function (pl) { return +pl.getAttribute('data-for') === litIdx; });
+      plates.forEach(function (pl) {
+        var on = pl === nearest;
+        var t = easeOut(Math.max(pre * .6, seg(p, .06, .20)));
+        var own = litHasPrint ? 1 : .5;
+        pl.style.opacity = String((on ? own : 0) * t * mix(1, .9, handoff));
+        var mid = pl.getAttribute('data-for') === '4' ? ' translateY(-50%)' : '';
+        pl.style.transform = mid + ' translateY(' + mix(18, 0, t) + 'px) scale(' + mix(.97, 1, t) + ')';
+      });
+    }
+
+    beat(sc, 'st-head', app > .25 || p > .01);
+    beat(sc, 'st-line', p > .74);
   }
 
-  /* ---------- S7 CONVERSION — the open frame ----------
-     The rejected red band is gone. A cream aperture opens into the page, the
-     invitation sets line by line, the traces of the five projects just seen
-     line up beneath it, and the plate button lands last. */
-  var ENG_START = [[64, 46], [72, 44], [78, 50], [76, 57], [68, 58], [62, 52]];
-  var ENG_FULL = [[0, 0], [50, 0], [100, 0], [100, 100], [50, 100], [0, 100]];
+  /* ---------- S7 CONVERSION — "The Deck" ----------
+     The plane arrives on approach, keeps a slow live drift the whole scene, and
+     a raking gleam crosses it. Nothing here is static, which is the fix for
+     "the white field feels dead". */
   function engageUpdate(p, sc, app) {
-    var pre = easeOutQ(clamp((app - .18) / .62, 0, 1));
-    var f = $('.eng-field', sc.el);
-    f.style.opacity = String(Math.max(pre, seg(p, 0, .05)));
-    f.style.clipPath = lerpPoly(ENG_START, ENG_FULL, Math.max(pre, easeIO(seg(p, .02, .24))));
-    $$('.eng-copy .ln i', sc.el).forEach(function (el, i) {
-      var s = .16 + i * .05, t = Math.max(pre, easeOut(seg(p, s, s + .16)));
-      el.style.transform = 'translateY(' + mix(112, 0, t) + '%)';
+    var pre = easeOutQ(clamp((app - .12) / .60, 0, 1));
+    var deck = $('.eng-deck', sc.el), gleam = $('.eng-gleam', sc.el);
+
+    /* the deck: arrives, then never stops moving (2.6svh of drift, .3deg of tilt) */
+    var arrive = Math.max(pre, easeIO(seg(p, 0, .10)));
+    if (deck) {
+      deck.style.opacity = String(arrive);
+      deck.style.transform = 'translateY(' + mix(6, 0, arrive) + 'svh) translateY('
+        + mix(3.2, 0.5, p) + 'svh) rotate(' + mix(-1.35, -0.55, p) + 'deg) scale(' + mix(1.03, 1, arrive) + ')';
+    }
+    if (gleam) {
+      gleam.style.opacity = String(clamp((Math.max(pre, p) - .12) / .5, 0, 1) * .55);
+      gleam.style.transform = 'rotate(-22deg) translate3d(' + mix(-20, 150, Math.max(pre * .2, p)) + '%,0,0)';
+    }
+
+    $$('.eng-head .ln i', sc.el).forEach(function (el, i) {
+      var t = easeOut(Math.max(pre - i * .10, seg(p, .02 + i * .06, .20 + i * .06)));
+      el.style.transform = 'translateY(' + mix(112, 0, clamp(t, 0, 1)) + '%)';
     });
-    beat(sc, 'eng-eyebrow', app > .35 || p > .12);
-    beat(sc, 'eng-sub', app > .6 || p > .34);
-    beat(sc, 'eng-panel', app > .7 || p > .40);
-    beat(sc, 'eng-trace', p > .52);
-    /* NO closing exit: the plane simply carries the scene out. Closing it back
-       down left an empty viewport between this scene and the finale. */
+    sc.el.style.setProperty('--axis', String(Math.max(pre * .16, easeIO(seg(p, .10, .52)))));
+
+    /* the five project chips flatten in, then the light walks along them */
+    var chips = $$('.chip', sc.el);
+    var lit = Math.floor(clamp(seg(p, .30, .70), 0, .999) * chips.length);
+    chips.forEach(function (ch, i) {
+      var t = easeOut(seg(p, .20 + i * .05, .40 + i * .05));
+      ch.style.opacity = String(t);
+      ch.style.transform = 'translateY(' + mix(14, 0, t) + 'px) rotate(' + mix(i % 2 ? 1.4 : -1.4, 0, t) + 'deg)';
+      ch.classList.toggle('dim', p > .30 && i !== lit);
+    });
+
+    beat(sc, 'eng-eyebrow', app > .34 || p > .02);
+    beat(sc, 'eng-yours', p > .05);
+    beat(sc, 'eng-sub', app > .74 || p > .02);
+    beat(sc, 'eng-panel', app > .74 || p > .02);
+    beat(sc, 'eng-answer', p > .24);
+    beat(sc, 'eng-trace', p > .14);
   }
 
-  /* ---------- S8 FINALE — the plate ----------
-     The planes the visitor has been following all page fly home along their own
-     rays, LOCK to the exact canonical geometry, and hold. The mark is
-     recognisable from the first frame and perfect from .34 onward — the visitor
-     never studies broken pieces (founder §32/33). */
-  var FIN_RAY = [[-1.7, -1.3], [1.4, -0.9], [-1.2, 1.1], [1.5, 1.0], [0, -1.8]];
+  /* ---------- S8 FINALE — "The Aperture Closes" ----------
+     Each blade flies home along ITS OWN centroid ray, computed from the
+     canonical polygon geometry rather than hand-picked vectors, carrying the
+     label of a scene the visitor has passed. The ground carries the cream of
+     the conversion deck and changes to void as the mark seats. At p .42 every
+     transform is written as the literal string 'none' so the resolved mark is
+     exactly canonical — never a rounding error away from it. */
+  var FIN_RAYS = null;
+  function finRays(sc) {
+    if (FIN_RAYS) return FIN_RAYS;
+    FIN_RAYS = $$('.fin-mark polygon', sc.el).map(function (poly) {
+      var pts = (poly.getAttribute('points') || '').trim().split(/\s+/).map(Number);
+      var cx = 0, cy = 0, n = 0;
+      for (var i = 0; i + 1 < pts.length; i += 2) { cx += pts[i]; cy += pts[i + 1]; n++; }
+      cx = cx / n - 275; cy = cy / n - 275;            // 550x550 viewBox centre
+      var d = Math.hypot(cx, cy) || 1;
+      return [cx / d, cy / d];
+    });
+    return FIN_RAYS;
+  }
   function finaleUpdate(p, sc, app) {
     var polys = $$('.fin-mark polygon', sc.el);
-    var glow = $('.fin-glow', sc.el);
-    var mark = $('.fin-mark', sc.el);
-    var locked = p >= .34;
+    var rays = finRays(sc);
+    var core = $('.fin-core', sc.el);
+
+    /* the close: begins on approach so the scene is never an empty frame */
+    /* the approach carries only enough to avoid an empty frame; the rest of the
+       flight happens ON SCREEN, or the arrival is never actually seen */
+    var enter = clamp(app, 0, 1) * .22 + .78 * clamp(p / .42, 0, 1);
+    var locked = p >= .42;
+
     polys.forEach(function (poly, i) {
       if (locked) { poly.style.transform = 'none'; poly.style.opacity = '1'; return; }
-      var s = i * .045, t = easeOut(Math.max(seg(p, s, s + .26), easeOutQ(clamp((app - .22) / .6, 0, 1))));
-      var r = FIN_RAY[i] || [0, 0];
-      poly.style.transform = 'translate(' + (r[0] * 190 * (1 - t)) + 'px,' + (r[1] * 190 * (1 - t)) + 'px)'
-        + ' scale(' + mix(.72, 1, t) + ')';
-      poly.style.opacity = String(mix(0, 1, Math.min(1, t * 1.6)));
+      var s0 = i * .055;
+      var k = 1 - easeOut(clamp((enter - s0) / (1 - s0 - .06), 0, 1));
+      var r = rays[i] || [0, 0];
+      poly.style.transform = 'translate(' + (r[0] * 420 * k) + 'px,' + (r[1] * 420 * k) + 'px) scale('
+        + mix(1, .78, k) + ')';
+      poly.style.opacity = String(clamp(1 - k * 1.15, 0, 1));
     });
-    if (mark) mark.classList.toggle('locked', locked);
-    if (glow) glow.style.opacity = String(Math.max(easeIO(seg(p, .04, .34)), clamp(app - .4, 0, 1)) * .42);
+
+    if (core) {
+      core.style.opacity = String(easeIO(seg(enter, .10, .70)) * (1 - easeIO(seg(p, .42, .52))) * .9);
+      core.style.transform = 'scale(' + mix(1.85, .52, enter) + ')';
+    }
+
+    /* THE LIGHT CHANGE — the cream carried from the conversion deck burns off
+       as the mark seats, and the mark's ink flips with it so it is never
+       light-on-light or dark-on-dark for a single frame. */
+    var gnd = 1 - easeIO(seg(p, .30, .44));
+    sc.el.style.setProperty('--gnd', String(gnd));
+    sc.el.style.setProperty('--markink', gnd > .5 ? '#131315' : '#f7f6f3');
+
     $$('.fin-words i', sc.el).forEach(function (el, i) {
-      var s = .38 + i * .12, t = easeOut(Math.max(seg(p, s, s + .16), clamp(app - .72, 0, 1) * 2.2));
-      el.style.transform = 'translateY(' + mix(110, 0, t) + '%)';
+      var s0 = .50 + i * .06;
+      el.style.transform = 'translateY(' + mix(110, 0, easeOut(seg(p, s0, s0 + .14))) + '%)';
     });
-    sc.el.style.setProperty('--finrule', String(easeIO(seg(p, .46, .58))));
-    sc.el.style.setProperty('--findiv', String(easeIO(seg(p, .54, .66))));
-    beat(sc, 'fin-act', p > .58);
-    beat(sc, 'fin-imprint', p > .62);
+    sc.el.style.setProperty('--seam', String(easeIO(seg(p, .58, .92))));
+    sc.el.style.setProperty('--gate', String(easeIO(seg(p, .78, .90)) * .0));  // fill only on hover
+
+    beat(sc, 'fin-act', p > .74);
+    beat(sc, 'fin-imprint', p > .84);
   }
 
   /* ---------- engine loop ---------- */
@@ -567,9 +667,9 @@
     addScene('tech', techUpdate, '3.2');
     addScene('photo', photoUpdate, '3.0');
     addScene('cinema', cinemaUpdate, '1.8');
-    addScene('studio', studioUpdate, '2.2');
+    addScene('studio', studioUpdate, '2.4');
     addScene('engage', engageUpdate, '1.8');
-    addScene('finale', finaleUpdate, '1.7');
+    addScene('finale', finaleUpdate, '2.6');
 
     var vh = innerHeight;
     addEventListener('resize', function () { vh = innerHeight; }, { passive: true });

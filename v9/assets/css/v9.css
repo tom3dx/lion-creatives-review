@@ -234,13 +234,22 @@ html[data-mode="editorial"] .hero-film .rm-poster{display:block;position:static}
 .reel{--reel-h:min(67svh,625px);height:var(--reel-h);
   width:calc(var(--reel-h) * 9 / 16);flex:0 0 auto;position:relative;
   will-change:transform,filter}
-.reel .frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000}
-.reel video,.reel .rm-poster{width:100%;height:100%;object-fit:cover}
+/* ROUNDED REEL EDGE (founder correction). The reference uses 28px on a 334x594
+   reel = 0.047 of the reel HEIGHT, so the radius is tied to --reel-h and stays
+   proportional at every size instead of being a fixed pixel value.
+   The radius is repeated on the media itself: an overflow:hidden parent alone
+   lets transformed video bleed past a rounded corner in WebKit, which would
+   show exactly the jagged edge the founder is trying to get rid of. */
+.reel{--reel-r:clamp(10px, calc(var(--reel-h) * 0.047), 30px)}
+.reel .frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000;
+  border-radius:var(--reel-r);isolation:isolate;-webkit-backface-visibility:hidden}
+.reel video,.reel .rm-poster{width:100%;height:100%;object-fit:cover;
+  border-radius:inherit;-webkit-backface-visibility:hidden}
 .reel .rm-poster{position:absolute;inset:0;display:none}
 html[data-mode="editorial"] .reel video{display:none}
 html[data-mode="editorial"] .reel .rm-poster{display:block;position:static}
 /* mirrored outward shadow — the cue that reads as two lifted planes */
-.reel-a .frame{box-shadow:-10px 22px 74px rgba(0,0,0,.72)}
+.reel-a .frame{box-shadow:-10px 22px 74px rgba(0,0,0,.72)}   /* follows border-radius */
 .reel-b .frame{box-shadow:10px 22px 74px rgba(0,0,0,.72)}
 
 .reel-centre{text-align:center;display:flex;flex-direction:column;align-items:center;
@@ -292,7 +301,11 @@ html[data-mode="editorial"] .reel .rm-poster{display:block;position:static}
   letter-spacing:.13em;text-transform:uppercase;color:#6f7c95;
   border:1px solid rgba(150,175,225,.24);padding:.15rem .4rem}
 .dun-view{position:relative;overflow:hidden;background:#fff;will-change:height}
-.dun-view img{position:absolute;top:0;left:0;display:block;will-change:transform}
+/* height:auto is LOAD-BEARING. The <img> carries width/height attributes; with a
+   CSS width but no CSS height the attribute acts as a presentational hint and the
+   image renders at its natural PIXEL height — a 2.45x vertical stretch of the
+   client's website. This is the aspect distortion the founder rejected. */
+.dun-view img{position:absolute;top:0;left:0;display:block;height:auto;will-change:transform}
 .dun-scroll-rail{position:absolute;top:6px;bottom:6px;right:4px;width:3px;
   background:rgba(0,0,0,.10);z-index:3}
 .dun-scroll-rail i{position:absolute;left:0;width:100%;background:rgba(0,0,0,.34);
@@ -344,84 +357,194 @@ html[data-mode="editorial"] .bars .stage::after{display:none}
   border-right:2px solid var(--void)}
 .strip img{width:100%;height:100%;object-fit:cover}
 
-/* ══ S6 · STUDIO — the field ═════════════════════════════════════════════ */
-#studio .stage{background:radial-gradient(120% 90% at 78% 30%,#1d1d21 0%,#141417 62%,#101012 100%);
-  perspective:1200px}
-.field-head{position:absolute;left:var(--gut);top:var(--safe-top);z-index:6;max-width:30ch;
-  pointer-events:none}
-.field{position:relative;width:100%;height:100%;transform-style:preserve-3d}
-.pl{position:absolute;width:var(--w,17%);will-change:transform,opacity;
-  transform-style:preserve-3d}
-.pl .pic{position:relative;overflow:hidden;background:#1b1b1f;aspect-ratio:4/5;
-  box-shadow:0 22px 54px rgba(0,0,0,.42)}
-/* portraits stay in natural colour — no filter is permitted here, ever */
-.pl .pic img{width:100%;height:100%;object-fit:cover;filter:none}
-.pl .pic.pending{display:grid;place-items:center;border:1px solid var(--hair);
-  background:linear-gradient(160deg,#191a1e,#141417)}
-.pl .pic.pending .initials{font-family:var(--f-studio);font-optical-sizing:none;
-  font-variation-settings:'opsz' 72,'wght' 300,'SOFT' 0,'WONK' 0;
-  font-size:2.4rem;color:var(--dim)}
-.pl .nm{margin-top:.6rem}
-.pl .role{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--signal);margin-top:.22rem}
-.field-note{position:absolute;left:var(--gut);bottom:calc(var(--gut) * .7);z-index:6}
-@media(max-width:1000px){
-  .field{display:flex;flex-wrap:wrap;gap:1rem;align-content:center;height:auto;
-    padding-top:calc(var(--safe-top) + 8rem)}
-  .pl{position:static;width:calc(50% - .5rem)}
+/* ══ S6 · STUDIO — "The Light-Up" ═══════════════════════════════════════
+   The unit is a CREDIT ROW, not a portrait. All five people are typeset
+   identically; a print is an extra that three of them happen to have. That is
+   what stops the two without photographs reading as holes.
+   Warm ground — human photography should feel warmer than the cool technology
+   scene. Focus is carried by LIGHT (colour temperature + weight), never by
+   desaturating or hiding a person. */
+#studio .stage{background:radial-gradient(112% 84% at 26% 8%,#221a13 0%,#191309 46%,#16110d 100%);
+  color:#f4ece1;perspective:none;overflow:clip}
+.st-key{position:absolute;left:50%;top:50%;width:118vh;height:118vh;margin:-59vh 0 0 -59vh;
+  pointer-events:none;opacity:0;z-index:1;will-change:transform,opacity;
+  background:radial-gradient(closest-side,rgba(255,196,134,.26),rgba(255,170,96,.10) 46%,transparent 72%)}
+.st-grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.st-grid{position:relative;z-index:3;display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:center}
+@media(min-width:1100px){
+  .st-grid{grid-template-columns:minmax(0,23%) minmax(0,1fr) minmax(0,300px);
+    column-gap:clamp(2rem,4vw,5rem);align-items:center}
 }
+.st-head .t-editorial{color:#f4ece1}
+.st-head .t-editorial i{color:var(--signal)}
+.st-head .factline{color:#a3968a}
+.st-head .spec{color:#a3968a}
+.st-head .spec a{color:#f4ece1;text-decoration:underline;text-underline-offset:4px}
 
-/* ══ S7 · CONVERSION — the open frame ════════════════════════════════════ */
-#engage .stage{background:var(--void)}
-.eng-field{position:absolute;inset:0;background:var(--field);z-index:1;
-  will-change:clip-path;pointer-events:none}
-.eng-grid{position:relative;z-index:3;display:grid;grid-template-columns:1fr;
-  gap:2rem;align-items:end;color:var(--ink)}
-@media(min-width:1000px){.eng-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  gap:clamp(2rem,5vw,5rem)}}
-.eng-copy .t-display{color:var(--ink)}
-.eng-copy .ln{display:block;overflow:clip}
-.eng-copy .ln i{display:block;font-style:normal;will-change:transform}
-.eng-sub{color:#43434a;max-width:44ch;margin-top:1.1rem}
+/* the credit list — every row identical */
+.st-credits{list-style:none;margin:0;padding:0;display:grid;gap:clamp(.5rem,1.5vh,1.1rem)}
+.st-row{display:grid;grid-template-columns:2.6em 1fr;gap:.2rem 1rem;align-items:baseline;
+  padding-bottom:clamp(.45rem,1.2vh,.9rem);border-bottom:1px solid rgba(233,223,208,.15);
+  will-change:opacity,transform}
+.st-n{font-family:var(--f-machine);font-size:.7rem;letter-spacing:.1em;color:#a3968a;
+  font-variant-numeric:tabular-nums}
+.st-name{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 40,'WONK' 0;font-weight:400;
+  font-size:clamp(1.5rem,3.2vw,2.9rem);line-height:1.02;letter-spacing:-.018em;
+  color:#f4ece1;transition:color 420ms var(--ease)}
+.st-role{grid-column:2;font-family:var(--f-machine);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#a3968a;transition:color 420ms var(--ease)}
+.st-row.lit .st-name{color:#fff}
+.st-row.lit .st-role{color:var(--signal)}
+
+/* the prints — an extra, not the unit. Never filtered, never desaturated. */
+.st-prints{position:relative;height:min(56svh,470px)}
+@media(max-width:1099px){.st-prints{height:auto;display:flex;gap:.8rem;justify-content:flex-start}}
+/* Each print is sized to what its own master can actually serve — Michael's
+   source is 384x514, so his print is physically smaller. Varied print sizes are
+   correct for tipped-in marginalia anyway; uniform ones would force an upscale. */
+.st-plate{position:absolute;top:0;left:0;height:100%;width:100%;margin:0;opacity:0;
+  will-change:opacity,transform}
+.st-plate[data-for="4"]{width:62%;height:auto;top:50%;transform-origin:0 50%}
+@media(max-width:1099px){.st-plate,.st-plate[data-for="4"]{position:static;opacity:1;flex:0 0 auto;width:31%;height:auto;transform:none}}
+.st-plate img{width:100%;height:100%;object-fit:cover;background:#221a13;
+  filter:none;                      /* portraits stay in natural colour, always */
+  box-shadow:0 26px 70px rgba(0,0,0,.55)}
+@media(max-width:1099px){.st-plate img{height:auto}}
+.st-plate figcaption{margin-top:.55rem;color:#a3968a;font-size:.6rem}
+
+/* ══ S7 · CONVERSION — "The Deck" ═══════════════════════════════════════
+   Founder scored the old full-bleed cream 2/10: "the large WHITE FIELD kills
+   the energy and makes the site feel dead." The fix is not a different colour,
+   it is object-hood — an inset, tilted, gradient-lit PLANE with mirrored
+   shadows and a raking gleam that moves. Light is not banned; flat paint is. */
+#engage .stage{background:var(--void);overflow:clip}
+.eng-deck{position:absolute;inset:calc(var(--safe-top) + 58px) var(--gut) -5svh var(--gut);
+  z-index:1;pointer-events:none;transform-origin:50% 92%;will-change:transform;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(19,19,21,.055) 0,rgba(19,19,21,0) 14%),
+    linear-gradient(172deg,#f4f2ed 0%,#eae7e0 46%,#ded9cf 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 0 0 1px rgba(19,19,21,.10),
+    0 -18px 60px rgba(0,0,0,.55),
+    -22px 30px 96px rgba(0,0,0,.66),
+    22px 30px 96px rgba(0,0,0,.66)}
+/* the raking light — under the content, so it crosses the surface, never the type */
+.eng-gleam{position:absolute;top:-30%;left:0;width:46%;height:160%;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));
+  will-change:transform,opacity}
+.eng-grid{position:relative;z-index:3;display:grid;grid-template-columns:1fr;gap:1.4rem;
+  align-items:start;color:var(--ink)}
+@media(min-width:1000px){.eng-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);
+  column-gap:clamp(2rem,4vw,4rem)}}
+.eng-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
+.eng-top .label{color:#5c5c64}
+.eng-loc{color:#6a6a72}
+.eng-head{color:var(--ink);margin-top:1rem;font-size:clamp(2.1rem,5.6vw,4.6rem)}
+.eng-head .ln{display:block;overflow:clip}
+.eng-head .ln i{display:block;font-style:normal;will-change:transform}
+.eng-yours{color:var(--ink);transition:color 420ms var(--ease)}
+.eng-yours.on{color:var(--signal)}
+.eng-axis{display:block;height:2px;background:var(--signal);transform-origin:left;
+  transform:scaleX(var(--axis,0));margin:1rem 0 0;max-width:300px}
+.eng-sub{color:#43434a;margin-top:1.1rem;max-width:46ch}
 .eng-panel{border-top:2px solid var(--ink);padding-top:1rem}
 .eng-panel .label{color:#5c5c64}
 .eng-actions{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem;align-items:flex-start}
-#engage .btn{color:var(--ink);border-color:var(--ink)}
-#engage .btn:hover,#engage .btn:focus-visible{color:#fff;border-color:var(--signal)}
-#engage .btn-solid{background:var(--signal);border-color:var(--signal);color:#fff}
+/* primary clearly outranks secondary (founder §22) */
+#engage .btn{color:var(--ink);border-color:rgba(19,19,21,.45)}
+#engage .btn-solid{background:var(--signal);border-color:var(--signal);color:#fff;
+  box-shadow:0 10px 30px rgba(218,31,38,.28)}
 #engage .btn-solid::before{background:var(--ink)}
 #engage .btn-solid:hover,#engage .btn-solid:focus-visible{color:#fff;border-color:var(--ink)}
-.eng-trace{grid-column:1/-1;border-top:1px solid var(--hair-ink);padding-top:.8rem;
-  display:flex;gap:clamp(1rem,3vw,2.6rem);flex-wrap:wrap}
-.eng-trace .tr{display:flex;flex-direction:column;gap:.15rem}
-.eng-trace .tr b{font-family:var(--f-work);font-stretch:112%;font-weight:600;
-  font-size:.86rem;color:var(--ink)}
-.eng-trace .tr span{font-family:var(--f-machine);font-size:.6rem;letter-spacing:.12em;
-  text-transform:uppercase;color:#6a6a72}
+#engage .eng-secondary{font-size:.66rem;border-color:rgba(19,19,21,.3)}
+#engage .eng-secondary>span{padding:.6rem .9rem}
+#engage .btn:hover,#engage .btn:focus-visible{border-color:var(--signal)}
+.eng-note{color:#6a6a72;margin-top:.7rem;max-width:30ch;line-height:1.5}
+.eng-mail{margin-top:.6rem}
+.eng-mail a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+/* the five projects already seen, as real frames rather than a text rail */
+.eng-rail{grid-column:1/-1;margin-top:.4rem}
+.eng-rail .label{color:#5c5c64}
+.eng-chips{list-style:none;display:flex;gap:clamp(.7rem,1.6vw,1.4rem);margin:.7rem 0 0;padding:0;
+  flex-wrap:wrap}
+.chip{width:clamp(96px,11vw,150px);will-change:transform,opacity}
+.chip img{width:100%;height:clamp(52px,6vw,80px);object-fit:cover;display:block;
+  box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.chip b{display:block;margin-top:.45rem;font-family:var(--f-work);font-stretch:112%;
+  font-weight:600;font-size:.7rem;color:var(--ink);line-height:1.22;min-height:2.44em}
+.chip span{display:block;font-family:var(--f-machine);font-size:.54rem;letter-spacing:.11em;
+  text-transform:uppercase;color:#6a6a72;margin-top:.15rem}
+.chip.dim{opacity:.5}
 
-/* ══ S8 · FINALE — the plate ═════════════════════════════════════════════ */
-#finale .stage{background:var(--void)}
-.fin-plate{display:flex;flex-direction:column;gap:clamp(1.5rem,3.2vh,2.4rem)}
-.fin-body{display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:center}
-@media(min-width:900px){.fin-body{grid-template-columns:auto minmax(0,1fr);
-  gap:clamp(2rem,5vw,4.5rem)}}
-.fin-mark{position:relative;width:clamp(150px,19vw,250px);aspect-ratio:1;justify-self:start}
-.fin-mark svg{width:100%;height:100%;overflow:visible}
-.fin-mark polygon{fill:var(--fg);transform-box:fill-box;transform-origin:center;
+/* ══ S8 · FINALE — "The Aperture Closes" ════════════════════════════════
+   The founder scored the old finale 0/10. This is a three-act arrival: blades
+   fly home along their own centroid rays carrying the names of the scenes just
+   passed, the ground changes from the conversion deck's cream to void, the mark
+   LOCKS to exact canonical geometry and holds, then the statement prints and
+   the gate opens. Closing type is deliberately unlike the hero. */
+#finale .stage{background:var(--void);overflow:clip}
+.fin-ground{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:var(--field);opacity:var(--gnd,0)}
+.fin-plate{position:relative;z-index:2;display:grid;grid-template-columns:1fr;
+  gap:clamp(1.2rem,3vh,2.2rem);align-content:center}
+@media(min-width:960px){
+  .fin-plate{grid-template-columns:repeat(12,1fr);column-gap:clamp(16px,1.6vw,28px);
+    row-gap:clamp(1.1rem,2.6vh,2rem)}
+  .fin-mark{grid-column:1/5;grid-row:1;justify-self:start;align-self:center}
+  .fin-words{grid-column:6/13;grid-row:1;align-self:center}
+  .fin-gate{grid-column:6/13;grid-row:2}
+  .fin-meta{grid-column:6/13;grid-row:3}
+}
+.fin-mark{position:relative;width:clamp(150px,17vw,244px);aspect-ratio:1}
+.fin-mark svg{width:100%;height:100%;overflow:visible;position:relative;z-index:2}
+.fin-mark polygon{fill:var(--markink,var(--fg));transform-box:fill-box;transform-origin:center;
   will-change:transform,opacity}
 .fin-mark polygon:nth-child(3){fill:var(--signal)}
-.fin-glow{position:absolute;inset:-40%;z-index:-1;pointer-events:none;opacity:0;
-  background:radial-gradient(circle at 50% 50%,rgba(218,31,38,.30),transparent 62%)}
-.fin-words .l1{display:block;overflow:clip}
-.fin-words .l1 i{display:block;font-style:normal}
-.fin-words .l2{display:block;overflow:clip;margin-top:.06em}
-.fin-words .l2 i{display:block;font-style:italic;color:var(--signal)}
-.fin-rule{height:1px;background:var(--signal);transform-origin:left;
-  transform:scaleX(var(--finrule,0));margin:.9rem 0 0;max-width:280px}
-.fin-div{height:1px;background:var(--hair);transform-origin:left;
-  transform:scaleX(var(--findiv,0))}
-.fin-base{display:grid;grid-template-columns:1fr;gap:1.2rem;align-items:end}
-@media(min-width:900px){.fin-base{grid-template-columns:minmax(0,1fr) auto}}
+.fin-core{position:absolute;inset:-45%;z-index:1;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 50%,rgba(218,31,38,.55),transparent 62%)}
+/* each blade carries the name of a scene the visitor has passed */
+.fin-tag{position:absolute;left:50%;top:50%;z-index:3;pointer-events:none;opacity:0;
+  font-family:var(--f-machine);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);white-space:nowrap;will-change:transform,opacity}
+
+/* the closing statement — three authored lines, not a centred sentence */
+.fin-words h2{margin:0}
+.fin-words .l1,.fin-words .l2,.fin-words .l3{display:block;overflow:clip}
+.fin-words .l1 i,.fin-words .l2 i,.fin-words .l3 i{display:block;font-style:normal;will-change:transform}
+.fin-words .l1,.fin-words .l2{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 40,'WONK' 0;font-weight:300;
+  font-size:clamp(2.6rem,7vw,6.4rem);line-height:.94;letter-spacing:-.032em;color:var(--fg)}
+.fin-words .l3 i{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 40,'WONK' 0;font-style:italic;
+  font-size:clamp(1.9rem,4.8vw,4.2rem);line-height:1;letter-spacing:-.016em;color:var(--signal)}
+.fin-words .l3{margin-left:clamp(14px,2.2vw,42px);margin-top:.08em}
+.fin-seam{display:block;height:1px;background:var(--signal);transform-origin:left;
+  transform:rotate(-4.8deg) scaleX(var(--seam,0));margin-top:clamp(.9rem,2vh,1.5rem);max-width:340px}
+
+/* the gate — APERTURE geometry, obviously a control, not a pill */
+.fin-gate{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;visibility:hidden}
+.fin-gate.on{visibility:visible}
+.gate{display:inline-flex;align-items:stretch;border:1px solid var(--fg);color:var(--fg);
+  min-height:52px;position:relative;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 100%,14px 100%,0 calc(100% - 14px));
+  transition:color 200ms var(--ease),border-color 200ms var(--ease)}
+.gate::before{content:"";position:absolute;inset:0;background:var(--signal);z-index:0;
+  transform:scaleX(var(--gate,0));transform-origin:left;transition:transform 420ms var(--ease)}
+.gate:hover::before,.gate:focus-visible::before{transform:scaleX(1)}
+.gate:hover,.gate:focus-visible{border-color:var(--signal);color:#fff}
+.gate-verb{position:relative;z-index:1;display:flex;align-items:center;padding:.9rem 1.4rem;
+  font-family:var(--f-work);font-stretch:88%;font-weight:700;font-size:1.05rem;
+  letter-spacing:.02em;text-transform:uppercase}
+.gate-tick{position:relative;z-index:1;display:flex;align-items:center;padding:0 1rem;
+  border-left:1px solid currentColor;font-family:var(--f-machine)}
+.gate-sub{color:var(--dim)}
+.fin-meta{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;align-items:baseline;
+  border-top:1px solid var(--hair);padding-top:clamp(.8rem,1.8vh,1.2rem)}
+.fin-mail{color:var(--fg);text-decoration:underline;text-decoration-color:var(--signal);
+  text-underline-offset:5px;text-decoration-thickness:2px}
 
 /* ══ FOOTER ══════════════════════════════════════════════════════════════ */
 .foot{display:grid;gap:2rem;padding:clamp(2.4rem,6vw,4.5rem) var(--gut) 2rem;
@@ -564,3 +687,45 @@ html[data-mode="editorial"] .pt-rail i{transform:scaleX(1)}
   .pl .role{font-size:.5rem}
   .t-display{font-size:clamp(2.1rem,10vw,3rem)}
 }
+
+/* ══ FOOTER — practical utility, kept distinct from the emotional finale ══ */
+.foot{display:grid;gap:2rem;padding:clamp(2.4rem,6vw,4.5rem) var(--gut) 2rem;
+  border-top:1px solid var(--hair);align-items:start}
+@media(min-width:820px){.foot{grid-template-columns:1.5fr 1fr 1fr}}
+.foot-mark{display:block;width:34px;margin-bottom:.9rem}
+.foot-mark svg{width:100%;height:auto;fill:var(--fg)}
+.foot-mark svg polygon:nth-child(3){fill:var(--signal)}
+.foot ul{list-style:none;margin:.6rem 0 0;padding:0;display:grid;gap:.4rem}
+.foot a:hover{color:var(--signal)}
+.foot .social{display:flex;gap:.7rem;margin-top:.8rem}
+.soc{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--hair);
+  color:var(--muted);transition:color 200ms var(--ease),border-color 200ms var(--ease)}
+.soc svg{width:19px;height:19px;display:block}
+/* pending state: inert on purpose — nothing here pretends to be a link */
+.social[data-state="pending"] .soc{opacity:.55}
+.soc-note{margin-top:.7rem;color:var(--dim);max-width:30ch;line-height:1.5}
+/* when real URLs arrive these become <a class="soc"> and light up on hover */
+a.soc:hover,a.soc:focus-visible{color:var(--fg);border-color:var(--signal)}
+
+/* the studio key light and grain are decoration for the pinned scene only. In the
+   editorial edition the stage is static, so an absolutely-positioned 118vh light
+   resolves against a different containing block and pushes the page sideways. */
+html[data-mode="editorial"] .st-key,
+html[data-mode="editorial"] .st-grain{display:none}
+html[data-mode="editorial"] .st-prints{height:auto;display:flex;flex-wrap:wrap;gap:.8rem}
+html[data-mode="editorial"] .st-plate{position:static;opacity:1!important;transform:none!important;
+  width:min(200px,44vw)}
+html[data-mode="editorial"] .st-plate img{height:auto}
+html[data-mode="editorial"] .st-row{opacity:1!important;transform:none!important}
+html[data-mode="editorial"] .eng-deck{position:static;inset:auto;opacity:1!important;
+  transform:none!important;margin:0 0 1.4rem;padding:1.6rem var(--gut)}
+html[data-mode="editorial"] .eng-gleam{display:none}
+html[data-mode="editorial"] .chip{opacity:1!important;transform:none!important}
+html[data-mode="editorial"] .eng-head .ln i{transform:none!important}
+html[data-mode="editorial"] .fin-ground{display:none}
+html[data-mode="editorial"] .fin-core{display:none}
+html[data-mode="editorial"] .fin-mark polygon{transform:none!important;opacity:1!important;fill:var(--fg)}
+html[data-mode="editorial"] .fin-mark polygon:nth-child(3){fill:var(--signal)}
+html[data-mode="editorial"] .fin-words i{transform:none!important}
+html[data-mode="editorial"] .fin-gate{visibility:visible}
+html[data-mode="editorial"] .fin-seam,html[data-mode="editorial"] .eng-axis{transform:scaleX(1)}
