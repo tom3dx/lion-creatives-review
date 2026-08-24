@@ -118,43 +118,46 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
 </section>
 
 <!-- ══ S2 · COMMISSIONED WORK — the reel wall ══
-     Both films are 9:16 and stay the hero of the scene. Every word sits on a
-     slate BESIDE the frame — type never crosses a film. ══ -->
-<section class="scene" id="commercial" data-len="2.6" aria-label="Commissioned work">
+     Interaction mechanics reproduced from the founder-supplied reference
+     (see 04-Design/REFERENCE-VISTA-REELS-MOTION-STUDY.md): two 9:16 reels throw
+     in from ±39vw with an opposing 4° tilt that resolves to flat, then drift
+     slowly apart while focus hands off from one film to the other at the
+     midpoint. Scroll-scrubbed 2D transforms only — the reference uses no
+     perspective, and adding one would be a different effect. ══ -->
+<section class="scene" id="commercial" data-len="2.8" aria-label="Commissioned work">
   <div class="stage">
-    <div class="wrap com-head" data-beat="com-head">
-      <p class="label label-sig">02 — Commissioned work</p>
-      <h2 class="t-scene" style="margin-top:.5rem">Two client films, <i>cut for the phone.</i></h2>
-    </div>
-    <div class="wrap">
-      <div class="reel-rig">
-        <article class="reel reel-a" aria-label="Ria Brows — commissioned studio social film">
-          <div class="frame" data-clearance="public">
-            <video data-auto muted playsinline loop preload="none" poster="assets/media/ria-after-900.webp" aria-label="Ria Brows film excerpt">
-              <source src="assets/media/ria-10s.mp4" type="video/mp4">
-            </video>
-            <img class="rm-poster" src="assets/media/ria-after-900.webp" alt="A brow artist presenting to camera in a styled studio set, with animated titles" loading="lazy" decoding="async">
-          </div>
-          <div class="slate" data-beat="slate-a">
-            <p class="proj-name">Ria Brows</p>
-            <p class="spec" style="margin-top:.3rem">STUDIO SOCIAL FILM · 9:16</p>
-            <p class="factline">A brow artist's career, told as a before and after. Direction, studio shoot, motion titles in English and Amharic.</p>
-          </div>
-        </article>
-        <article class="reel reel-b" aria-label="Love in Action — commissioned sponsorship appeal film">
-          <div class="frame" data-clearance="public">
-            <video data-auto muted playsinline loop preload="none" poster="assets/media/lia-presenter-900.webp" aria-label="Love in Action film excerpt">
-              <source src="assets/media/lia-10s.mp4" type="video/mp4">
-            </video>
-            <img class="rm-poster" src="assets/media/lia-presenter-900.webp" alt="A presenter in Love in Action apparel speaking to camera, with bilingual animated captions" loading="lazy" decoding="async">
-          </div>
-          <div class="slate" data-beat="slate-b">
-            <p class="proj-name">Love in Action</p>
-            <p class="spec" style="margin-top:.3rem">SPONSORSHIP APPEAL · 9:16</p>
-            <p class="factline">A nonprofit working in Ethiopia. Presenter, field footage, bilingual captions — cut to work with the sound off.</p>
-          </div>
-        </article>
+    <div class="wrap reel-wall">
+      <article class="reel reel-a" aria-label="Ria Brows — commissioned studio social film">
+        <div class="frame" data-clearance="public">
+          <video data-auto muted playsinline loop preload="none" poster="assets/media/ria-after-900.webp" aria-label="Ria Brows film excerpt">
+            <source src="assets/media/ria-10s.mp4" type="video/mp4">
+          </video>
+          <img class="rm-poster" src="assets/media/ria-after-900.webp" alt="A brow artist presenting to camera in a styled studio set, with animated titles" loading="lazy" decoding="async">
+        </div>
+      </article>
+
+      <div class="reel-centre">
+        <h2 class="label label-sig">02 — Commissioned work</h2>
+        <h3 class="rc-name rc-a"><span>Ria Brows</span></h3>
+        <p class="rc-plus" aria-hidden="true">+</p>
+        <h3 class="rc-name rc-b"><span>Love in Action</span></h3>
+        <span class="rc-thread" aria-hidden="true">
+          <svg viewBox="240 315 170 140"><polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/></svg>
+        </span>
+        <div class="rc-facts">
+          <p class="factline rc-f rc-fa">Studio social film · 9:16 — a brow artist's career, told as a before and after. Direction, studio shoot, motion titles in English and Amharic.</p>
+          <p class="factline rc-f rc-fb">Sponsorship appeal · 9:16 — a nonprofit working in Ethiopia. Presenter, field footage, bilingual captions, cut to work with the sound off.</p>
+        </div>
       </div>
+
+      <article class="reel reel-b" aria-label="Love in Action — commissioned sponsorship appeal film">
+        <div class="frame" data-clearance="public">
+          <video data-auto muted playsinline loop preload="none" poster="assets/media/lia-presenter-900.webp" aria-label="Love in Action film excerpt">
+            <source src="assets/media/lia-10s.mp4" type="video/mp4">
+          </video>
+          <img class="rm-poster" src="assets/media/lia-presenter-900.webp" alt="A presenter in Love in Action apparel speaking to camera, with bilingual animated captions" loading="lazy" decoding="async">
+        </div>
+      </article>
     </div>
   </div>
 </section>

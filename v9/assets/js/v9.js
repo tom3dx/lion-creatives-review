@@ -243,49 +243,96 @@
   }
 
   /* ---------- S2 COMMERCIAL — the reel wall ----------
-     Both films are 9:16 and stay the hero of the scene. Type sits BESIDE them
-     on slates that never cross a frame. A perspective rig carries focus from
-     one film to the other. The `app` (approach) value animates the reels in
-     BEFORE the scene pins, so the cut out of the hero is never empty. */
+     Rebuilt to the mechanics measured from the founder's reference site
+     (full numbers in 04-Design/REFERENCE-VISTA-REELS-MOTION-STUDY.md).
+
+     Measured at 1440x900 over a 1620px runway:
+       translateX  left -560 -> 0 over the first 15.2%, then 0 -> +140 over the
+                   rest (a knee, not one curve); right mirrored
+       rotateZ     left -4deg -> 0deg, LINEAR across the whole runway
+       scale       a continuous shrink, with the focused reel slightly larger
+       brightness  1.0 vs 0.68, handing off from left to right at the midpoint
+       easing      none - a straight linear scrub
+     There is NO perspective and NO rotateY in the reference; adding them would
+     be a different effect, so this stays 2D. The engine's existing progress
+     lerp supplies the inertia. */
+  var REEL_THROW = 38.9;    // vw, measured 560/1440
+  var REEL_DRIFT = 9.7;     // vw, measured 140/1440
+  var REEL_KNEE  = 0.152;   // measured knee in the translate curve
+  var REEL_TILT  = 4;       // degrees, measured
+  function reelX(p) {       // returns vw for the LEFT reel; right is mirrored
+    return p < REEL_KNEE
+      ? mix(-REEL_THROW, 0, p / REEL_KNEE)
+      : mix(0, REEL_DRIFT, (p - REEL_KNEE) / (1 - REEL_KNEE));
+  }
   function commercialUpdate(p, sc, app) {
-    var rig = $('.reel-rig', sc.el);
     var A = $('.reel-a', sc.el), B = $('.reel-b', sc.el);
-    /* approach: the wall rises from depth while the hero is still on screen */
-    var arrive = easeOutQ(clamp(app * 1.25, 0, 1));
-    var settle = easeOutQ(seg(p, 0, .16));
-    var enter = Math.max(arrive, settle);
+    if (!A || !B) return;
+    var m = isMobile();
 
-    var focusA = easeIO(seg(p, .30, .50));        // Ria forward
-    var hand = easeIO(seg(p, .52, .74));          // handoff to Love in Action
-    var resolve = easeIO(seg(p, .88, .98));       // return to parity
+    /* THE ONE DELIBERATE DEPARTURE FROM THE REFERENCE.
+       In the reference the throw happens inside the first 15% of the pinned
+       runway, which means its scene is nearly empty at p=0 (reels off-screen,
+       centre copy not yet mounted) — exactly the dead frame the founder
+       rejected in our build. So the same throw is split across the boundary:
+       the approach carries it 62% of the way, and it completes visibly in the
+       first 15% of the pin. One continuous driver, no discontinuity, and the
+       scene is composed the moment it pins. */
+    var e = clamp(app, 0, 1) * .62 + .38 * clamp(p / REEL_KNEE, 0, 1);
+    var q = p;
+    var x = p < REEL_KNEE
+      ? mix(-REEL_THROW, 0, e)
+      : mix(0, REEL_DRIFT, (p - REEL_KNEE) / (1 - REEL_KNEE));
+    /* tilt is linear across the whole runway, as measured; the approach only
+       carries it from a slightly steeper lean into the measured -4 deg start */
+    var tilt = mix(mix(-REEL_TILT - 1, -REEL_TILT, clamp(app, 0, 1)), 0, p) * (m ? .75 : 1);
+    /* global settle plus a focus differential: the lit reel sits fractionally
+       larger, which is what makes one read as nearer without any z movement */
+    var shrink = mix(1.13, 1, q);
+    var hand = easeIO(seg(q, .44, .54));         // the focus handoff beat
+    var focusA = 1 - hand, focusB = hand;
+    var sA = shrink * mix(.985, 1.015, focusA);
+    var sB = shrink * mix(.985, 1.015, focusB);
 
-    var yaw = mix(6, 2, easeIO(seg(p, .14, .30)));
-    yaw = mix(yaw, -2, hand);
-    var throwX = mix(0, -1, hand) * (isMobile() ? 0 : 96);
-    rig.style.transform = 'translateX(' + throwX + 'px) rotateY(' + yaw + 'deg)';
+    var unit = m ? 'vw' : 'vw';
+    A.style.transform = 'translateX(' + (m ? x * .55 : x) + unit + ') rotate(' + tilt + 'deg) scale(' + sA + ')';
+    B.style.transform = 'translateX(' + (m ? -x * .55 : -x) + unit + ') rotate(' + (-tilt) + 'deg) scale(' + sB + ')';
+    A.style.filter = 'brightness(' + mix(.68, 1, focusA) + ')';
+    B.style.filter = 'brightness(' + mix(.68, 1, focusB) + ')';
+    A.style.zIndex = String(focusA >= focusB ? 3 : 2);
+    B.style.zIndex = String(focusB > focusA ? 3 : 2);
 
-    var aZ = mix(-180, 0, enter);
-    aZ = mix(aZ, 140, focusA);
-    aZ = mix(aZ, -220, hand);
-    aZ = mix(aZ, -60, resolve);
-    var aRot = mix(-5, 0, enter); aRot = mix(aRot, -16, hand); aRot = mix(aRot, -8, resolve);
-    var aOp = mix(0, 1, enter) * mix(1, .62, hand);
-    A.style.transform = 'translateZ(' + aZ + 'px) rotateY(' + aRot + 'deg) scale(' + mix(.94, 1, enter) + ')';
-    A.style.opacity = String(clamp(aOp * mix(1, 1.4, resolve), 0, 1));
+    /* the centre column names the two films and follows the same handoff */
+    var nA = $('.rc-a', sc.el), nB = $('.rc-b', sc.el);
+    var fA = $('.rc-fa', sc.el), fB = $('.rc-fb', sc.el);
+    if (nA) { nA.style.opacity = String(mix(.42, 1, focusA)); nA.classList.toggle('lit', focusA > .5); }
+    if (nB) { nB.style.opacity = String(mix(.42, 1, focusB)); nB.classList.toggle('lit', focusB >= .5); }
+    if (fA) fA.style.opacity = String(focusA);
+    if (fB) fB.style.opacity = String(focusB);
 
-    var bEnter = easeOutQ(clamp(app * 1.05, 0, 1));
-    bEnter = Math.max(bEnter, easeOutQ(seg(p, .06, .24)));
-    var bZ = mix(-220, 0, bEnter);
-    bZ = mix(bZ, -150, focusA);
-    bZ = mix(bZ, 140, hand);
-    bZ = mix(bZ, -40, resolve);
-    var bRot = mix(6, 0, bEnter); bRot = mix(bRot, 14, focusA); bRot = mix(bRot, 0, hand);
-    B.style.transform = 'translateZ(' + bZ + 'px) rotateY(' + bRot + 'deg) scale(' + mix(.94, 1, bEnter) + ')';
-    B.style.opacity = String(clamp(mix(0, 1, bEnter) * mix(.62, 1, Math.max(hand, resolve * .6)), 0, 1));
-
-    beat(sc, 'com-head', app > .35 || p > .01);
-    beat(sc, 'slate-a', p > .12);
-    beat(sc, 'slate-b', p > .20);
+    /* the one Lion-specific addition: the red Plane Thread rises as the axis the
+       pair settles around, arriving with the handoff. Nothing else is layered on. */
+    var th = $('.rc-thread', sc.el);
+    var handOut = easeIO(seg(p, .93, 1));        // the bridge into the technology scene
+    if (th) {
+      var t = easeOut(seg(q, .30, .58));
+      /* the thread comes FORWARD and dissolves into the cut rather than growing
+         into a literal arrow over the copy */
+      th.style.opacity = String(mix(t, 0, easeIO(seg(p, .94, 1))) * (handOut > 0 ? 1 : 1));
+      th.style.transform = 'translateY(' + (mix(14, 0, t) - handOut * 34) + 'px) rotate('
+        + mix(-14, 0, t) + 'deg) scale(' + mix(1, 2.1, handOut) + ')';
+    }
+    if (handOut > 0) {
+      /* the pair recedes and dims as the plane comes forward — the reels are
+         handing the frame to the digital surface, not simply ending */
+      A.style.transform += ' scale(' + mix(1, .93, handOut) + ')';
+      B.style.transform += ' scale(' + mix(1, .93, handOut) + ')';
+      A.style.filter = 'brightness(' + mix(mix(.68, 1, focusA), .34, handOut) + ')';
+      B.style.filter = 'brightness(' + mix(mix(.68, 1, focusB), .34, handOut) + ')';
+      var cen = $('.reel-centre', sc.el);
+      if (cen) { cen.style.opacity = String(1 - handOut * .85); }
+    }
+    beat(sc, 'com-head', app > .3 || p > .01);
   }
 
   /* ---------- S3 TECHNOLOGY — the drawing becomes the site ----------
@@ -323,7 +370,7 @@
     /* the frame arrives at final size — it is never scaled up from a thumbnail */
     var draw = Math.max(pre, easeIO(seg(p, .02, .10)));
     surf.style.opacity = String(draw);
-    surf.style.clipPath = 'inset(0 ' + (100 - draw * 100) + '% 0 0)';
+    surf.style.clipPath = 'inset(0 ' + (50 - draw * 50) + '% 0 ' + (50 - draw * 50) + '%)';
 
     /* GEOMETRY — measured from the live box, never parsed from a CSS variable.
        getPropertyValue('--gut') returns the unresolved clamp() token, so

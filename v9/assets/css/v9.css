@@ -222,38 +222,43 @@ html[data-mode="editorial"] .hero-film .rm-poster{display:block;position:static}
   font-size:clamp(1rem,1.5vw,1.24rem);line-height:1.35;color:var(--fg);max-width:44ch;margin:0}
 .hero-idline{display:flex;gap:1rem;flex-wrap:wrap;align-items:baseline}
 
-/* ══ S2 · COMMERCIAL — the reel wall ═════════════════════════════════════ */
-#commercial .stage{background:var(--void);perspective:1500px}
-.reel-rig{display:flex;justify-content:center;align-items:center;
-  gap:clamp(20px,3vw,44px);transform-style:preserve-3d;will-change:transform}
-.reel{position:relative;flex:0 0 auto;transform-style:preserve-3d;will-change:transform;
-  --reel-h:min(64svh,var(--reel-cap,580px));height:var(--reel-h);
-  width:calc(var(--reel-h) * 9 / 16)}
-.reel .frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000;
-  box-shadow:0 30px 90px rgba(0,0,0,.6)}
+/* ══ S2 · COMMERCIAL — the reel wall ═════════════════════════════════════
+   Mechanics measured from the founder's reference (motion study in
+   04-Design/REFERENCE-VISTA-REELS-MOTION-STUDY.md). Deliberately 2D: the
+   reference has perspective:none everywhere, and the depth read comes from an
+   opposing tilt, a long horizontal throw, mirrored outward shadow and a
+   brightness/scale differential — not from rotateY. */
+#commercial .stage{background:var(--void)}
+.reel-wall{display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;gap:clamp(1rem,2.4vw,3rem)}
+.reel{--reel-h:min(67svh,625px);height:var(--reel-h);
+  width:calc(var(--reel-h) * 9 / 16);flex:0 0 auto;position:relative;
+  will-change:transform,filter}
+.reel .frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000}
 .reel video,.reel .rm-poster{width:100%;height:100%;object-fit:cover}
 .reel .rm-poster{position:absolute;inset:0;display:none}
 html[data-mode="editorial"] .reel video{display:none}
 html[data-mode="editorial"] .reel .rm-poster{display:block;position:static}
-/* the slate sits BESIDE the film, never on it — and OUTWARD, into the outer
-   margin. Pointing them inward put each slate on top of the opposite film. */
-.slate{position:absolute;top:0;right:calc(100% + 18px);width:max(180px,13.5vw);
-  text-align:right}
-.reel-b .slate{right:auto;left:calc(100% + 18px);text-align:left}
-.slate .factline{margin-left:auto}
-.reel-b .slate .factline{margin-left:0;margin-right:auto}
-.slate .factline{font-size:.84rem;margin-top:.5rem;max-width:24ch}
+/* mirrored outward shadow — the cue that reads as two lifted planes */
+.reel-a .frame{box-shadow:-10px 22px 74px rgba(0,0,0,.72)}
+.reel-b .frame{box-shadow:10px 22px 74px rgba(0,0,0,.72)}
 
-@media(max-width:1100px){
-  .slate{position:static;width:auto;text-align:left;margin-top:.9rem}
-  .reel-b .slate{text-align:left}
-  .reel-b .slate .factline{margin-left:0}
-  .reel{--reel-h:min(52svh,460px)}
-}
-@media(max-width:760px){
-  .reel-rig{flex-direction:column;gap:2.2rem}
-}
-.com-head{position:absolute;left:var(--gut);right:var(--gut);top:var(--safe-top);z-index:5}
+.reel-centre{text-align:center;display:flex;flex-direction:column;align-items:center;
+  gap:.5rem;position:relative;padding-inline:.5rem}
+.rc-name{font-family:var(--f-work);font-stretch:118%;font-weight:600;
+  font-size:clamp(1.05rem,1.7vw,1.5rem);line-height:1.15;margin:0;
+  transition:opacity 420ms var(--ease)}
+.rc-name span{display:inline-block;padding-bottom:.22em;border-bottom:2px solid transparent;
+  transition:border-color 420ms var(--ease)}
+.rc-name.lit span{border-bottom-color:var(--signal)}
+.rc-plus{font-family:var(--f-machine);font-size:.8rem;color:var(--dim);margin:.1rem 0}
+.rc-thread{display:block;width:clamp(26px,2.6vw,40px);opacity:0;margin:.3rem 0}
+.rc-thread svg{width:100%;height:auto;fill:var(--signal)}
+.rc-facts{position:relative;width:100%;min-height:5.2em;margin-top:.4rem}
+.rc-f{position:absolute;inset:0;margin:0 auto;max-width:30ch;font-size:.86rem;
+  text-align:center;transition:opacity 420ms var(--ease)}
+@media(max-width:1200px){.reel{--reel-h:min(54svh,470px)}
+  .rc-name{font-size:clamp(.95rem,1.5vw,1.2rem)} .rc-f{font-size:.78rem}}
 
 /* ══ S3 · TECHNOLOGY — the drawing becomes the site ══════════════════════ */
 #tech .stage{background:var(--tech-ground,#07090e)}
@@ -437,6 +442,14 @@ html[data-mode="editorial"] .hero-layer{position:static;inset:auto;margin-bottom
 html[data-mode="editorial"] .hero-film{height:auto;aspect-ratio:16/9;clip-path:none!important}
 html[data-mode="editorial"] .reel-rig{flex-wrap:wrap;transform:none!important}
 html[data-mode="editorial"] .reel{transform:none!important;opacity:1!important}
+/* the two fact lines are stacked and crossfaded by the focus handoff in the
+   cinematic edition; with no JS they must simply sit one after the other */
+html[data-mode="editorial"] .rc-facts{min-height:0}
+html[data-mode="editorial"] .rc-f{position:static;opacity:1!important;margin-bottom:.7rem;max-width:38ch}
+html[data-mode="editorial"] .rc-name{opacity:1!important}
+html[data-mode="editorial"] .rc-thread{display:none}
+html[data-mode="editorial"] .reel-centre{opacity:1!important}
+html[data-mode="editorial"] .reel-wall{grid-template-columns:1fr;gap:1.4rem}
 html[data-mode="editorial"] .dun-surface{width:100%!important}
 html[data-mode="editorial"] .dun-view{height:auto!important;overflow:visible}
 html[data-mode="editorial"] .dun-view img{position:static;transform:none!important;
@@ -494,13 +507,19 @@ html[data-mode="editorial"] .pt-rail i{transform:scaleX(1)}
   .hero-credit{margin-top:.6rem}
   .hero-rail{margin-bottom:.9rem}
 
-  /* S2 reels: shorter, side by side, slates below the pair */
-  .reel-rig{flex-direction:row;gap:14px;align-items:flex-start;justify-content:center}
-  .reel{--reel-h:min(40svh,340px)}
-  .slate,.reel-b .slate{position:static;width:auto;text-align:left;margin-top:.6rem}
-  .slate .factline,.reel-b .slate .factline{margin-left:0;margin-right:0;max-width:none;
-    font-size:.74rem;line-height:1.45}
-  .reel .slate .proj-name{font-size:.9rem}
+  /* S2 reels — ORIGINAL mobile interpretation. The reference simply hides this
+     section below md, so there is nothing to copy. Two 9:16 reels cannot sit
+     side by side at 390px and stay legible, so the same idea is compressed:
+     the pair OVERLAPS in staggered depth, keeps the opposing tilt at a reduced
+     angle, and the focus handoff swaps which one is in front. */
+  .reel-wall{grid-template-columns:1fr;grid-template-rows:auto auto;gap:1rem}
+  .reel{--reel-h:min(44svh,380px)}
+  .reel-a{grid-area:1/1;justify-self:start}
+  .reel-b{grid-area:1/1;justify-self:end;margin-top:7svh}
+  .reel-centre{grid-area:2/1}
+  .reel-centre{text-align:left;align-items:flex-start;padding-inline:var(--gut)}
+  .rc-facts{min-height:6.4em}
+  .rc-f{text-align:left;max-width:none}
 
   /* S3 the surface leads; copy sits beneath it */
   .tech-body{display:flex;flex-direction:column-reverse;gap:.9rem;padding-top:0}
