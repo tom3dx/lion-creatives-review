@@ -97,12 +97,18 @@
       if (state) {
         m.removeAttribute('inert');
         m.removeAttribute('aria-hidden');
-        lastFocus = document.activeElement;
+        /* Restore to the TRIGGER, not to whatever happened to be focused when the
+           menu opened. Safari/WebKit does not focus a <button> on click, so the
+           captured element there is <body> and focus is silently dropped on the
+           floor when the dialog closes - the keyboard user loses their place. */
+        var prev = document.activeElement;
+        lastFocus = (prev && prev !== document.body && prev !== document.documentElement)
+          ? prev : open;
         var f = m.querySelector('a,button'); if (f) f.focus();
       } else {
         m.setAttribute('inert', '');
         m.setAttribute('aria-hidden', 'true');
-        if (lastFocus) lastFocus.focus();
+        (lastFocus || open).focus();
       }
     }
     // initial closed state

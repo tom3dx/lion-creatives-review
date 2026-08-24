@@ -288,10 +288,18 @@ html[data-mode="editorial"] .reel .rm-poster{display:block;position:static}
   background:
     repeating-linear-gradient(to right,rgba(120,150,210,.10) 0 1px,transparent 1px 64px),
     repeating-linear-gradient(to bottom,rgba(120,150,210,.10) 0 1px,transparent 1px 64px)}
+/* .wrap carries width:100% AND horizontal padding. On an absolutely positioned
+   element width:100% WINS over the left/right pair, so the box resolved to
+   left:58px + width:1440px = a right edge 58px past the viewport, and the
+   right-hand readout was clipped away by the stage's overflow:clip. Any
+   absolutely positioned .wrap needs width:auto to honour left/right. */
 .tech-hud{position:absolute;left:var(--gut);right:var(--gut);top:var(--safe-top);
+  width:auto;padding-left:0;padding-right:0;
   display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
   padding-bottom:.55rem;border-bottom:1px solid rgba(150,175,225,.24);z-index:6}
 .tech-hud .rd{margin-left:auto;display:flex;gap:1rem;align-items:baseline}
+/* the route/product readout orphaned its last word at 1440 */
+.tech-copy .spec{text-wrap:balance}
 .tech-body{display:grid;grid-template-columns:1fr;gap:1.4rem;align-items:center;
   padding-top:3.2rem}
 @media(min-width:1050px){
@@ -463,11 +471,14 @@ html[data-mode="editorial"] .st-ghost{display:none}
   overflow:clip;perspective:1400px}
 .eng-room{position:absolute;inset:0;z-index:1;pointer-events:none;transform-style:preserve-3d}
 /* the project fragments — real frames, in depth, converging */
-.eng-frag{position:absolute;width:clamp(88px,9vw,132px);will-change:transform,opacity;opacity:0}
-.eng-frag img{width:100%;height:clamp(56px,6vw,86px);object-fit:cover;display:block;
-  border-radius:6px;box-shadow:0 18px 46px rgba(0,0,0,.6)}
-.eng-frag b{display:block;margin-top:.35rem;font-family:var(--f-machine);font-size:.5rem;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+/* The fragments used to converge UNDER the plane and dim, so they finished as
+   clipped grey smudges with half-cut labels. They now hold a ring outside the
+   plane's footprint and BRIGHTEN as the ask lands. */
+.eng-frag{position:absolute;width:clamp(104px,10.4vw,158px);will-change:transform,opacity;opacity:0}
+.eng-frag img{width:100%;height:clamp(66px,6.9vw,100px);object-fit:cover;display:block;
+  border-radius:8px;box-shadow:0 18px 46px rgba(0,0,0,.62)}
+.eng-frag b{display:block;margin-top:.4rem;font-family:var(--f-machine);font-size:.54rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 /* the lit table */
 .eng-deck{position:absolute;left:50%;top:50%;
   width:min(66%,880px);z-index:3;transform-origin:50% 60%;
@@ -479,10 +490,29 @@ html[data-mode="editorial"] .st-ghost{display:none}
 .eng-gleam{position:absolute;top:-30%;left:0;width:46%;height:160%;pointer-events:none;opacity:0;
   background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.7),rgba(255,255,255,0));
   will-change:transform,opacity}
+/* Two columns. The single-column version left the right ~40% of the plane as
+   bare cream - the "large white field" the founder rejected twice. */
 .eng-grid{position:relative;color:var(--ink);pointer-events:none;
-  padding:clamp(1.6rem,3.4vw,2.8rem)}
+  padding:clamp(1.6rem,3.4vw,2.8rem);
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.72fr);
+  column-gap:clamp(1.5rem,3.2vw,3rem);align-items:start}
+@media(max-width:900px){.eng-grid{grid-template-columns:1fr;row-gap:1.4rem}}
 .eng-grid>*{pointer-events:auto}
-.eng-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
+.eng-top{grid-column:1/-1;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
+/* the disciplines column */
+.eng-side{border-left:1px solid rgba(19,19,21,.16);padding-left:clamp(1rem,1.8vw,1.7rem);
+  margin-top:.9rem;align-self:stretch}
+@media(max-width:900px){.eng-side{border-left:0;border-top:1px solid rgba(19,19,21,.16);
+  padding-left:0;padding-top:1.1rem;margin-top:0}}
+.eng-side-h{color:#5c5c64}
+.eng-lines{margin:1rem 0 0;display:grid;row-gap:.72rem}
+.eng-lines div{display:grid;grid-template-columns:1fr;gap:.1rem;
+  padding-bottom:.72rem;border-bottom:1px solid rgba(19,19,21,.1)}
+.eng-lines div:last-child{border-bottom:0;padding-bottom:0}
+.eng-lines dt{font-family:var(--f-work);font-variation-settings:'wdth' 88,'wght' 700;
+  font-weight:700;font-size:.94rem;letter-spacing:.005em;color:var(--ink)}
+.eng-lines dd{margin:0;font-family:var(--f-machine);font-size:.62rem;letter-spacing:.09em;
+  text-transform:uppercase;color:#6a6a72;line-height:1.5}
 .eng-top .label{color:#5c5c64}
 .eng-loc{color:#6a6a72}
 .eng-head{color:var(--ink);margin-top:.9rem;font-size:clamp(1.8rem,4.2vw,3.4rem)}
@@ -503,7 +533,7 @@ html[data-mode="editorial"] .st-ghost{display:none}
 #engage .eng-secondary>span{padding:.6rem .9rem}
 #engage .btn:hover,#engage .btn:focus-visible{border-color:var(--signal)}
 .eng-note{color:#6a6a72;margin-top:.7rem;max-width:34ch;line-height:1.5}
-.eng-mail{margin-top:.4rem}
+.eng-mail{margin-top:1.1rem}
 .eng-mail a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 
 /* ══ S8 · FINALE — "The Aperture Closes" ════════════════════════════════

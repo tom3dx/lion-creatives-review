@@ -103,11 +103,16 @@
       document.body.style.overflow = state ? 'hidden' : '';
       if (state) {
         m.removeAttribute('inert'); m.removeAttribute('aria-hidden');
-        lastFocus = document.activeElement;
+        /* Fall back to the TRIGGER, not to whatever was focused at open time.
+           WebKit does not focus a <button> on click, so that capture is <body>
+           and a keyboard user loses their place entirely when the menu closes. */
+        var prev = document.activeElement;
+        lastFocus = (prev && prev !== document.body && prev !== document.documentElement)
+          ? prev : open;
         var f = m.querySelector('a,button'); if (f) f.focus();
       } else {
         m.setAttribute('inert', ''); m.setAttribute('aria-hidden', 'true');
-        if (lastFocus) lastFocus.focus();
+        (lastFocus || open).focus();
       }
     }
     m.setAttribute('inert', ''); m.setAttribute('aria-hidden', 'true');
@@ -174,9 +179,13 @@
     el.style.setProperty('--len', el.getAttribute('data-len'));
     scenes.push({ el: el, stage: $('.stage', el), update: update, p: 0, disp: 0, app: 0, appDisp: 0 });
   }
+  /* querySelector (singular) was the bug: a beat name used on more than one
+     element only ever revealed the FIRST of them, and every sibling stayed at
+     the [data-beat] default of opacity 0. Silent, and invisible in review
+     precisely because the missing content leaves no trace. */
   function beat(scene, name, on) {
-    var el = scene.el.querySelector('[data-beat="' + name + '"]');
-    if (el) el.classList.toggle('on', on);
+    var els = scene.el.querySelectorAll('[data-beat="' + name + '"]');
+    for (var i = 0; i < els.length; i++) els[i].classList.toggle('on', on);
   }
 
   /* ---------- S1 HERO — aperture → cinema → project ----------
@@ -586,7 +595,9 @@
 
     /* the table stands in the room: it tilts up out of perspective and keeps a
        slow live drift, never resolving to a flat axis-aligned rectangle */
-    var tilt = mix(9, 1.4, arrive) - p * 0.9;
+    /* keep a real residual tilt: at rest this must still read as a lit plane
+       standing in a room, not an axis-aligned cream rectangle */
+    var tilt = mix(9, 2.6, arrive) - p * 0.5;
     var lift = mix(7, 0, arrive) + mix(0, -1.6, p);
     var tf = 'translate(-50%,-50%) translateY(' + lift + 'svh) rotateX(' + tilt + 'deg) scale('
       + mix(.94, 1, arrive) + ')';
@@ -596,20 +607,25 @@
       gleam.style.transform = 'rotate(-20deg) translate3d(' + mix(-20, 150, Math.max(pre * .2, p)) + '%,0,0)';
     }
 
-    /* the five projects drift in around the table and converge toward the CTA */
-    var SEATS = [[-38, -26, -420], [-44, 24, -300], [40, -30, -380], [46, 20, -260], [2, 36, -520]];
+    /* The five projects hold a ring AROUND the table. Their seats are outside the
+       plane's footprint (half-width ~31% / half-height ~26% of the stage) so no
+       frame is ever clipped by the deck edge and no label is cut in half - the
+       previous version slid them underneath it and faded them to a smudge.
+       "Converging on the ask" is now carried by attention, not collision: they
+       turn square to the plane, come forward in z, and BRIGHTEN. */
+    var SEATS = [[-40, -33, -420], [-45, 25, -300], [40, -33, -380], [45, 25, -260], [0, 37, -520]];
     frags.forEach(function (fr, i) {
       var seat = SEATS[i] || SEATS[0];
       var t = easeOut(Math.max(pre - i * .06, seg(p, .06 + i * .05, .34 + i * .05)));
-      var conv = easeIO(seg(p, .55, .95));            // converge toward the action
-      var x = mix(seat[0], seat[0] * .42, conv);
-      var y = mix(seat[1], seat[1] * .34 + 16, conv);
-      var z = mix(seat[2], -140, conv);
-      fr.style.opacity = String(t * mix(1, .55, conv));
+      var conv = easeIO(seg(p, .52, .94));
+      var x = mix(seat[0], seat[0] * .97, conv);
+      var y = mix(seat[1], seat[1] * .97, conv);
+      var z = mix(seat[2], -110, conv);               // forward, not under
+      fr.style.opacity = String(t * mix(.72, 1, conv));
       fr.style.left = (50 + x) + '%';
       fr.style.top = (50 + y) + '%';
       fr.style.transform = 'translate(-50%,-50%) translateZ(' + z + 'px) rotate('
-        + mix(i % 2 ? 3 : -3, 0, t) + 'deg) scale(' + mix(.88, 1, t) + ')';
+        + mix(i % 2 ? 3 : -3, 0, Math.max(t, conv)) + 'deg) scale(' + mix(.88, 1, t) + ')';
     });
 
     $$('.eng-head .ln i', sc.el).forEach(function (el, i) {

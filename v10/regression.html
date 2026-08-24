@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Correction Evidence — Lion Creatives V9</title>
+<title>Correction Evidence — Lion Creatives V10</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,129 +51,108 @@ figcaption{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.11em;
 </head>
 <body>
 <div class="wrap">
-<p class="label">Lion Creatives · V9 · correction evidence</p>
-<h1>What the founder rejected, <i>and what replaced it.</i></h1>
-<p class="lede">Every item the founder raised in the V8.1 review, reproduced in the live V8 build (left) against the rebuilt V9 homepage (right), captured from both running prototypes at 1440×900 unless noted. Nothing here is a mockup.</p>
-
+<p class="label">Lion Creatives &middot; APERTURE X</p>
+<h1>V10 correction <i>evidence</i></h1>
+<p class="lede">Fourteen deliberate desktop states at 1440&times;900, one for each item in the founder&rsquo;s &sect;44 regression set. Every frame is a real capture of the build being reviewed, taken at a named scroll position. None is a mockup.</p>
+<p class="lede"><a href="index.html">&larr; the homepage</a> &middot; <a href="copy-deck.html">copy deck</a> &middot; <a href="type-deck.html">typography deck</a></p>
 <div class="item">
-  <h2><b>§2 §37</b>Hero typography was flat</h2>
-  <p class="meta"><strong>Cause:</strong> both halves of the headline were one serif at nearly the same size — the italic and the red did all the differentiating, and Instrument Serif ships a single weight, so there was no way out of it. <strong>Change:</strong> a three-voice system. The creative half is Fraunces at full optical size, light; the technology half is Archivo condensed, black, uppercase. <strong>Result:</strong> the two disciplines are now different <em>kinds</em> of type, not different sizes of one.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b1-hero-empty-left.webp" alt="V8 hero: the headline fading, half the viewport empty" loading="lazy"><figcaption>V8 · hero mid-scroll</figcaption></figure>
-    <figure class="good"><img src="assets/regression/v9-hero.webp" alt="V9 hero: descriptor, two-voice headline, lede, buttons and the film plate" loading="lazy"><figcaption>V9 · hero at rest</figcaption></figure>
-  </div>
+<h2><b>A</b>Hero &mdash; opening statement</h2>
+<p class="meta"><strong>State:</strong> hero p .02</p>
+<p class="meta">The founder&rsquo;s &sect;26: the live typography did not match the approved artifact. It does now, and the cause was not the font service. <strong>font-variation-settings inherits, and it beats font-weight.</strong> The Archivo line sits inside an h1 that declares Fraunces at &lsquo;wght&rsquo; 300, so it computed weight 800 and rendered at 300. One reset fixed it. The supporting paragraph and its red rule are &sect;29.</p>
+<figure><img src="assets/shots/a-hero.png" width="1440" height="900" loading="lazy" decoding="async" alt="Hero &mdash; opening statement at hero p .02"><figcaption>hero p .02 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§4</b>The empty left half</h2>
-  <p class="meta"><strong>Cause:</strong> the copy column was faded to zero while the film kept only its right-hand grid column — roughly half the viewport was bare black. <strong>Change:</strong> the words change <em>around</em> a constant film plate. As the statement lifts away, the project identification takes the same column: label, project name, and the one production fact we can verify. <strong>Result:</strong> no scroll position leaves the left half empty.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b1-hero-empty-left.webp" alt="V8: film right, empty black left" loading="lazy"><figcaption>V8 · hero 42% — half the frame is nothing</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a1-hero-left.webp" alt="V9: the identification and caption occupy the left column" loading="lazy"><figcaption>V9 · hero 42% — the film is identified</figcaption></figure>
-  </div>
+<h2><b>B</b>Hero &mdash; full-screen film</h2>
+<p class="meta"><strong>State:</strong> hero p .30</p>
+<p class="meta">&sect;30 state two. The aperture opens to the full width and the film plays at its native 2.22:1. It is letterboxed rather than cropped to fill: the source is 1600&times;720, so full width at 1440 is a 0.9&times; downscale &mdash; sharp, and no part of the frame is cut away.</p>
+<figure><img src="assets/shots/b-hero.png" width="1440" height="900" loading="lazy" decoding="async" alt="Hero &mdash; full-screen film at hero p .30"><figcaption>hero p .30 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§5</b>The shrink had no purpose</h2>
-  <p class="meta"><strong>Cause:</strong> the film shrank because the interpolation looked interesting, then faded to nothing. <strong>Change:</strong> the plate no longer shrinks — its frame <em>closes</em>, from 72svh to 58svh, and the space it releases is immediately filled by the credit and the case-study link. A frame with a visible edge is an object; an object can be credited. <strong>Result:</strong> the movement now produces information. The scene holds to the end of its runway instead of fading out.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b2-dead-gap.webp" alt="V8: the film reduced to a thumbnail in empty black" loading="lazy"><figcaption>V8 · hero 90% — faded to nothing</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a2-hero-hold.webp" alt="V9: the frame closed, credit and link released beneath" loading="lazy"><figcaption>V9 · hero 92% — the credit is what the movement bought</figcaption></figure>
-  </div>
+<h2><b>C</b>Hero &mdash; film left, project story right</h2>
+<p class="meta"><strong>State:</strong> hero p .90</p>
+<p class="meta">&sect;30 state three. The film settles into the left column and the event-film story sets on the right. The copy is withheld until the film has physically cleared the column, so no state puts type over a face and no state leaves half the viewport empty.</p>
+<figure><img src="assets/shots/c-hero.png" width="1440" height="900" loading="lazy" decoding="async" alt="Hero &mdash; film left, project story right at hero p .90"><figcaption>hero p .90 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§6 §7 §40</b>Dead scroll</h2>
-  <p class="meta"><strong>Cause, found in the code:</strong> two scenes were never pinning at all. <code style="font-family:var(--f-machine);font-size:.85em">#tech .stage</code> and <code style="font-family:var(--f-machine);font-size:.85em">#engage .stage</code> each set <code style="font-family:var(--f-machine);font-size:.85em">position:relative</code>, and at ID specificity that silently overrode the engine's <code style="font-family:var(--f-machine);font-size:.85em">position:sticky</code>. Their content scrolled away while the runway kept going — which is exactly the empty scrolling the founder hit twice. <strong>Change:</strong> the override is gone, and every scene now also composes on <em>approach</em>, before it pins, so the handoff between scenes is never an empty frame. <strong>Result:</strong> measured across the whole page at quarter-viewport steps, <em>zero</em> dead samples and zero weak samples. This is now an automated test.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b4-blue-field.webp" alt="V8: a tiny screenshot in a huge empty field" loading="lazy"><figcaption>V8 · technology 10% — the field the founder objected to</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a4-tech-arrive.webp" alt="V9: the drafting frame and the site already present" loading="lazy"><figcaption>V9 · technology 10% — composed on arrival</figcaption></figure>
-  </div>
+<h2><b>D</b>Reels &mdash; arrival</h2>
+<p class="meta"><strong>State:</strong> commercial p .20</p>
+<p class="meta">Approved motion, unchanged (&sect;32). Throw, tilt and knee are the measured reference values, not a preset.</p>
+<figure><img src="assets/shots/d-commercial.png" width="1440" height="900" loading="lazy" decoding="async" alt="Reels &mdash; arrival at commercial p .20"><figcaption>commercial p .20 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§8 §9</b>The commissioned films</h2>
-  <p class="meta"><strong>Cause:</strong> the two vertical films held only 17–23% of the viewport across 1800px of scroll, and the slates pointed inward so each one landed on the opposite film. <strong>Change:</strong> a perspective rig carries both 9:16 films at 64svh with a focus handoff between them; the slates now sit outward into the margins. <strong>Result:</strong> the reels are the largest thing in their scene and no word touches a frame. <em>The founder's reference site for the reel reveal has not been supplied yet — the 3D entrance is built with tuning points ready for it.</em></p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b3-reels.webp" alt="V8: two small vertical films with space around them" loading="lazy"><figcaption>V8 · commissioned work</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a3-reels.webp" alt="V9: larger films in perspective with slates outboard" loading="lazy"><figcaption>V9 · commissioned work</figcaption></figure>
-  </div>
+<h2><b>E</b>Reels &mdash; focus handoff</h2>
+<p class="meta"><strong>State:</strong> commercial p .55</p>
+<p class="meta">The two-act beat: the lit reel hands off to the other at the midpoint. Rounded corners preserved, and the radius scales with the frame.</p>
+<figure><img src="assets/shots/e-commercial.png" width="1440" height="900" loading="lazy" decoding="async" alt="Reels &mdash; focus handoff at commercial p .55"><figcaption>commercial p .55 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§15</b>The header covered the headline</h2>
-  <p class="meta"><strong>Cause:</strong> pinned stages had no header reservation, so display type sat under the fixed navigation. <strong>Change:</strong> the nav is measured at runtime into a <code style="font-family:var(--f-machine);font-size:.85em">--nav-h</code> token and every pinned stage pads to it. <strong>Result:</strong> tested at 1440, 768, 390 and 360 across the whole page — no display headline sits under the header while its scene is pinned.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b5-header-collision.webp" alt="V8: the technology headline clipped by the navigation" loading="lazy"><figcaption>V8 · “We design and build the web.” cut by the nav</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a5-tech-head.webp" alt="V9: the headline clears the header" loading="lazy"><figcaption>V9 · clear of the header at every width</figcaption></figure>
-  </div>
+<h2><b>F</b>Reels &mdash; settled pose</h2>
+<p class="meta"><strong>State:</strong> commercial p .90</p>
+<p class="meta">The settled pair, just before the bridge into Dunamis. Radius is proportional to reel height, so the frames never read as UI cards.</p>
+<figure><img src="assets/shots/f-commercial.png" width="1440" height="900" loading="lazy" decoding="async" alt="Reels &mdash; settled pose at commercial p .90"><figcaption>commercial p .90 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§10–§14 §16–§19</b>Dunamis: the transition, the copy and the phone</h2>
-  <p class="meta"><strong>Live embedding is not possible, and we are not going to pretend otherwise.</strong> dunamishosting.com sends <code style="font-family:var(--f-machine);font-size:.85em">X-Frame-Options: SAMEORIGIN</code>; Chrome refuses to frame it cross-origin (verified in the browser, not assumed). We did not weaken the client's security headers to make a portfolio effect work. <strong>Change:</strong> a drafting frame is drawn at final size — never grown from a thumbnail — and high-DPR captures of the real site are read at four desktop stops, then the viewport genuinely narrows to 390px and the phone layout paints in at its true width, then three phone stops. The whole demonstration is driven by the page's own scroll: there is no nested scroller, so there is nothing to be trapped in. <strong>Copy:</strong> rewritten from scratch; “a live commerce platform” is gone. <strong>Result:</strong> the scene reads as a live site being examined, and is labelled “Captured · scroll-driven” so the claim is honest.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b6-dun-mobile.webp" alt="V8: a tall phone screenshot with text beside it" loading="lazy"><figcaption>V8 · the phone treatment the founder rejected</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a6-dun-mobile.webp" alt="V9: the viewport itself reflowed to phone width" loading="lazy"><figcaption>V9 · the same viewport, reflowed to 390px</figcaption></figure>
-  </div>
-  <p class="meta" style="margin-top:1rem"><strong>One editorial decision to confirm:</strong> the captured region deliberately excludes the client's trust badge (“Trusted by 20,000+ · rated 4.9/5”) and their customer-testimonial band, because the standing rule is that Lion Creatives does not inherit Dunamis' marketing claims. The demonstration therefore opens on the product architecture our own copy describes. An incidental “99.9% uptime” product bullet remains inside the client's own page view — we did not doctor a live client page to remove it. Say the word and the hero band goes back in.</p>
+<h2><b>G</b>Dunamis &mdash; opens at its real hero</h2>
+<p class="meta"><strong>State:</strong> tech p .05</p>
+<p class="meta">&sect;31: the sequence now starts at the actual homepage hero, the globe, instead of partway down the page. Aspect integrity holds &mdash; uniform scale, no stretch. The readout at the top right was being clipped by the viewport edge; that is fixed here too.</p>
+<figure><img src="assets/shots/g-tech.png" width="1440" height="900" loading="lazy" decoding="async" alt="Dunamis &mdash; opens at its real hero at tech p .05"><figcaption>tech p .05 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§20–§25</b>Photography: the gallery, the timing and the type</h2>
-  <p class="meta"><strong>Cause:</strong> “Commissioned photography” was set across the women's faces (rated 0/10 for readability), the large group frame arrived before the smaller frames had been seen, and the images floated in a large empty field. <strong>Change:</strong> the horizontal movement the founder liked is kept and the gallery is rebuilt around it. The title panel now travels <em>inside</em> the track, so it physically leaves the viewport before any photograph arrives — type cannot land on a face by construction. Eleven frames were re-exported from the 2400px originals (previously only 640px crops existed), composed with varying scale, portrait/landscape rhythm, deliberate vertical offsets and an edge-to-edge group finale, with the pacing slowed where the frames should be read. <strong>Result:</strong> an art-directed spread rather than thumbnails in white space.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b7-photo-text-faces.webp" alt="V8: display type across the group photograph" loading="lazy"><figcaption>V8 · type across faces</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a8-photo-open.webp" alt="V9: the title panel travels in the track, ahead of the frames" loading="lazy"><figcaption>V9 · the title leaves before the pictures arrive</figcaption></figure>
-    <figure class="bad"><img src="assets/regression/b8-photo-gallery.webp" alt="V8: small images floating in empty space" loading="lazy"><figcaption>V8 · the gallery</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a7-photo-frames.webp" alt="V9: full-height frames edge to edge" loading="lazy"><figcaption>V9 · the rebuilt spread</figcaption></figure>
-  </div>
+<h2><b>H</b>Dunamis &mdash; product architecture</h2>
+<p class="meta"><strong>State:</strong> tech p .55</p>
+<p class="meta">The captured site is translated by the page&rsquo;s own scroll. One scroll authority, so there is no nested scroller and no way to be trapped.</p>
+<figure><img src="assets/shots/h-tech.png" width="1440" height="900" loading="lazy" decoding="async" alt="Dunamis &mdash; product architecture at tech p .55"><figcaption>tech p .55 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§26–§28</b>The team</h2>
-  <p class="meta"><strong>Cause:</strong> a row of cards that read as SaaS pricing. <strong>Change:</strong> rebuilt as a field — five plates arriving out of depth, recomposing mid-scene, one person in focus at a time, resolving into a group frame. Focus is carried by blur and lift, never by colour: no desaturating filter is permitted anywhere in the scene, in any state, and that is asserted by test. <strong>Result:</strong> an editorial composition. All portraits stay in natural colour; Bisrat and Gelila keep a deliberate initials plate until their portraits are shot — never stock, never generated.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b9-team.webp" alt="V8: a row of team cards" loading="lazy"><figcaption>V8 · cards</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a9-team.webp" alt="V9: portraits composed in depth across the field" loading="lazy"><figcaption>V9 · the field</figcaption></figure>
-  </div>
+<h2><b>I</b>Dunamis &mdash; phone reflow</h2>
+<p class="meta"><strong>State:</strong> tech p .95</p>
+<p class="meta">The viewport itself narrows to 390 and the layout genuinely reflows. Not a device mockup, and not a tall screenshot stretched to fit.</p>
+<figure><img src="assets/shots/i-tech.png" width="1440" height="900" loading="lazy" decoding="async" alt="Dunamis &mdash; phone reflow at tech p .95"><figcaption>tech p .95 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§29 §30 §35</b>The conversion moment</h2>
-  <p class="meta"><strong>Cause:</strong> a red banner with a cramped line, arriving abruptly with no runway at all (283px tall). <strong>Change:</strong> the red rectangle is gone. A cream plane opens into the page through the mark's own geometry, the invitation sets line by line, the five projects just seen line up beneath it as traces, and the plate button — a bordered plate with a divided action square, not a pill — lands last. <strong>Result:</strong> the ask is earned by what precedes it, and the section now has 2.2 viewports of authored pacing.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b10-red-cta.webp" alt="V8: the red CTA band" loading="lazy"><figcaption>V8 · the red band</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a10-engage.webp" alt="V9: the open frame with traces and the plate button" loading="lazy"><figcaption>V9 · the open frame</figcaption></figure>
-  </div>
+<h2><b>J</b>Photography &mdash; horizontal gallery</h2>
+<p class="meta"><strong>State:</strong> photo p .45</p>
+<p class="meta">The horizontal travel the founder asked to keep (&sect;33), across eleven frames re-exported from 2400px originals.</p>
+<figure><img src="assets/shots/j-photo.png" width="1440" height="900" loading="lazy" decoding="async" alt="Photography &mdash; horizontal gallery at photo p .45"><figcaption>photo p .45 &middot; 1440&times;900</figcaption></figure>
 </div>
-
 <div class="item">
-  <h2><b>§31–§34</b>The finale</h2>
-  <p class="meta"><strong>Cause:</strong> the mark did almost nothing, the closing line was giant centred text with an ordinary button under it, and the measured viewport at 92% of the page held 7% media and 1% text. <strong>Change:</strong> the five planes fly home along their own rays, <em>lock</em> to the exact canonical geometry at 34% and hold — the mark is recognisable from the first frame and perfect from the lock onward. The closing line then prints, a red rule races out from it, a hairline draws the full plate width, and the imprint and CTA land on one baseline. <strong>Result:</strong> a composed plate rather than centred text. The canonical point sets in the nav, the loader and the finale are byte-identical, asserted by test.</p>
-  <div class="pair">
-    <figure class="bad"><img src="assets/regression/b11-footer-lion.webp" alt="V8: a small mark and centred text" loading="lazy"><figcaption>V8 · finale</figcaption></figure>
-    <figure class="good"><img src="assets/regression/a12-final-hold.webp" alt="V9: the locked mark, the printed line, the rule and the imprint" loading="lazy"><figcaption>V9 · the plate</figcaption></figure>
-  </div>
+<h2><b>K</b>Photography &mdash; full-screen group payoff</h2>
+<p class="meta"><strong>State:</strong> photo p .96</p>
+<p class="meta">&sect;33: the sequence now builds to a full-screen group frame. The caption sits lower-left on its own scrim, clear of every face, and the photograph keeps its natural colour.</p>
+<figure><img src="assets/shots/k-photo.png" width="1440" height="900" loading="lazy" decoding="async" alt="Photography &mdash; full-screen group payoff at photo p .96"><figcaption>photo p .96 &middot; 1440&times;900</figcaption></figure>
 </div>
-
-<h2 style="font-family:var(--f-studio);font-optical-sizing:none;font-variation-settings:'opsz' 60,'wght' 400;font-weight:400;font-size:1.7rem;margin:3rem 0 .5rem">Automated gates — all passing</h2>
-<p class="lede" style="font-size:.94rem">Every founder rule that can be checked by machine is now a test, so it cannot regress silently.</p>
-<div class="gate">
-  <div><span>No dead scroll — whole page, quarter-viewport sampling, re-measured after settling</span><span class="p">PASS</span></div>
-  <div><span>Type never crosses media — clip-aware, 25 scroll positions</span><span class="p">PASS</span></div>
-  <div><span>No display headline under the header while pinned — 1440 / 768 / 390</span><span class="p">PASS</span></div>
-  <div><span>All eight stages genuinely pin</span><span class="p">PASS</span></div>
-  <div><span>Dunamis reflows 1440 → 390 with no nested scroller to trap anyone</span><span class="p">PASS</span></div>
-  <div><span>Every image owns the pixels its largest rendered size needs at DPR 2</span><span class="p">PASS</span></div>
-  <div><span>The mark locks to canonical geometry; nav / loader / finale byte-identical</span><span class="p">PASS</span></div>
-  <div><span>No rejected copy, no private names, no inherited client claims, five named people</span><span class="p">PASS</span></div>
-  <div><span>Portraits carry no desaturating filter in any state</span><span class="p">PASS</span></div>
-  <div><span>Editorial edition complete without JS; no horizontal overflow at 360/390/768/1280</span><span class="p">PASS</span></div>
-  <div><span>Loader leaves the accessibility tree; menu is a real dialog with focus return</span><span class="p">PASS</span></div>
+<div class="item">
+<h2><b>L</b>The Studio</h2>
+<p class="meta"><strong>State:</strong> studio p .75</p>
+<p class="meta">&sect;34 and &sect;36. A credit roll, with the portrait of whoever is currently named: one frame size, one corner radius, natural colour, cropped never stretched. All five portraits are real files now &mdash; none is a placeholder or an initials treatment.</p>
+<figure><img src="assets/shots/l-studio.png" width="1440" height="900" loading="lazy" decoding="async" alt="The Studio at studio p .75"><figcaption>studio p .75 &middot; 1440&times;900</figcaption></figure>
 </div>
-
-<p class="label" style="margin-top:3rem"><a href="index.html">the prototype</a> · <a href="copy-deck.html">copy deck</a> · <a href="type-deck.html">typography deck</a></p>
+<div class="item">
+<h2><b>M</b>Section 06 &mdash; The Table</h2>
+<p class="meta"><strong>State:</strong> engage p .88</p>
+<p class="meta">&sect;37, rebuilt again. The lit plane stands in a dark room, and its right half now carries the four disciplines instead of bare cream &mdash; that empty field was the thing being rejected. The five projects hold a ring outside the plane rather than sliding underneath it, so every frame and every label stays whole.</p>
+<figure><img src="assets/shots/m-engage.png" width="1440" height="900" loading="lazy" decoding="async" alt="Section 06 &mdash; The Table at engage p .88"><figcaption>engage p .88 &middot; 1440&times;900</figcaption></figure>
 </div>
-</body>
-</html>
+<div class="item">
+<h2><b>N</b>Finale</h2>
+<p class="meta"><strong>State:</strong> finale p .99</p>
+<p class="meta">&sect;38. Horizon, receding plane grid, red halo and a contact shadow under the mark. The closing line, the gate and the imprint all land. The contact address in this block was invisible until this build &mdash; see the note below.</p>
+<figure><img src="assets/shots/n-finale.png" width="1440" height="900" loading="lazy" decoding="async" alt="Finale at finale p .99"><figcaption>finale p .99 &middot; 1440&times;900</figcaption></figure>
+</div>
+<div class="item">
+<h2><b>+</b>Three defects this pass found that no screenshot would have shown</h2>
+<p class="meta"><strong>Every duplicated animation cue was silently invisible.</strong> The scroll engine revealed beats with
+<code>querySelector</code> &mdash; singular. Where a cue name was used on more than one element, only the first ever became visible; the rest stayed at
+the stylesheet default of <code>opacity: 0</code>. Four elements were affected, and two of them were content the founder had specifically asked for:
+<strong>the contact address in the finale</strong> and the link through to the studio page. The engine now reveals every matching element.</p>
+<p class="meta"><strong>A right-edge clip in the Dunamis header.</strong> An absolutely positioned element also carried the page&rsquo;s
+<code>.wrap</code> class, whose <code>width: 100%</code> overrides the <code>left</code>/<code>right</code> pair. The row finished 58px past the
+viewport and its readout was cut off by the scene&rsquo;s <code>overflow: clip</code>.</p>
+<p class="meta"><strong>Focus went nowhere when the mobile menu closed, in Safari.</strong> The menu restored focus to whatever had been focused when it
+opened &mdash; but WebKit does not focus a button on click, so that was the document body. A keyboard user lost their place entirely. It now returns
+focus to the trigger.</p>
+<p class="meta">The suite runs green in Chromium, Firefox and WebKit. Two of those tests were themselves wrong and were corrected rather than worked
+around: the font-integrity probe compared a monospace face against a monospace fallback, which ties by definition and reported a loaded font as
+missing; and the focus check above was a real bug in the page, not in the test.</p>
+</div>
+</div></body></html>
