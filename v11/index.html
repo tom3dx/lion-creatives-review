@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="editorial">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Lion Creatives — Creative and Technology Agency</title>
+<meta name="description" content="Lion Creatives is a creative and technology agency in Maryland. Commercial film, photography, and the web platforms they run on — directed and built by one team.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Geist+Mono:wght@100..900&display=swap">
+<link rel="stylesheet" href="assets/css/v9.css">
+<script>
+/* pre-paint: enter cinematic mode before first render when motion is allowed.
+   Editorial remains the default for no-JS and reduced motion. */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
+  document.documentElement.setAttribute('data-mode','cinematic');}catch(e){}
+</script>
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to content</a>
+<noscript><p class="label" style="padding:.8rem var(--gut);border-bottom:1px solid var(--hair)">JavaScript is off — you are reading the editorial edition. Everything is here; only the choreography is missing.</p></noscript>
+
+<div class="loader" role="status" aria-live="polite">
+  <span class="sr-only">Loading Lion Creatives</span>
+  <svg viewBox="0 0 550 550" aria-hidden="true">
+    <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+    <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+    <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+    <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+    <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+  </svg>
+  <div class="prog" aria-hidden="true"><i></i></div>
+</div>
+
+<header class="nav">
+  <a class="nav-mark" href="index.html" aria-label="Lion Creatives — home">
+    <svg viewBox="0 0 550 550" aria-hidden="true">
+      <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+      <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+      <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+      <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+      <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+    </svg>
+    <span>Lion Creatives</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="engagements.html">Engagements</a>
+    <a href="studio.html">Studio</a>
+  </nav>
+  <a class="btn nav-cta" href="contact.html"><span>Start a project</span></a>
+  <button class="menu-btn btn" aria-expanded="false" aria-controls="menu"><span>Menu</span></button>
+</header>
+
+<div class="menu" id="menu" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <button class="btn menu-close" aria-label="Close menu"><span>Close</span></button>
+  <p class="label">Lion Creatives</p>
+  <nav aria-label="Mobile">
+    <a href="work.html">Work</a>
+    <a href="services.html">Services</a>
+    <a href="engagements.html">Engagements</a>
+    <a href="studio.html">Studio</a>
+    <a href="contact.html">Start a project</a>
+  </nav>
+</div>
+
+<main id="main">
+
+<!-- ══ S1 · HERO — aperture → cinema → project ══
+     Three states the founder asked for:
+       1. the opening composition, film inside the faceted aperture
+       2. the film opens to FULL WIDTH at its native 2.22:1 with letterbox —
+          a real cinema moment, held, nothing over the picture
+       3. the film settles LEFT and the project story sets on the RIGHT
+     The film element spans the whole stage and is revealed by an interpolated
+     polygon, so every state is one GPU-composited clip-path — no layout writes. ══ -->
+<section class="scene" id="hero" data-len="4" aria-label="Introduction">
+  <div class="stage">
+    <div class="hero-film" data-clearance="public">
+      <video data-auto data-hero autoplay muted playsinline loop preload="auto" poster="assets/media/pw-hero-t76-1600.webp" aria-label="Film excerpt: a couple at golden hour on the water, the ring just revealed">
+        <source src="assets/media/pw-hero-t76-portrait-12s.mp4" type="video/mp4" media="(max-width:640px)">
+        <source src="assets/media/pw-hero-t76-12s.mp4" type="video/mp4">
+      </video>
+      <img class="rm-poster" src="assets/media/pw-hero-t76-1600.webp" alt="A couple at golden hour on the water, the ring just revealed" loading="eager" decoding="async">
+    </div>
+
+    <div class="wrap hero-say">
+      <p class="hero-rail">
+        <span class="mark-name">Lion Creatives</span>
+        <span class="desc">Creative and Technology Agency</span>
+      </p>
+      <h1 class="t-display">
+        <span class="hero-l1">Stories <span class="nw">on screen<span class="hero-dot">.</span></span></span>
+        <span class="hero-l2">Systems <span class="sig">behind</span> them.</span>
+      </h1>
+      <p class="lede">We direct commercial film and photography — and design and build the platforms they run on. Maryland-based, on location and remote.</p>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="work.html"><span>See the work</span></a>
+        <a class="btn" href="contact.html"><span>Start a project</span></a>
+      </div>
+    </div>
+
+    <div class="wrap hero-id">
+      <div class="hero-id-inner">
+        <p class="label label-sig">01 — Event film</p>
+        <p class="proj-name">A proposal, then a wedding</p>
+        <p class="cap t-editorial">Lion Creatives was hired to film a surprise proposal on the water — and, for the same couple, the church ceremony that followed.</p>
+        <p class="spec">4K · TWO SHOOTS · ONE FILM · MARYLAND</p>
+        <p class="spec"><a href="case-study.html">Read the case study →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S2 · COMMISSIONED WORK — the reel wall ══
+     Interaction mechanics reproduced from the founder-supplied reference
+     (see 04-Design/REFERENCE-VISTA-REELS-MOTION-STUDY.md): two 9:16 reels throw
+     in from ±39vw with an opposing 4° tilt that resolves to flat, then drift
+     slowly apart while focus hands off from one film to the other at the
+     midpoint. Scroll-scrubbed 2D transforms only — the reference uses no
+     perspective, and adding one would be a different effect. ══ -->
+<section class="scene" id="commercial" data-len="2.8" aria-label="Commissioned work">
+  <div class="stage">
+    <div class="wrap reel-wall">
+      <article class="reel reel-a" aria-label="Ria Brows — commissioned studio social film">
+        <div class="frame" data-clearance="public">
+          <video data-auto muted playsinline loop preload="none" poster="assets/media/ria-after-900.webp" aria-label="Ria Brows film excerpt">
+            <source src="assets/media/ria-10s.mp4" type="video/mp4">
+          </video>
+          <img class="rm-poster" src="assets/media/ria-after-900.webp" alt="A brow artist presenting to camera in a styled studio set, with animated titles" loading="lazy" decoding="async">
+        </div>
+      </article>
+
+      <div class="reel-centre">
+        <h2 class="label label-sig">02 — Commissioned work</h2>
+        <h3 class="rc-name rc-a"><span>Ria Brows</span></h3>
+        <p class="rc-plus" aria-hidden="true">+</p>
+        <h3 class="rc-name rc-b"><span>Love in Action</span></h3>
+        <span class="rc-thread" aria-hidden="true">
+          <svg viewBox="240 315 170 140"><polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/></svg>
+        </span>
+        <div class="rc-facts">
+          <p class="factline rc-f rc-fa">Studio social film · 9:16 — a brow artist's career, told as a before and after. Direction, studio shoot, motion titles in English and Amharic.</p>
+          <p class="factline rc-f rc-fb">Sponsorship appeal · 9:16 — a nonprofit working in Ethiopia. Presenter, field footage, bilingual captions, cut to work with the sound off.</p>
+        </div>
+      </div>
+
+      <article class="reel reel-b" aria-label="Love in Action — commissioned sponsorship appeal film">
+        <div class="frame" data-clearance="public">
+          <video data-auto muted playsinline loop preload="none" poster="assets/media/lia-presenter-900.webp" aria-label="Love in Action film excerpt">
+            <source src="assets/media/lia-10s.mp4" type="video/mp4">
+          </video>
+          <img class="rm-poster" src="assets/media/lia-presenter-900.webp" alt="A presenter in Love in Action apparel speaking to camera, with bilingual animated captions" loading="lazy" decoding="async">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S3 · TECHNOLOGY — the drawing becomes the site ══
+     A drafting frame drawn at final size, the real site rendered into it, read
+     at four desktop stops, reflowed to 390px, read again on the phone.
+     These are high-DPR captures: dunamishosting.com sends
+     X-Frame-Options: SAMEORIGIN, so a live cross-origin frame is impossible.
+     The demonstration is driven by the PAGE's scroll — nothing to trap. ══ -->
+<section class="scene" id="tech" data-len="3.6" aria-label="Technology">
+  <div class="stage">
+    <div class="wrap tech-hud">
+      <span class="label label-sig">03 — Technology</span>
+      <span class="label" style="color:var(--muted)">Dunamis Hosting</span>
+      <span class="rd">
+        <span class="label">LAYOUT <span class="rd-w">1440 PX</span></span>
+        <span class="label rd-r">/ home</span>
+      </span>
+    </div>
+    <div class="wrap tech-body">
+      <div class="tech-copy">
+        <div data-beat="tech-head">
+          <h2 class="t-tech">We design and <br>build the web.</h2>
+          <div class="tech-rule" aria-hidden="true"></div>
+        </div>
+        <div data-beat="tech-note">
+          <p class="factline">Dunamis Hosting sells six product lines. We designed the product architecture, the navigation across thirteen routes, the pricing and checkout journeys, and the responsive system that carries all of it from 1440 pixels down to 390.</p>
+          <div class="route-ribbon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="spec" style="margin-top:.7rem">13 ROUTES · 6 PRODUCT LINES · CHECKOUT · CLIENT AREA</p>
+        </div>
+        <div data-beat="tech-close" class="tech-facts">
+          <p class="spec"><a href="https://dunamishosting.com" rel="noopener" target="_blank" style="color:var(--fg);text-decoration:underline;text-underline-offset:4px">Visit the live site ↗</a></p>
+        </div>
+      </div>
+      <div>
+        <div class="dun-surface" data-clearance="public">
+          <div class="dun-chrome">
+            <i class="sq" aria-hidden="true"></i>
+            <span class="u">dunamishosting.com</span>
+            <span class="cap-chip">Live mirror · capture</span>
+          </div>
+          <div class="dun-view">
+            <img class="dun-shot-d" src="assets/media/dun-scroll-desktop.webp" width="2160" height="8380" loading="lazy" decoding="async" alt="The Dunamis Hosting homepage at desktop width, from its hero down through the six product lines and feature sections, designed and built by Lion Creatives">
+            <img class="dun-shot-m" src="assets/media/dun-scroll-mobile.webp" width="1170" height="12000" loading="lazy" decoding="async" alt="The same site at 390 pixels: the layout reflows to a single column, cards stacking full-width">
+            <!-- INTERACTIVE PORTFOLIO MIRROR of the client's own public hero:
+                 the globe is the site's real mechanic (an equirectangular texture
+                 panning inside a circular mask - pure CSS on the live site too)
+                 and the headline types with the live site's measured timing.
+                 The trust pill and badge copy are the client's own public page
+                 content, reproduced inside their mirrored page only - they are
+                 not Lion Creatives claims. Below this band the page remains an
+                 honestly-labelled capture. -->
+            <div class="dun-live dun-live-d" aria-hidden="true">
+              <span class="dg"><i class="dg-slide"></i></span>
+              <div class="dl-content">
+        <p class="dl-eyebrow"><b>⚡</b> DOMAINS &middot; WEB HOSTING &middot; CLOUD</p>
+        <p class="dl-h1">Find your <span class="dl-typed">future.</span><span class="dl-caret">|</span></p>
+        <p class="dl-sub">Search 400+ extensions and register in seconds, with free WHOIS privacy and 24/7 human support on every domain.</p>
+        <div class="dl-card">
+          <span class="dl-row"><span class="dl-input">Find your perfect domain name...</span><span class="dl-btn">Search</span></span>
+          <span class="dl-chips"><i>.com</i><i>.net</i><i>.org</i><i>.io</i><i>.co</i><i>.dev</i><b class="dl-viewall">View all →</b></span>
+        </div>
+        <p class="dl-transfer">Already have a domain? <u>Transfer it now →</u></p>
+        <span class="dl-pill">
+          <span class="dl-avs"><img src="assets/media/dun-av1.png" alt="" width="106" height="160"><img src="assets/media/dun-av2.png" alt="" width="106" height="160"><img src="assets/media/dun-av3.png" alt="" width="106" height="160"><i>20k+</i></span>
+          <span class="dl-pill-t"><b>Trusted by 20,000+</b> businesses worldwide &middot; rated 4.9/5</span>
+        </span>
+        <span class="dl-badges"><i>✓ Free SSL Certificates</i><i>↺ Daily Automated Backups</i><i>◔ 24/7 Expert Support</i><i>⚡ 99.9% Uptime Guarantee</i></span>
+        <span class="dl-cue"><i class="dl-mouse"></i><span>SCROLL TO DISCOVER MORE</span></span>
+              </div>
+            </div>
+            <div class="dun-live dun-live-m" aria-hidden="true">
+              <span class="dg"><i class="dg-slide"></i></span>
+              <div class="dl-content">
+        <p class="dl-eyebrow"><b>⚡</b> DOMAINS &middot; WEB HOSTING &middot; CLOUD</p>
+        <p class="dl-h1">Find your <span class="dl-typed">future.</span><span class="dl-caret">|</span></p>
+        <p class="dl-sub">Search 400+ extensions and register in seconds, with free WHOIS privacy and 24/7 human support on every domain.</p>
+        <div class="dl-card">
+          <span class="dl-row"><span class="dl-input">Find your perfect domain name...</span><span class="dl-btn">Search</span></span>
+          <span class="dl-chips"><i>.com</i><i>.net</i><i>.org</i><i>.io</i><i>.co</i><i>.dev</i><b class="dl-viewall">View all →</b></span>
+        </div>
+        <p class="dl-transfer">Already have a domain? <u>Transfer it now →</u></p>
+        <span class="dl-pill">
+          <span class="dl-avs"><img src="assets/media/dun-av1.png" alt="" width="106" height="160"><img src="assets/media/dun-av2.png" alt="" width="106" height="160"><img src="assets/media/dun-av3.png" alt="" width="106" height="160"><i>20k+</i></span>
+          <span class="dl-pill-t"><b>Trusted by 20,000+</b> businesses worldwide &middot; rated 4.9/5</span>
+        </span>
+        <span class="dl-badges"><i>✓ Free SSL Certificates</i><i>↺ Daily Automated Backups</i><i>◔ 24/7 Expert Support</i><i>⚡ 99.9% Uptime Guarantee</i></span>
+        <span class="dl-cue"><i class="dl-mouse"></i><span>SCROLL TO DISCOVER MORE</span></span>
+              </div>
+            </div>
+            <div class="dun-scroll-rail" aria-hidden="true"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S4 · PHOTOGRAPHY — the sheet, travelling horizontally ══
+     The founder keeps the horizontal movement; the gallery is rebuilt around
+     it. The title panel is IN the track, so it physically leaves the viewport
+     before any photograph arrives. Type can never land on a face. ══ -->
+<section class="scene" id="photo" data-len="3.4" aria-label="Photography">
+  <div class="stage">
+    <div class="pt-track">
+      <div class="pt-panel pt-plate" data-beat="ph-open">
+        <p class="label label-sig">04 — Photography</p>
+        <h2 class="t-scene" style="margin-top:.5rem">Commissioned <i>photography.</i></h2>
+        <p class="factline" style="margin-top:.9rem">A styled family celebration, photographed for the client. Eleven frames from one afternoon.</p>
+        <p class="spec" style="margin-top:.9rem">COMMISSIONED · SHOWN WITH PERMISSION</p>
+      </div>
+      <div class="pt-panel pt-gutter" aria-hidden="true"></div>
+
+      <figure class="pt-panel pt-fig tall" data-clearance="public">
+        <img src="assets/media/ph-hair-tall-900.webp" srcset="assets/media/ph-hair-tall-480.webp 480w, assets/media/ph-hair-tall-900.webp 900w" sizes="(min-width:900px) 40vw, 70vw" width="900" height="1600" loading="lazy" decoding="async" alt="A woman in a floral traditional dress adjusting her hair, styled set behind her">
+      </figure>
+      <figure class="pt-panel pt-fig wide lift" data-clearance="public">
+        <img src="assets/media/ph-fan-wide-1800.webp" srcset="assets/media/ph-fan-wide-900.webp 900w, assets/media/ph-fan-wide-1800.webp 1800w" sizes="(min-width:900px) 60vw, 92vw" width="1800" height="1013" loading="lazy" decoding="async" alt="A woman holding a decorative fan, laughing, against a draped backdrop">
+        <figcaption>Styled set · natural light</figcaption>
+      </figure>
+      <figure class="pt-panel pt-fig mid drop" data-clearance="public">
+        <img src="assets/media/ph-drape-pair-900.webp" srcset="assets/media/ph-drape-pair-480.webp 480w, assets/media/ph-drape-pair-900.webp 900w" sizes="(min-width:900px) 28vw, 60vw" width="900" height="1600" loading="lazy" decoding="async" alt="Two women adjusting a white shawl together">
+      </figure>
+
+      <div class="pt-panel pt-gutter" aria-hidden="true"></div>
+
+      <figure class="pt-panel pt-fig tall" data-clearance="public">
+        <img src="assets/media/ph-stand-tall-900.webp" srcset="assets/media/ph-stand-tall-480.webp 480w, assets/media/ph-stand-tall-900.webp 900w" sizes="(min-width:900px) 40vw, 70vw" width="900" height="1600" loading="lazy" decoding="async" alt="Full-length portrait beside a woven mesob basket">
+        <figcaption>Full length · mesob</figcaption>
+      </figure>
+      <figure class="pt-panel pt-fig small lift" data-clearance="public">
+        <img src="assets/media/ph-lean-pair-900.webp" srcset="assets/media/ph-lean-pair-480.webp 480w, assets/media/ph-lean-pair-900.webp 900w" sizes="(min-width:900px) 22vw, 50vw" width="900" height="1600" loading="lazy" decoding="async" alt="Two women leaning together, laughing">
+      </figure>
+      <figure class="pt-panel pt-fig wide" data-clearance="public">
+        <img src="assets/media/ph-fan-turn-1800.webp" srcset="assets/media/ph-fan-turn-900.webp 900w, assets/media/ph-fan-turn-1800.webp 1800w" sizes="(min-width:900px) 60vw, 92vw" width="1800" height="1013" loading="lazy" decoding="async" alt="A turn to camera, fan raised, gold jewellery catching the light">
+      </figure>
+      <figure class="pt-panel pt-fig mid drop" data-clearance="public">
+        <img src="assets/media/ph-close-tall-900.webp" srcset="assets/media/ph-close-tall-480.webp 480w, assets/media/ph-close-tall-900.webp 900w" sizes="(min-width:900px) 28vw, 60vw" width="900" height="1600" loading="lazy" decoding="async" alt="A closer standing portrait against the draped set">
+        <figcaption>Nine of eleven frames shown</figcaption>
+      </figure>
+
+      <div class="pt-panel pt-gutter" aria-hidden="true"></div>
+
+      <figure class="pt-panel pt-fig hero-wide" data-clearance="public">
+        <img src="assets/media/ph-group-wide-1800.webp" srcset="assets/media/ph-group-wide-900.webp 900w, assets/media/ph-group-wide-1800.webp 1800w, assets/media/ph-group-wide-2400.webp 2400w" sizes="(min-width:900px) 1120px, 92vw" width="1800" height="1013" loading="lazy" decoding="async" alt="The full group in coordinated traditional dress, the closing frame of the celebration">
+        <figcaption>The group frame · the last exposure of the day</figcaption>
+      </figure>
+
+    </div>
+    <!-- the payoff: the group frame grows out of the track to full viewport -->
+    <figure class="ph-payoff" data-clearance="public" aria-hidden="true">
+      <img src="assets/media/ph-group-wide-1800.webp" srcset="assets/media/ph-group-wide-900.webp 900w, assets/media/ph-group-wide-1800.webp 1800w, assets/media/ph-group-wide-2400.webp 2400w" sizes="100vw" width="1800" height="1013" loading="lazy" decoding="async" alt="">
+    </figure>
+    <div class="pt-rail" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- ══ S5 · CINEMA — the letterbox carries the title; frames stay clean ══ -->
+<section class="scene bars" id="cinema" data-len="3.8" aria-label="The wedding film — a proposal, then a wedding">
+  <div class="stage">
+    <div class="cin-frame" data-clearance="public">
+      <figure class="cut" data-cut="0">
+        <video data-auto muted playsinline loop preload="none" poster="assets/media/pw-the-kneel-1600.webp" aria-label="Film excerpt: the proposal at the flower-dressed bow of the boat"><source src="assets/media/pw-proposal-hero-12s.mp4" type="video/mp4"></video>
+        <figcaption class="cut-cap">01 — The ask · golden hour, on the water</figcaption>
+      </figure>
+      <figure class="cut" data-cut="1">
+        <img src="assets/media/pw-ring-macro-1600.webp" srcset="assets/media/pw-ring-macro-1600.webp 1600w, assets/media/pw-ring-macro-2880.webp 2880w" sizes="100vw" width="1600" height="720" loading="lazy" decoding="async" alt="The ring — a close detail of joined hands">
+        <figcaption class="cut-cap">02 — The ring · the detail</figcaption>
+      </figure>
+      <figure class="cut" data-cut="2">
+        <img src="assets/media/pw-bw-toast-1600.webp" srcset="assets/media/pw-bw-toast-1600.webp 1600w, assets/media/pw-bw-toast-2880.webp 2880w" sizes="100vw" width="1600" height="720" loading="lazy" decoding="async" alt="A night toast on the water">
+        <figcaption class="cut-cap">03 — The night · a toast on the water</figcaption>
+      </figure>
+      <figure class="cut" data-cut="3">
+        <video data-auto muted playsinline loop preload="none" poster="assets/media/pw-nave-wide-1600.webp" aria-label="Film excerpt: the crowned couple before the congregation"><source src="assets/media/pw-ceremony-12s.mp4" type="video/mp4"></video>
+        <figcaption class="cut-cap">04 — The ceremony · the church</figcaption>
+      </figure>
+      <figure class="cut" data-cut="4">
+        <img src="assets/media/pw-crowning-1600.webp" srcset="assets/media/pw-crowning-1600.webp 1600w, assets/media/pw-crowning-2880.webp 2880w" sizes="100vw" width="1600" height="720" loading="lazy" decoding="async" alt="The crown placed on the groom during the ceremony">
+        <figcaption class="cut-cap">05 — The crowning</figcaption>
+      </figure>
+      <figure class="cut" data-cut="5">
+        <img src="assets/media/pw-door-exit-1600.webp" srcset="assets/media/pw-door-exit-1600.webp 1600w, assets/media/pw-door-exit-2880.webp 2880w" sizes="100vw" width="1600" height="720" loading="lazy" decoding="async" alt="Hand in hand through the church doors">
+        <figcaption class="cut-cap">06 — The exit · hand in hand</figcaption>
+      </figure>
+    </div>
+    <div class="cin-top">
+      <p class="cin-t">A proposal, <i>then a wedding.</i></p>
+    </div>
+    <div class="cin-bot" aria-hidden="true">
+      <span class="slate">01 / 06 — THE ASK · GOLDEN HOUR, ON THE WATER</span>
+      <span class="slate">02 / 06 — THE RING · THE DETAIL</span>
+      <span class="slate">03 / 06 — THE NIGHT · A TOAST ON THE WATER</span>
+      <span class="slate">04 / 06 — THE CEREMONY · THE CHURCH</span>
+      <span class="slate">05 / 06 — THE CROWNING</span>
+      <span class="slate">06 / 06 — THE EXIT · HAND IN HAND</span>
+      <span class="spec cin-meta">EVENT FILM · 4K · <a href="case-study.html">CASE STUDY →</a></span>
+      <span class="cin-count"><i class="cin-count-i"></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S6 · STUDIO — "The Light-Up" ══
+     Rebuilt from scratch. The unit is a CREDIT ROW (index · name · role), and
+     all five people get byte-identical treatment. A photograph is an extra that
+     three of them happen to have — so the two without portraits are not holes
+     in a grid, they are simply credits without a print. A warm key light travels
+     down the list, holding on each name, then all five come up together. ══ -->
+<section class="scene" id="studio" data-len="3" aria-label="The studio">
+  <div class="stage">
+    <span class="st-key" aria-hidden="true"></span>
+    <span class="st-grain" aria-hidden="true"></span>
+    <div class="st-echo" aria-hidden="true"><i>01</i><i>02</i><i>03</i><i>04</i><i>05</i></div>
+    <span class="st-pool" aria-hidden="true"></span>
+    <span class="st-ghost" aria-hidden="true">
+      <svg viewBox="0 0 550 550"><polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/></svg>
+    </span>
+    <div class="wrap st-grid">
+
+      <div class="st-head" data-beat="st-head">
+        <p class="label label-sig">05 — The studio</p>
+        <h2 class="t-editorial" style="margin-top:.7rem">Who <i>made all of it.</i></h2>
+        <p class="factline" style="margin-top:.9rem">Film, photography, design, engineering and data. Maryland-based, remote and on location.</p>
+        <p class="spec st-line" data-beat="st-line" style="margin-top:1.6rem">MARYLAND, USA · REMOTE AND ON LOCATION</p>
+        <p class="spec" data-beat="st-line" style="margin-top:.5rem"><a href="studio.html">The studio page →</a></p>
+      </div>
+
+      <ol class="st-credits">
+        <li class="st-row" data-i="0"><span class="st-n">01</span><span class="st-name">Thomas Asfaw</span><span class="st-role">Founder — Creative Director</span></li>
+        <li class="st-row" data-i="1"><span class="st-n">02</span><span class="st-name">Tewodros Teshome</span><span class="st-role">Co-Founder</span></li>
+        <li class="st-row" data-i="2"><span class="st-n">03</span><span class="st-name">Bisrat Asfaw</span><span class="st-role">Lead Software Engineer</span></li>
+        <li class="st-row" data-i="3"><span class="st-n">04</span><span class="st-name">Gelila Assefa</span><span class="st-role">AI &amp; Data Engineer</span></li>
+        <li class="st-row" data-i="4"><span class="st-n">05</span><span class="st-name">Michael Bekele</span><span class="st-role">Graphics Designer</span></li>
+      </ol>
+
+      <div class="st-prints">
+        <figure class="st-plate" data-for="0">
+          <img src="assets/media/team-thomas-400.webp" srcset="assets/media/team-thomas-400.webp 400w, assets/media/team-thomas-800.webp 800w" sizes="192px" width="400" height="500" loading="lazy" decoding="async" alt="Thomas Asfaw, Founder and Creative Director at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="1">
+          <img src="assets/media/team-tewodros-400.webp" srcset="assets/media/team-tewodros-400.webp 400w, assets/media/team-tewodros-800.webp 800w" sizes="192px" width="400" height="500" loading="lazy" decoding="async" alt="Tewodros Teshome, Co-Founder at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="2">
+          <img src="assets/media/team-bisrat-400.webp" srcset="assets/media/team-bisrat-400.webp 400w, assets/media/team-bisrat-800.webp 800w" sizes="192px" width="400" height="500" loading="lazy" decoding="async" alt="Bisrat Asfaw, Lead Software Engineer at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="3">
+          <img src="assets/media/team-gelila-400.webp" srcset="assets/media/team-gelila-400.webp 400w, assets/media/team-gelila-800.webp 800w" sizes="192px" width="400" height="500" loading="lazy" decoding="async" alt="Gelila Assefa, AI and Data Engineer at Lion Creatives">
+        </figure>
+        <figure class="st-plate" data-for="4">
+          <img src="assets/media/team-michael-384.webp" srcset="assets/media/team-michael-384.webp 384w" sizes="192px" width="384" height="480" loading="lazy" decoding="async" alt="Michael Bekele, Graphics Designer at Lion Creatives">
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ S7 · CONVERSION — "The Table" ══
+     A lit plane standing in a dark room, with the five projects already seen
+     drifting in around it and converging toward the CTA. Not a cream rectangle
+     with type on it — the light field is an object, and the room is the scene. ══ -->
+<section class="scene" id="engage" data-len="2.6" aria-label="Start a project">
+  <div class="stage">
+    <div class="cv-room" aria-hidden="true"><span class="hz"></span><span class="fl"></span></div>
+    <div class="cv-frags" aria-hidden="true">
+      <div class="cv-frag" data-f="0"><img src="assets/media/pw-crowning-560.webp" loading="lazy" decoding="async" alt=""><b>Event film</b></div>
+      <div class="cv-frag" data-f="1"><img src="assets/media/ria-after-900.webp" loading="lazy" decoding="async" alt=""><b>Studio social film</b></div>
+      <div class="cv-frag" data-f="2"><img src="assets/media/lia-presenter-900.webp" loading="lazy" decoding="async" alt=""><b>Nonprofit appeal</b></div>
+      <div class="cv-frag" data-f="3"><img src="assets/media/dun-pricing-640.webp" loading="lazy" decoding="async" alt=""><b>Web platform</b></div>
+      <div class="cv-frag" data-f="4"><img src="assets/media/ph-group-wide-900.webp" loading="lazy" decoding="async" alt=""><b>Photography</b></div>
+    </div>
+    <div class="wrap cv-core">
+      <p class="label label-sig" data-beat="cv-eyebrow">06 — Start</p>
+      <h2 class="t-display cv-head">
+        <span class="ln"><i>You've seen the work.</i></span>
+        <span class="ln"><i>Now tell us about <span class="cv-yours" data-beat="cv-yours">yours.</span></i></span>
+      </h2>
+      <span class="cv-thread" aria-hidden="true"></span>
+      <p class="lede cv-sub" data-beat="cv-sub">A film, a photography day, a website &mdash; or all three. A short brief is enough, and &ldquo;not sure yet&rdquo; is a valid budget.</p>
+      <div class="cv-actions" data-beat="cv-panel">
+        <a class="btn btn-solid" href="contact.html"><span>Start a project</span><i class="tick" aria-hidden="true">&rarr;</i></a>
+        <a class="btn" href="contact.html#book"><span>Book a call</span></a>
+      </div>
+      <p class="spec cv-note" data-beat="cv-meta" data-review-state="no-scheduler">No scheduler connected yet &mdash; this opens a request for a time.</p>
+      <p class="spec cv-lines" data-beat="cv-meta">FILM &middot; PHOTOGRAPHY &middot; DESIGN &middot; ENGINEERING</p>
+      <p class="spec cv-mail" data-beat="cv-meta"><a href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S8 · FINALE — "The Aperture Closes" ══
+     The five blades arrive along their OWN centroid rays — each carrying the
+     label of a scene the visitor has passed — the light changes from the
+     conversion deck's cream to void, the mark locks to exact canonical
+     geometry and holds, then the statement prints and the gate opens.
+     The polygon point strings are byte-identical to the nav and the loader. ══ -->
+<section class="scene" id="finale" data-len="3.2" aria-labelledby="fin-h">
+  <div class="stage">
+    <span class="fin-stage" aria-hidden="true">
+      <span class="horizon"></span><span class="floor"></span><span class="pool"></span>
+    </span>
+    <div class="wrap fin-plate">
+      <div class="fin-mark" aria-hidden="true">
+        <span class="fin-core"></span>
+        <svg viewBox="0 0 550 550">
+        <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+        <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+        <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+        <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+        <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+        </svg>
+        <span class="fin-reflect" aria-hidden="true"><svg viewBox="0 0 550 550">
+        <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+        <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+        <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+        <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+        <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+        </svg></span>
+        <span class="fin-tag" data-i="0">Event film</span>
+        <span class="fin-tag" data-i="1">Commissioned reels</span>
+        <span class="fin-tag" data-i="2">Technology</span>
+        <span class="fin-tag" data-i="3">Photography</span>
+        <span class="fin-tag" data-i="4">The studio</span>
+      </div>
+
+      <div class="fin-words">
+        <h2 id="fin-h">
+          <span class="l1"><i>Directed</i></span>
+          <span class="l2"><i>and built</i></span>
+          <span class="l3"><i>by one team.</i></span>
+        </h2>
+        <span class="fin-seam" aria-hidden="true"></span>
+      </div>
+
+      <div class="fin-gate" data-beat="fin-act">
+        <a class="gate" href="contact.html">
+          <span class="gate-verb">Start a project</span>
+          <span class="gate-tick" aria-hidden="true">→</span>
+        </a>
+        <p class="spec gate-sub">MARYLAND · REMOTE · ON LOCATION</p>
+      </div>
+
+      <div class="fin-meta">
+        <p class="spec" data-beat="fin-imprint">LION CREATIVES · CREATIVE AND TECHNOLOGY AGENCY · MARYLAND, USA</p>
+        <p class="spec" data-beat="fin-imprint"><a class="fin-mail" href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-id">
+    <span class="foot-mark" aria-hidden="true">
+      <svg viewBox="0 0 550 550">
+        <polygon points="108.32 111.05 146.51 171.85 314.88 156.65 335.93 82.99 266.95 124.69 217.45 87.27 181.2 125.08 108.32 111.05"/>
+        <polygon points="154.18 217.19 146.38 369.19 195.49 394.91 250.84 311.51 154.18 217.19"/>
+        <polygon points="236.11 365.93 395.42 467.01 258.25 461.57 211.09 404.26 236.11 365.93"/>
+        <polygon points="404.01 451.03 246.55 349.94 266.05 320.07 386.07 368.4 404.01 451.03"/>
+        <polygon points="149.63 188.74 272.79 300.46 394.39 351.91 419.86 372.18 437 285.91 424.01 278.12 369.45 293.19 372.05 259.93 420.37 249.02 435.96 260.97 433.89 201.73 441.68 181.98 333.07 206.41 320.6 234.47 265 212.64 333.07 206.41 345.54 175.23 149.63 188.74"/>
+      </svg>
+    </span>
+    <p class="label">Lion Creatives</p>
+    <p class="factline" style="margin-top:.6rem;max-width:32ch">A creative and technology agency. Maryland-based, working remotely and on location, across the U.S. and beyond.</p>
+    <p class="spec" style="margin-top:1rem"><a href="mailto:contact@lioncreatives.com">contact@lioncreatives.com</a></p>
+  </div>
+  <div>
+    <p class="label">Explore</p>
+    <ul>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="engagements.html">Engagements</a></li>
+      <li><a href="studio.html">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="label">Elsewhere</p>
+    <!-- SOCIAL: the founder will supply the three profile URLs after this pass.
+         Until then these are deliberately NOT links: no placeholder anchor, no guessed
+         profile, no generic instagram.com. They render as an inert, labelled
+         set so the layout is final and only the href has to be filled in. -->
+    <ul class="social" data-state="pending">
+      <li>
+        <span class="soc" role="img" aria-label="Instagram — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/>
+          </svg>
+        </span>
+      </li>
+      <li>
+        <span class="soc" role="img" aria-label="TikTok — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M13.2 2.6h2.6c.25 1.86 1.35 3.4 3.4 3.72v2.63c-1.3.06-2.5-.28-3.6-.98v6.36c0 3.3-2.4 5.77-5.6 5.77S4.4 17.63 4.4 14.33c0-3.1 2.3-5.5 5.4-5.7v2.75c-1.6.2-2.75 1.36-2.75 2.95 0 1.72 1.3 3.05 3 3.05 1.72 0 2.95-1.3 2.95-3.1V2.6z"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </li>
+      <li>
+        <span class="soc" role="img" aria-label="Facebook — Lion Creatives, link pending">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M14.6 21.4v-8.1h2.72l.4-3.16H14.6V8.1c0-.9.26-1.53 1.56-1.53h1.67V3.75c-.29-.04-1.28-.12-2.44-.12-2.42 0-4.07 1.47-4.07 4.19v2.32H8.6v3.16h2.72v8.1z"
+                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </li>
+    </ul>
+    <p class="spec soc-note">Profile links pending — supplied by the founder, then wired.</p>
+  </div>
+  <div class="foot-legal">
+    <span>© 2026 Lion Creatives · Maryland, USA</span>
+    <span><strong>Review prototype</strong> — real client work, shown with permission. Not the live site.</span>
+  </div>
+</footer>
+
+<script src="assets/js/v9.js"></script>
+</body>
+</html>
