@@ -1,0 +1,1398 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   APERTURE X — V9 homepage system
+   Founder correction gate (V8.1). Rebuilt: typography, pacing, media handling,
+   conversion and finale.
+
+   THREE VOICES (all Google Fonts OFL, all variable, all verified live):
+     STUDIO  Fraunces    opsz 9-144 · wght 100-900 · SOFT 0-100   — the cinema
+     WORK    Archivo     wdth 62-125 · wght 100-900               — the working voice
+     MACHINE Geist Mono  wght 100-900                             — the instruments
+   The page is typographically flat no longer: eight roles, each with its own
+   family, axis position, scale, case and tracking.
+
+   ARCHITECTURE unchanged in kind: the EDITORIAL edition is the document's
+   default; the cinematic scene engine is enhancement.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --void:#0a0a0b; --plane:#17171a; --edge:#333338; --hair:rgba(255,255,255,.12);
+  --hair-ink:rgba(0,0,0,.16);
+  --signal:#da1f26; --fg:#f7f6f3; --muted:#b8b7b3; --dim:#8b8b8e;
+  --field:#eae7e0; --ink:#131315;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+
+  --f-studio:'Fraunces',Georgia,'Times New Roman',serif;
+  --f-work:'Archivo','Helvetica Neue',Arial,system-ui,sans-serif;
+  --f-machine:'Geist Mono','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* HEADER SAFE ZONE (founder §15). --nav-h is measured at runtime by the engine;
+     this is the fallback. NOTHING may render above --safe-top inside a stage. */
+  --nav-h:82px;
+  --safe-top:calc(var(--nav-h) + clamp(14px,2.4vh,30px));
+  --gut:clamp(1.2rem,4vw,4rem);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--void);color:var(--fg);
+  font-family:var(--f-work);font-stretch:100%;font-weight:400;
+  font-size:1.02rem;line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-synthesis:none;overflow-x:clip}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--signal);color:#fff}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;
+  clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+[id]{scroll-margin-top:var(--safe-top)}
+
+/* ══ THE EIGHT TYPE ROLES ════════════════════════════════════════════════ */
+/* 1 · DISPLAY / CINEMATIC — Fraunces at full optical size, light, tight */
+.t-display{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 0,'WONK' 0;font-weight:300;
+  font-size:clamp(2.7rem,7.6vw,6.6rem);line-height:.92;letter-spacing:-.028em;
+  margin:0;text-wrap:balance}
+/* 2 · SCENE HEAD — same family, different optical size = different texture */
+.t-scene{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 0,'WONK' 0;font-weight:400;
+  font-size:clamp(1.9rem,4vw,3.3rem);line-height:1.02;letter-spacing:-.018em;margin:0}
+/* 3 · EDITORIAL — warmer terminals (SOFT 40), reading size */
+.t-editorial{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 30,'wght' 400,'SOFT' 40,'WONK' 0;font-weight:400;
+  font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.28;letter-spacing:-.008em;margin:0}
+/* 4 · TECHNICAL — Archivo condensed, the engineering register */
+.t-tech{font-family:var(--f-work);font-stretch:88%;font-weight:700;
+  font-size:clamp(1.5rem,3.1vw,2.6rem);line-height:1.04;letter-spacing:-.005em;
+  text-transform:uppercase;margin:0}
+/* 5 · PROJECT IDENTITY — Archivo expanded: names get room */
+.proj-name{font-family:var(--f-work);font-stretch:118%;font-weight:600;
+  font-size:clamp(1.02rem,1.5vw,1.32rem);line-height:1.15;letter-spacing:.002em;margin:0}
+/* 6 · BODY */
+.lede{font-family:var(--f-work);font-stretch:100%;font-weight:400;
+  font-size:clamp(1rem,1.35vw,1.16rem);line-height:1.55;color:var(--muted);max-width:52ch;margin:0}
+.factline{font-family:var(--f-work);font-stretch:100%;font-weight:400;
+  font-size:.96rem;line-height:1.6;color:var(--muted);max-width:50ch;margin:0}
+/* 7 · METADATA — Geist Mono, the instruments */
+.label{font-family:var(--f-machine);font-weight:400;font-size:.7rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:0;
+  font-variant-numeric:tabular-nums slashed-zero}
+.label-sig{border-left:2px solid var(--signal);padding-left:.62em}
+.spec{font-family:var(--f-machine);font-weight:400;font-size:.72rem;
+  letter-spacing:.09em;color:var(--dim);font-variant-numeric:tabular-nums slashed-zero;margin:0}
+/* 8 · NAV + CTA */
+.nav-links a{font-family:var(--f-work);font-stretch:92%;font-weight:500;
+  font-size:.9rem;letter-spacing:.012em}
+.btn{font-family:var(--f-machine);font-weight:600;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase}
+
+h1,h2,h3{margin:0;font-weight:inherit}
+.sig{color:var(--signal)}
+i.sig,em.sig{font-style:italic}
+.t-display i,.t-scene i{font-style:italic;font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 0,'WONK' 0}
+
+/* ══ CHROME ══════════════════════════════════════════════════════════════ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:110;display:flex;align-items:center;
+  gap:1.4rem;padding:1rem var(--gut);pointer-events:none;
+  transition:background 400ms var(--ease)}
+.nav>*{pointer-events:auto}
+.nav.scrolled{background:rgba(10,10,11,.72);
+  backdrop-filter:blur(14px) saturate(1.05);
+  border-bottom:1px solid var(--hair)}
+.nav-mark{display:flex;align-items:center;gap:.7rem;font-family:var(--f-work);
+  font-stretch:118%;font-weight:600;font-size:1rem;letter-spacing:.004em}
+.nav-mark svg{width:30px;height:30px;fill:var(--fg)}
+.nav-mark svg polygon:nth-child(3){fill:var(--signal)}
+.nav-links{display:none;gap:1.7rem;margin-left:auto}
+.nav-links a{opacity:.82;transition:opacity 180ms var(--ease)}
+.nav-links a:hover,.nav-links a[aria-current="page"]{opacity:1}
+@media(min-width:900px){.nav-links{display:flex}}
+
+/* CTA — a plate with a divided action square, not a pill (founder §35) */
+.btn{display:inline-flex;align-items:stretch;gap:0;border:1px solid currentColor;
+  cursor:pointer;color:var(--fg);background:transparent;padding:0;
+  min-height:44px;position:relative;overflow:hidden;
+  transition:color 180ms var(--ease),border-color 180ms var(--ease)}
+.btn>span{display:flex;align-items:center;padding:.78rem 1.15rem;position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;background:var(--signal);
+  transform:scaleX(0);transform-origin:left;z-index:1;
+  transition:transform 420ms var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{transform:scaleX(1)}
+.btn:hover,.btn:focus-visible{border-color:var(--signal);color:#fff}
+.btn .tick{border-left:1px solid currentColor;padding:.78rem .8rem;z-index:2;
+  display:flex;align-items:center}
+.btn-solid{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn-solid::before{background:var(--fg)}
+.btn-solid:hover,.btn-solid:focus-visible{color:var(--void);border-color:var(--fg)}
+.nav-cta{margin-left:auto;min-height:40px}
+.nav-cta>span{padding:.55rem .9rem}
+@media(min-width:900px){.nav-cta{margin-left:0}}
+@media(max-width:899px){.nav-cta{display:none}}
+.menu-btn{margin-left:auto;display:inline-flex}
+@media(min-width:900px){.menu-btn{display:none}}
+
+.menu{position:fixed;inset:0;z-index:120;background:var(--plane);visibility:hidden;
+  clip-path:polygon(0 0,100% 0,100% 0,0 0);
+  transition:clip-path 620ms var(--ease-io),visibility 0s linear 620ms;
+  display:flex;flex-direction:column;justify-content:center;padding:var(--gut)}
+.menu[data-open="true"]{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  visibility:visible;transition-delay:0s,0s}
+.menu nav a{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 72,'wght' 400,'SOFT' 0,'WONK' 0;
+  font-size:2.3rem;padding:.42rem 0;display:block}
+.menu .label{margin-bottom:1.3rem}
+.menu-close{position:absolute;top:1rem;right:var(--gut)}
+
+.motion-toggle{position:fixed;right:1rem;bottom:1rem;z-index:130;
+  font-family:var(--f-machine);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.55rem .75rem;border:1px solid var(--edge);background:rgba(10,10,11,.9);
+  color:var(--fg);cursor:pointer;backdrop-filter:blur(6px)}
+.motion-toggle:hover,.motion-toggle:focus-visible{border-color:var(--signal)}
+
+/* ══ LOADER — V1 integrity treatment, unchanged (founder-approved cat G) ══ */
+.loader{position:fixed;inset:0;z-index:200;background:var(--void);
+  display:grid;place-items:center;
+  transition:clip-path 700ms var(--ease-io);clip-path:inset(0 0 0 0);
+  animation:loader-bail 400ms ease 6s forwards}
+@keyframes loader-bail{to{visibility:hidden;opacity:0;pointer-events:none}}
+html[data-mode="editorial"] .loader{display:none;animation:none}
+.loader[data-done="true"]{clip-path:inset(0 0 100% 0);pointer-events:none}
+.loader svg{width:min(150px,26vw)}
+.loader polygon{fill:var(--fg);opacity:0;transform-box:fill-box;transform-origin:center;
+  transform:scale(.82);transition:opacity 460ms var(--ease),transform 620ms var(--ease)}
+.loader polygon:nth-child(3){fill:var(--signal)}
+.loader.lit polygon{opacity:1;transform:scale(1)}
+.loader.lit polygon:nth-child(1){transition-delay:0ms}
+.loader.lit polygon:nth-child(2){transition-delay:80ms}
+.loader.lit polygon:nth-child(3){transition-delay:160ms}
+.loader.lit polygon:nth-child(4){transition-delay:240ms}
+.loader.lit polygon:nth-child(5){transition-delay:320ms}
+.loader .prog{position:absolute;bottom:2.6rem;left:50%;transform:translateX(-50%);
+  width:min(210px,42vw);height:1px;background:var(--hair)}
+.loader .prog i{display:block;height:100%;width:0%;background:var(--signal);
+  transition:width 260ms linear}
+
+/* ══ SCENE ENGINE BASE ═══════════════════════════════════════════════════ */
+.wrap{max-width:1500px;margin:0 auto;padding-inline:var(--gut);width:100%}
+html[data-mode="cinematic"] .scene[data-len]{min-height:calc(var(--len,2) * 100svh);position:relative}
+html[data-mode="cinematic"] .scene[data-len] .stage{position:sticky;top:0;height:100svh;
+  display:grid;align-items:center;overflow:clip;padding-top:var(--safe-top)}
+[data-beat]{opacity:0;transform:translateY(26px);visibility:hidden;
+  transition:opacity 620ms var(--ease),transform 720ms var(--ease),visibility 0s linear 620ms}
+[data-beat].on{opacity:1;transform:none;visibility:visible;transition-delay:0s,0s,0s}
+html[data-mode="editorial"] [data-beat]{opacity:1;transform:none;visibility:visible;transition:none}
+
+/* ══ S1 · HERO — aperture → cinema → project ═════════════════════════════
+   The film spans the whole stage and is revealed by an interpolated polygon.
+   State 2 shows it FULL WIDTH at its native 2.22:1 with letterbox rather than
+   cropping to fill: the source is 1600x720, so full-width at 1440 is a 0.9x
+   downscale — genuinely sharp, and nothing is cut off the frame. */
+/* NEVER set position/display here: an ID selector outranks the engine's
+   `html[data-mode=cinematic] .scene[data-len] .stage{position:sticky}` and the
+   scene silently stops pinning. This exact trap has now bitten three scenes. */
+#hero .stage{background:var(--void);overflow:clip}
+.hero-film{position:absolute;inset:0;z-index:1;overflow:hidden;background:#000;
+  will-change:clip-path}
+.hero-film video,.hero-film .rm-poster{position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);width:100%;height:auto;min-height:0;
+  object-fit:contain;will-change:transform}
+.hero-film .rm-poster{display:none}
+html[data-mode="editorial"] .hero-film video{display:none}
+html[data-mode="editorial"] .hero-film .rm-poster{display:block}
+
+.hero-say,.hero-id{position:absolute;left:0;right:0;z-index:3;
+  top:var(--safe-top);bottom:0;display:flex;flex-direction:column;justify-content:center;
+  pointer-events:none}
+.hero-say>*,.hero-id>*{pointer-events:auto}
+.hero-say{max-width:none;padding-inline:var(--gut)}
+@media(min-width:1000px){.hero-say{padding-right:52%}}
+@media(max-width:999px){.hero-say{justify-content:flex-end;padding-bottom:11svh}}
+.hero-rail{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.hero-rail .mark-name{font-family:var(--f-work);font-stretch:118%;font-weight:600;
+  font-size:.82rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-rail .desc{font-family:var(--f-machine);font-size:.7rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--muted)}
+.hero-rail .desc::before{content:"";display:inline-block;width:16px;height:1px;
+  background:var(--signal);vertical-align:.34em;margin-right:.6em}
+.hero-l1{display:block;line-height:.81}
+.hero-l1 .nw{white-space:nowrap}
+/* font-variation-settings INHERITS and BEATS font-weight — this span sits inside
+   .t-display, which declares 'wght' 300 for Fraunces, so without this reset the
+   Archivo line renders at weight 300 while computing 800. That was the visual
+   mismatch between the approved specimen and the live build. */
+.hero-l2{display:block;font-family:var(--f-work);font-variation-settings:normal;
+  font-optical-sizing:auto;font-stretch:86%;font-weight:800;
+  font-size:clamp(1.34rem,3.2vw,2.72rem);line-height:1;letter-spacing:.004em;
+  text-transform:uppercase;color:var(--fg);margin-top:.18em}
+.hero-l2 .sig{color:var(--signal)}
+.hero-dot{color:var(--signal)}
+#hero .lede{border-left:2px solid var(--signal);padding-left:1rem;margin-top:1.5rem}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+
+/* state 3 — the project story is a dark editorial SURFACE entering from the
+   right. Its translateX is driven by the SAME clip numbers as the film, so its
+   leading edge and the film's trailing edge are one seam — the film is pushed,
+   never covered. */
+.hero-id{left:auto;right:0;width:48%;top:0;bottom:0;
+  background:linear-gradient(90deg,#0d0d0f 0%,#121215 100%);
+  border-left:1px solid var(--hair);
+  transform:translateX(103%);will-change:transform;z-index:3;
+  padding-top:var(--safe-top)}
+.hero-id-inner{width:min(100%,560px);margin:0 auto;
+  padding-inline:clamp(1.6rem,3.4vw,3.2rem);
+  display:flex;flex-direction:column;gap:.85rem;
+  opacity:0;transform:translateY(26px);will-change:transform,opacity}
+@media(max-width:999px){.hero-id{position:absolute;left:0;right:0;width:auto;
+  top:auto;bottom:0;transform:none;border-left:0;
+  background:linear-gradient(180deg,rgba(10,10,11,0) 0%,rgba(10,10,11,.86) 34%,rgba(10,10,11,.94) 100%);
+  padding:2.2rem 0 1.4rem}
+  .hero-id-inner{width:100%;padding-inline:var(--gut)}}
+html[data-mode="editorial"] .hero-id{position:static;width:auto;transform:none;
+  background:none;border-left:0;padding-top:0}
+html[data-mode="editorial"] .hero-id-inner{opacity:1;transform:none;margin:0}
+.hero-id .cap{font-style:italic;color:var(--fg);max-width:34ch}
+.hero-id .spec a{color:var(--fg);text-decoration:underline;text-underline-offset:4px}
+
+/* ══ S2 · COMMERCIAL — the reel wall ═════════════════════════════════════
+   Mechanics measured from the founder's reference (motion study in
+   04-Design/REFERENCE-VISTA-REELS-MOTION-STUDY.md). Deliberately 2D: the
+   reference has perspective:none everywhere, and the depth read comes from an
+   opposing tilt, a long horizontal throw, mirrored outward shadow and a
+   brightness/scale differential — not from rotateY. */
+#commercial .stage{background:var(--void)}
+.reel-wall{display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;gap:clamp(1rem,2.4vw,3rem)}
+.reel{--reel-h:min(67svh,625px);height:var(--reel-h);
+  width:calc(var(--reel-h) * 9 / 16);flex:0 0 auto;position:relative;
+  will-change:transform,filter}
+/* ROUNDED REEL EDGE (founder correction). The reference uses 28px on a 334x594
+   reel = 0.047 of the reel HEIGHT, so the radius is tied to --reel-h and stays
+   proportional at every size instead of being a fixed pixel value.
+   The radius is repeated on the media itself: an overflow:hidden parent alone
+   lets transformed video bleed past a rounded corner in WebKit, which would
+   show exactly the jagged edge the founder is trying to get rid of. */
+.reel{--reel-r:clamp(10px, calc(var(--reel-h) * 0.047), 30px)}
+.reel .frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000;
+  border-radius:var(--reel-r);isolation:isolate;-webkit-backface-visibility:hidden}
+.reel video,.reel .rm-poster{width:100%;height:100%;object-fit:cover;
+  border-radius:inherit;-webkit-backface-visibility:hidden}
+.reel .rm-poster{position:absolute;inset:0;display:none}
+html[data-mode="editorial"] .reel video{display:none}
+html[data-mode="editorial"] .reel .rm-poster{display:block;position:static}
+/* mirrored outward shadow — the cue that reads as two lifted planes */
+.reel-a .frame{box-shadow:-10px 22px 74px rgba(0,0,0,.72)}   /* follows border-radius */
+.reel-b .frame{box-shadow:10px 22px 74px rgba(0,0,0,.72)}
+
+.reel-centre{text-align:center;display:flex;flex-direction:column;align-items:center;
+  gap:.5rem;position:relative;padding-inline:.5rem}
+.rc-name{font-family:var(--f-work);font-stretch:118%;font-weight:600;
+  font-size:clamp(1.05rem,1.7vw,1.5rem);line-height:1.15;margin:0;
+  transition:opacity 420ms var(--ease)}
+.rc-name span{display:inline-block;padding-bottom:.22em;border-bottom:2px solid transparent;
+  transition:border-color 420ms var(--ease)}
+.rc-name.lit span{border-bottom-color:var(--signal)}
+.rc-plus{font-family:var(--f-machine);font-size:.8rem;color:var(--dim);margin:.1rem 0}
+.rc-thread{display:block;width:clamp(26px,2.6vw,40px);opacity:0;margin:.3rem 0}
+.rc-thread svg{width:100%;height:auto;fill:var(--signal)}
+.rc-facts{position:relative;width:100%;min-height:5.2em;margin-top:.4rem}
+.rc-f{position:absolute;inset:0;margin:0 auto;max-width:30ch;font-size:.86rem;
+  text-align:center;transition:opacity 420ms var(--ease)}
+@media(max-width:1200px){.reel{--reel-h:min(54svh,470px)}
+  .rc-name{font-size:clamp(.95rem,1.5vw,1.2rem)} .rc-f{font-size:.78rem}}
+
+/* ══ S3 · TECHNOLOGY — the drawing becomes the site ══════════════════════ */
+#tech .stage{background:var(--tech-ground,#07090e)}
+#tech .stage::before{content:"";position:absolute;inset:0;pointer-events:none;
+  opacity:var(--grid-o,0);transition:opacity 300ms linear;
+  background:
+    repeating-linear-gradient(to right,rgba(120,150,210,.10) 0 1px,transparent 1px 64px),
+    repeating-linear-gradient(to bottom,rgba(120,150,210,.10) 0 1px,transparent 1px 64px)}
+/* .wrap carries width:100% AND horizontal padding. On an absolutely positioned
+   element width:100% WINS over the left/right pair, so the box resolved to
+   left:58px + width:1440px = a right edge 58px past the viewport, and the
+   right-hand readout was clipped away by the stage's overflow:clip. Any
+   absolutely positioned .wrap needs width:auto to honour left/right. */
+.tech-hud{position:absolute;left:var(--gut);right:var(--gut);top:var(--safe-top);
+  width:auto;padding-left:0;padding-right:0;
+  display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
+  padding-bottom:.55rem;border-bottom:1px solid rgba(150,175,225,.24);z-index:6}
+.tech-hud .rd{margin-left:auto;display:flex;gap:1rem;align-items:baseline}
+/* the route/product readout orphaned its last word at 1440 */
+.tech-copy .spec{text-wrap:balance}
+.tech-body{display:grid;grid-template-columns:1fr;gap:1.4rem;align-items:center;
+  padding-top:3.2rem}
+@media(min-width:1050px){
+  .tech-body{grid-template-columns:minmax(0,30%) minmax(0,1fr);gap:clamp(1.6rem,3vw,3rem)}
+}
+.tech-copy{position:relative;z-index:4}
+.tech-copy .t-tech{color:#f2f4f8}
+.tech-copy .factline{color:#9fabc4;max-width:34ch}
+.tech-rule{height:2px;background:var(--signal);transform-origin:left;
+  transform:scaleX(var(--rule,0));margin:1rem 0 1.2rem;max-width:320px}
+/* the composed surface: a drafting frame, not OS chrome */
+.dun-surface{position:relative;border:1px solid rgba(150,175,225,.30);background:#0a0e16;
+  width:100%;margin-inline:auto;will-change:width}
+.dun-chrome{display:flex;align-items:center;gap:.6rem;height:34px;padding:0 .7rem;
+  border-bottom:1px solid rgba(150,175,225,.22);background:#0c1119}
+.dun-chrome .sq{width:7px;height:7px;background:var(--signal);flex:0 0 auto}
+.dun-chrome .u{font-family:var(--f-machine);font-size:.68rem;color:#8e9bb5;letter-spacing:.05em}
+.dun-chrome .cap-chip{margin-left:auto;font-family:var(--f-machine);font-size:.6rem;
+  letter-spacing:.13em;text-transform:uppercase;color:#6f7c95;
+  border:1px solid rgba(150,175,225,.24);padding:.15rem .4rem}
+.dun-view{position:relative;overflow:hidden;background:#fff;will-change:height}
+/* height:auto is LOAD-BEARING. The <img> carries width/height attributes; with a
+   CSS width but no CSS height the attribute acts as a presentational hint and the
+   image renders at its natural PIXEL height — a 2.45x vertical stretch of the
+   client's website. This is the aspect distortion the founder rejected. */
+.dun-view img{position:absolute;top:0;left:0;display:block;height:auto;will-change:transform}
+/* ── the Dunamis live hero mirror ──────────────────────────────────────────
+   Faithful to the client's own public implementation: the "globe" is a flat
+   equirectangular Earth texture panning inside a circular mask (their real
+   mechanic - 70s per revolution), the headline types and deletes with their
+   measured timing, the caret blinks with their hard 0.9s cut. Sizes scale
+   with --s (band width / 1440) so the band stays in register with the
+   capture pixels around it at any surface width. */
+.dun-live{position:absolute;top:calc(var(--s,0.7)*112px);left:0;width:100%;
+  aspect-ratio:2160/1132;overflow:hidden;opacity:0;pointer-events:none;
+  background:linear-gradient(180deg,#0d1830 0%,#0a1526 46%,#091120 100%);
+  will-change:transform,opacity;contain:layout paint}
+.dun-live-m{display:none}
+.dg{position:absolute;left:50%;top:calc(var(--s,0.7)*-6px);
+  width:calc(var(--s,0.7)*1100px);aspect-ratio:1;translate:-50% 0;
+  border-radius:50%;overflow:hidden;background:#0a1628;display:block;
+  box-shadow:inset -95px -55px 150px rgba(6,12,24,.85),
+    inset 38px 24px 70px rgba(255,255,255,.07),
+    0 0 120px rgba(47,90,180,.22),0 0 200px rgba(30,60,140,.14)}
+.dg::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 34% 22%,rgba(10,22,44,.30),rgba(6,12,26,.78) 74%)}
+.dg-slide{position:absolute;top:0;bottom:0;left:0;width:240%;display:block;
+  background:url(../media/dun-earth-bluemarble.jpg);background-repeat:repeat-x;
+  background-size:50% 100%;
+  filter:saturate(.82) contrast(1.05) brightness(.5) hue-rotate(-4deg);
+  animation:dgSpin 70s linear infinite;animation-play-state:paused}
+.dun-live.run .dg-slide{animation-play-state:running}
+@keyframes dgSpin{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.dun-live::after{content:"";position:absolute;left:0;right:0;bottom:0;
+  height:calc(var(--s,0.7)*130px);
+  background:linear-gradient(180deg,transparent,#0a1220 88%)}
+.dl-content{position:relative;z-index:2;text-align:center;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  padding-top:calc(var(--s,0.7)*64px)}
+.dl-eyebrow{margin:0;font-size:calc(var(--s,0.7)*11.5px);letter-spacing:.22em;
+  color:#8fb0ff;font-weight:600}
+.dl-eyebrow b{color:#f5a623;font-weight:400;letter-spacing:0}
+.dl-h1{margin:calc(var(--s,0.7)*16px) 0 0;font-size:calc(var(--s,0.7)*50px);
+  line-height:1.1;font-weight:700;color:#fff;letter-spacing:-.01em}
+.dl-typed{color:#5b8cff}
+.dl-caret{color:#5b8cff;font-weight:400;animation:dlBlink .9s infinite}
+@keyframes dlBlink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.dl-sub{margin:calc(var(--s,0.7)*14px) auto 0;max-width:calc(var(--s,0.7)*640px);
+  font-size:calc(var(--s,0.7)*15px);line-height:1.55;color:#b7c2d8}
+.dl-card{display:block;width:calc(var(--s,0.7)*620px);
+  margin:calc(var(--s,0.7)*26px) auto 0;background:#fff;
+  border-radius:calc(var(--s,0.7)*14px);padding:calc(var(--s,0.7)*14px);
+  box-shadow:0 24px 60px rgba(4,10,24,.45);text-align:left}
+.dl-row{display:flex;gap:calc(var(--s,0.7)*10px)}
+.dl-input{flex:1;border:1px solid #e2e6ee;border-radius:calc(var(--s,0.7)*8px);
+  padding:calc(var(--s,0.7)*12px) calc(var(--s,0.7)*14px);color:#9aa3b2;
+  font-size:calc(var(--s,0.7)*14px);white-space:nowrap;overflow:hidden}
+.dl-btn{background:#2f6bff;color:#fff;border-radius:calc(var(--s,0.7)*8px);
+  padding:calc(var(--s,0.7)*12px) calc(var(--s,0.7)*22px);
+  font-size:calc(var(--s,0.7)*14px);font-weight:600}
+.dl-chips{display:flex;align-items:center;gap:calc(var(--s,0.7)*8px);
+  margin-top:calc(var(--s,0.7)*10px);flex-wrap:wrap}
+.dl-chips i{background:#eef1f6;border-radius:999px;font-style:normal;
+  padding:calc(var(--s,0.7)*6px) calc(var(--s,0.7)*12px);
+  font-size:calc(var(--s,0.7)*12px);color:#24304a;font-weight:600}
+.dl-viewall{margin-left:auto;color:#2f6bff;font-size:calc(var(--s,0.7)*12px);
+  font-weight:600}
+.dl-transfer{margin:calc(var(--s,0.7)*20px) 0 0;color:#cdd6e6;
+  font-size:calc(var(--s,0.7)*13px)}
+.dl-transfer u{color:#fff;font-weight:600;text-underline-offset:3px}
+.dl-pill{display:inline-flex;align-items:center;gap:calc(var(--s,0.7)*12px);
+  margin-top:calc(var(--s,0.7)*22px);background:#fff;border-radius:999px;
+  padding:calc(var(--s,0.7)*8px) calc(var(--s,0.7)*18px) calc(var(--s,0.7)*8px) calc(var(--s,0.7)*10px)}
+.dl-avs{display:inline-flex;align-items:center}
+.dl-avs img{width:calc(var(--s,0.7)*30px);height:calc(var(--s,0.7)*30px);
+  border-radius:50%;object-fit:cover;border:2px solid #fff;
+  margin-right:calc(var(--s,0.7)*-9px)}
+.dl-avs i{width:calc(var(--s,0.7)*30px);height:calc(var(--s,0.7)*30px);
+  border-radius:50%;background:#e8efff;color:#2f6bff;font-style:normal;
+  font-size:calc(var(--s,0.7)*10px);font-weight:700;display:inline-flex;
+  align-items:center;justify-content:center;border:2px solid #fff}
+.dl-pill-t{font-size:calc(var(--s,0.7)*12px);color:#212b40;text-align:left;
+  line-height:1.35}
+.dl-pill-t b{color:#0d1730}
+.dl-badges{display:flex;justify-content:center;gap:calc(var(--s,0.7)*10px);
+  margin-top:calc(var(--s,0.7)*22px);flex-wrap:wrap}
+.dl-badges i{border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  padding:calc(var(--s,0.7)*7px) calc(var(--s,0.7)*14px);font-style:normal;
+  font-size:calc(var(--s,0.7)*11.5px);color:#d6deeb;
+  background:rgba(10,20,40,.35)}
+.dl-cue{display:flex;flex-direction:column;align-items:center;
+  gap:calc(var(--s,0.7)*8px);margin-top:calc(var(--s,0.7)*26px)}
+.dl-mouse{width:calc(var(--s,0.7)*18px);height:calc(var(--s,0.7)*30px);
+  border:1.5px solid rgba(255,255,255,.5);border-radius:calc(var(--s,0.7)*10px);
+  position:relative;display:block}
+.dl-mouse::after{content:"";position:absolute;left:50%;top:calc(var(--s,0.7)*6px);
+  width:calc(var(--s,0.7)*3px);height:calc(var(--s,0.7)*6px);translate:-50% 0;
+  border-radius:2px;background:rgba(255,255,255,.7)}
+.dun-live.run .dl-mouse::after{animation:dlBob 2.6s ease-in-out infinite}
+@keyframes dlBob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.dl-cue span{font-size:calc(var(--s,0.7)*10px);letter-spacing:.22em;
+  color:#93a0b8}
+/* ── the mobile hero mirror: same content, the phone layout ── */
+.dun-live-m{top:calc(var(--sm,0.85)*115px);aspect-ratio:1170/2955;
+  background:linear-gradient(180deg,#0d1830 0%,#0a1526 40%,#091120 100%)}
+.dun-live-m::after{height:calc(var(--sm,0.85)*140px)}
+.dun-live-m .dg{top:calc(var(--sm,0.85)*140px);width:calc(var(--sm,0.85)*640px)}
+.dun-live-m .dl-content{padding-top:calc(var(--sm,0.85)*66px)}
+.dun-live-m .dl-eyebrow{font-size:calc(var(--sm,0.85)*12px);line-height:1.6;
+  padding-inline:calc(var(--sm,0.85)*30px)}
+.dun-live-m .dl-h1{font-size:calc(var(--sm,0.85)*33px);
+  margin-top:calc(var(--sm,0.85)*14px)}
+.dun-live-m .dl-sub{font-size:calc(var(--sm,0.85)*16px);
+  max-width:calc(var(--sm,0.85)*330px);margin-top:calc(var(--sm,0.85)*16px)}
+.dun-live-m .dl-card{width:calc(var(--sm,0.85)*330px);
+  border-radius:calc(var(--sm,0.85)*16px);padding:calc(var(--sm,0.85)*16px);
+  margin-top:calc(var(--sm,0.85)*30px)}
+.dun-live-m .dl-row{flex-direction:column}
+.dun-live-m .dl-input{font-size:calc(var(--sm,0.85)*15px);
+  padding:calc(var(--sm,0.85)*13px) calc(var(--sm,0.85)*14px)}
+.dun-live-m .dl-btn{text-align:center;font-size:calc(var(--sm,0.85)*15px);
+  padding:calc(var(--sm,0.85)*13px)}
+.dun-live-m .dl-chips i{font-size:calc(var(--sm,0.85)*13px)}
+.dun-live-m .dl-viewall{font-size:calc(var(--sm,0.85)*13px)}
+.dun-live-m .dl-transfer{font-size:calc(var(--sm,0.85)*14px);
+  margin-top:calc(var(--sm,0.85)*24px)}
+.dun-live-m .dl-pill{border-radius:calc(var(--sm,0.85)*16px);
+  width:calc(var(--sm,0.85)*330px);justify-content:flex-start;
+  padding:calc(var(--sm,0.85)*12px);margin-top:calc(var(--sm,0.85)*26px)}
+.dun-live-m .dl-pill-t{font-size:calc(var(--sm,0.85)*13px)}
+.dun-live-m .dl-avs img,.dun-live-m .dl-avs i{width:calc(var(--sm,0.85)*34px);
+  height:calc(var(--sm,0.85)*34px)}
+.dun-live-m .dl-badges{flex-direction:column;align-items:center;
+  gap:calc(var(--sm,0.85)*10px);margin-top:calc(var(--sm,0.85)*28px)}
+.dun-live-m .dl-badges i{font-size:calc(var(--sm,0.85)*13px);
+  padding:calc(var(--sm,0.85)*9px) calc(var(--sm,0.85)*16px)}
+.dun-live-m .dl-cue{margin-top:calc(var(--sm,0.85)*30px)}
+html[data-mode="editorial"] .dun-live{display:none}
+.dun-scroll-rail{position:absolute;top:6px;bottom:6px;right:4px;width:3px;
+  background:rgba(0,0,0,.10);z-index:3}
+.dun-scroll-rail i{position:absolute;left:0;width:100%;background:rgba(0,0,0,.34);
+  height:var(--thumb-h,20%);top:var(--thumb-y,0%)}
+.tech-facts{margin-top:1.1rem}
+.tech-facts .factline{color:#9fabc4;max-width:64ch}
+.route-ribbon{display:flex;align-items:center;gap:5px;margin-top:.8rem;flex-wrap:wrap}
+.route-ribbon i{width:16px;height:2px;background:rgba(150,175,225,.28);display:block}
+.route-ribbon i.on{background:var(--signal)}
+
+/* ══ S4 · PHOTOGRAPHY — the sheet, travelling horizontally ═══════════════ */
+#photo .stage{background:var(--void);overflow:clip}
+.pt-track{display:flex;align-items:center;gap:clamp(18px,2.4vw,42px);
+  height:100%;will-change:transform;padding-inline:var(--gut)}
+.pt-panel{flex:0 0 auto;position:relative}
+.pt-plate{width:min(30vw,420px);min-width:260px}
+.pt-plate .t-scene{margin-bottom:.7rem}
+.pt-fig{margin:0;position:relative}
+.pt-fig img{display:block;width:auto;object-fit:cover;background:#111}
+.pt-fig.tall img{height:min(74svh,700px)}
+.pt-fig.mid img{height:min(56svh,520px)}
+.pt-fig.small img{height:min(40svh,370px)}
+.pt-fig.wide img{height:min(52svh,470px)}
+.pt-fig.hero-wide img{height:min(70svh,650px)}
+.pt-fig figcaption{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim);margin-top:.55rem}
+.pt-fig.lift{align-self:flex-start;margin-top:8svh}
+.pt-fig.drop{align-self:flex-end;margin-bottom:8svh}
+.pt-gutter{width:clamp(60px,9vw,150px)}
+/* THE PAYOFF (founder V11 §21): a camera PUSH. The full-screen plate starts as
+   exactly the in-track group frame (FLIP: live rect each frame) and expands
+   continuously to the viewport while the rest of the track recedes — an image
+   plane handoff, not a box that fades in. No heading sits on the photograph:
+   the section already introduced itself, so the payoff carries no text (§23). */
+.ph-payoff{position:absolute;inset:0;margin:0;z-index:7;opacity:0;pointer-events:none;
+  overflow:hidden;will-change:transform,clip-path}
+.ph-payoff img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;
+  will-change:transform}
+html[data-mode="editorial"] .ph-payoff{position:static;opacity:1;height:min(70svh,620px)}
+.pt-rail{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--hair);z-index:8}
+.pt-rail i{display:block;height:100%;background:var(--signal);transform-origin:left;
+  transform:scaleX(var(--ptp,0))}
+
+/* ══ S5 · CINEMA — "The Edit" ════════════════════════════════════════════
+   Six full-bleed cuts of one couple's real day, in true order, on void between
+   letterbox bars. Scroll advances the edit: each frame arrives through a
+   diagonal blade wipe (hard-scrubbed; the easing lives in the scroll mapping),
+   and every cut keeps a slow live settle so no still ever sits dead. The bars
+   carry ALL type — nothing is ever written over the picture. */
+#cinema .stage{background:var(--void);color:var(--fg);overflow:clip}
+.cin-frame{position:absolute;inset:0;z-index:1}
+.cut{position:absolute;inset:0;margin:0;visibility:hidden;will-change:clip-path}
+.cut img,.cut video{position:absolute;left:50%;top:50%;width:100%;height:auto;
+  transform:translate(-50%,-50%);will-change:transform}
+/* captions are for the editorial edition and assistive tech; the bars carry
+   the visible slate in cinematic mode */
+.cut-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
+  white-space:nowrap}
+.cin-top,.cin-bot{position:absolute;left:var(--gut);right:var(--gut);z-index:6;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  pointer-events:none;opacity:var(--cinui,0)}
+/* the fixed nav owns the upper ~70px of the top bar, so the title hangs from
+   the bar's BOTTOM edge instead of its centre */
+.cin-top{top:calc(var(--barh,0px) - 14px);translate:0 -100%}
+.cin-bot{bottom:calc(var(--barh,0px)/2);translate:0 50%}
+.cin-t{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 40,'wght' 420,'SOFT' 0,'WONK' 0;font-weight:400;
+  font-size:clamp(1rem,1.5vw,1.4rem);line-height:1;color:#fff;margin:0}
+.cin-t i{font-style:italic;color:#e8b7b9}
+.cin-meta{margin:0;color:rgba(255,255,255,.72)}
+.cin-meta a{color:#fff;text-decoration:underline;text-underline-offset:3px;pointer-events:auto}
+.slate{position:absolute;left:0;top:50%;translate:0 -50%;margin:0;opacity:0;
+  font-family:var(--f-machine);font-size:.62rem;letter-spacing:.13em;
+  text-transform:uppercase;color:#cfcdc8;white-space:nowrap}
+.cin-meta{margin-left:auto}
+.cin-count{margin-left:1.2rem;width:min(180px,20vw);height:2px;
+  background:rgba(255,255,255,.14)}
+.cin-count-i{display:block;height:100%;background:var(--signal);
+  transform-origin:left;transform:scaleX(var(--cinp,0))}
+/* phone: the cuts render taller with a centre-weighted crop (films are
+   reframed for portrait exactly this way), and the bottom bar keeps only the
+   slate and the progress line */
+@media(max-width:700px){
+  .cut img,.cut video{width:auto;height:46svh;max-width:none}
+  .cin-meta{display:none}
+  .slate{font-size:.56rem;letter-spacing:.1em;max-width:64vw;white-space:normal;line-height:1.5}
+  .cin-t{font-size:1rem}
+}
+/* editorial edition: the same story as composed stills with their captions */
+html[data-mode="editorial"] #cinema .stage{background:var(--void);color:var(--fg)}
+html[data-mode="editorial"] .cin-frame{position:static;display:grid;gap:1.4rem;
+  padding:0 var(--gut) 2rem;max-width:1240px;margin:0 auto}
+html[data-mode="editorial"] .cut{position:static;visibility:visible;clip-path:none!important}
+html[data-mode="editorial"] .cut img,html[data-mode="editorial"] .cut video{
+  position:static;transform:none;width:100%;height:auto}
+html[data-mode="editorial"] .cut-cap{position:static;width:auto;height:auto;
+  clip-path:none;margin-top:.5rem;font-family:var(--f-machine);font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+html[data-mode="editorial"] .cin-top{position:static;translate:none;opacity:1;
+  padding:2.4rem var(--gut) 1.4rem;max-width:1240px;margin:0 auto}
+html[data-mode="editorial"] .cin-bot{display:none}
+
+/* ══ S6 · STUDIO — "The Light-Up" ═══════════════════════════════════════
+   The unit is a CREDIT ROW, not a portrait. All five people are typeset
+   identically; a print is an extra that three of them happen to have. That is
+   what stops the two without photographs reading as holes.
+   Warm ground — human photography should feel warmer than the cool technology
+   scene. Focus is carried by LIGHT (colour temperature + weight), never by
+   desaturating or hiding a person. */
+#studio .stage{background:radial-gradient(112% 84% at 26% 8%,#221a13 0%,#191309 46%,#16110d 100%);
+  color:#f4ece1;perspective:none;overflow:clip}
+.st-key{position:absolute;left:50%;top:50%;width:118vh;height:118vh;margin:-59vh 0 0 -59vh;
+  pointer-events:none;opacity:0;z-index:1;will-change:transform,opacity;
+  background:radial-gradient(closest-side,rgba(255,196,134,.26),rgba(255,170,96,.10) 46%,transparent 72%)}
+.st-grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+/* a single very faint APERTURE plane gives the warm field depth without noise
+   (founder S28: depth, not grunge). One shape, low contrast, slow drift. */
+/* environmental depth: a giant index numeral far behind the list crossfades
+   with whoever the light is on, and a warm pool sits on the floor under the
+   active row — the void behind the people becomes a lit room. */
+.st-echo{position:absolute;right:2%;top:50%;height:0;z-index:0;pointer-events:none}
+.st-echo i{position:absolute;right:0;top:0;translate:0 -50%;font-style:normal;
+  font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 340,'SOFT' 0,'WONK' 0;
+  font-size:clamp(220px,30vw,430px);line-height:1;letter-spacing:-.05em;
+  color:rgba(255,212,160,.055);opacity:0;will-change:transform,opacity}
+.st-pool{position:absolute;left:34%;bottom:-4%;width:min(58vw,760px);height:30svh;
+  translate:-50% 0;z-index:0;pointer-events:none;opacity:0;will-change:transform,opacity;
+  background:radial-gradient(50% 62% at 50% 100%,rgba(255,182,116,.13),transparent 72%)}
+html[data-mode="editorial"] .st-echo,html[data-mode="editorial"] .st-pool{display:none}
+.st-ghost{position:absolute;left:62%;top:50%;width:min(74vh,760px);z-index:1;opacity:0;
+  pointer-events:none;will-change:transform,opacity}
+.st-ghost svg{width:100%;height:auto;fill:none;stroke:rgba(255,196,134,.16);stroke-width:2}
+html[data-mode="editorial"] .st-ghost{display:none}
+.st-grid{position:relative;z-index:3;display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:center}
+@media(min-width:1100px){
+  .st-grid{grid-template-columns:minmax(0,23%) minmax(0,1fr) minmax(0,300px);
+    column-gap:clamp(2rem,4vw,5rem);align-items:center}
+}
+.st-head .t-editorial{color:#f4ece1}
+.st-head .t-editorial i{color:var(--signal)}
+.st-head .factline{color:#a3968a}
+.st-head .spec{color:#a3968a}
+.st-head .spec a{color:#f4ece1;text-decoration:underline;text-underline-offset:4px}
+
+/* the credit list — every row identical */
+.st-credits{list-style:none;margin:0;padding:0;display:grid;gap:clamp(.5rem,1.5vh,1.1rem)}
+.st-row{display:grid;grid-template-columns:2.6em 1fr;gap:.2rem 1rem;align-items:baseline;
+  padding-bottom:clamp(.45rem,1.2vh,.9rem);border-bottom:1px solid rgba(233,223,208,.15);
+  will-change:opacity,transform}
+.st-n{font-family:var(--f-machine);font-size:.7rem;letter-spacing:.1em;color:#a3968a;
+  font-variant-numeric:tabular-nums}
+.st-name{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 40,'WONK' 0;font-weight:400;
+  font-size:clamp(1.5rem,3.2vw,2.9rem);line-height:1.02;letter-spacing:-.018em;
+  color:#f4ece1;transition:color 420ms var(--ease)}
+.st-role{grid-column:2;font-family:var(--f-machine);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#a3968a;transition:color 420ms var(--ease)}
+.st-row.lit .st-name{color:#fff}
+.st-name{transition:font-variation-settings 380ms var(--ease),color 380ms var(--ease)}
+.st-row.lit .st-name{font-variation-settings:'opsz' 84,'wght' 440,'SOFT' 0,'WONK' 0}
+.st-row.lit .st-n{color:var(--signal)}
+.st-row.lit .st-role{color:var(--signal)}
+
+/* the prints — an extra, not the unit. Never filtered, never desaturated. */
+.st-prints{position:relative;height:min(56svh,470px)}
+@media(max-width:1099px){.st-prints{height:auto;display:flex;gap:.8rem;justify-content:flex-start}}
+/* Each print is sized to what its own master can actually serve — Michael's
+   source is 384x514, so his print is physically smaller. Varied print sizes are
+   correct for tipped-in marginalia anyway; uniform ones would force an upscale. */
+.st-prints{position:relative;height:min(56svh,470px);display:grid;place-items:center}
+/* One frame size for everyone (founder S5): 192 CSS px is the largest that the
+   weakest master (Michael, 384x514) can serve at DPR2 without upscaling. */
+.st-plate{position:absolute;top:50%;left:50%;translate:-50% -50%;width:192px;margin:0;opacity:0;
+  will-change:opacity,transform}
+@media(max-width:1099px){.st-prints{height:auto;display:flex;flex-wrap:wrap;gap:.7rem;place-items:start}
+  .st-plate{position:static;translate:none;opacity:1;flex:0 0 auto;width:calc(20% - .56rem)}}
+.st-plate img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#221a13;
+  filter:none;                      /* portraits stay in natural colour, always */
+  border-radius:14px;               /* rounded, consistent — founder S5/S29 */
+  box-shadow:0 26px 70px rgba(0,0,0,.55)}
+
+.st-plate figcaption{margin-top:.55rem;color:#a3968a;font-size:.6rem}
+
+/* ══ S7 · CONVERSION — "The Table" ══════════════════════════════════════
+   Rejected twice as a cream rectangle with type and buttons. So the light plane
+   is no longer the scene — it is an OBJECT IN A DARK ROOM. It occupies a little
+   over half the frame, tilted in perspective, and the five projects the visitor
+   has just seen drift in around it and converge toward the CTA. The room is
+   dark, which is also what connects this scene to the ones on either side. */
+/* ══ S7 · CONVERSION — "The Convergence" ═════════════════════════════════
+   Founder scored the deck 0/10 twice. No card, no cream, no white field: the
+   room IS the composition. The five projects the visitor has just seen fly out
+   of depth, align along one axis and compress into the red thread — the work
+   literally resolves into the line under the ask. The type then sets around
+   that line, and the controls arrive on the same axis. Dark, dimensional,
+   continuous with the studio before it and the finale after it. */
+#engage .stage{background:radial-gradient(130% 90% at 50% 118%,#141418 0%,#0c0c0e 48%,var(--void) 100%);
+  overflow:clip}
+.cv-room{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:var(--room,0)}
+.cv-room .hz{position:absolute;left:8%;right:8%;top:var(--hzy,58%);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(247,246,243,.13) 22%,rgba(247,246,243,.13) 78%,transparent)}
+.cv-room .fl{position:absolute;left:-18%;right:-18%;top:var(--hzy,58%);bottom:-4%;
+  background:repeating-linear-gradient(to right,rgba(247,246,243,.05) 0 1px,transparent 1px 96px);
+  transform:perspective(820px) rotateX(72deg);transform-origin:50% 0;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 36%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 36%)}
+.cv-frags{position:absolute;inset:0;z-index:2;pointer-events:none}
+.cv-frag{position:absolute;left:50%;top:50%;width:clamp(116px,12vw,186px);
+  will-change:transform,opacity;opacity:0}
+.cv-frag img{width:100%;height:clamp(74px,8vw,118px);object-fit:cover;display:block;
+  border-radius:8px;box-shadow:0 18px 46px rgba(0,0,0,.62)}
+.cv-frag b{display:block;margin-top:.4rem;font-family:var(--f-machine);font-size:.54rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;
+  text-align:center}
+.cv-core{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding-top:var(--safe-top)}
+.cv-head{font-size:clamp(2rem,4.6vw,3.9rem)}
+.cv-head .ln{display:block;overflow:clip}
+.cv-head .ln i{display:block;font-style:normal;will-change:transform;transform:translateY(112%);transition:transform 560ms var(--ease)}
+.cv-head .ln i.set{transform:none}
+.cv-yours{transition:color 420ms var(--ease)}
+.cv-yours.on{color:var(--signal)}
+.cv-thread{display:block;width:min(46vw,560px);height:2px;background:var(--signal);
+  transform:scaleX(var(--cvt,0));transform-origin:50% 50%;margin-top:1.2rem;
+  box-shadow:0 0 9px rgba(218,31,38,.32)}
+.cv-sub{margin-top:1.2rem;max-width:52ch}
+.cv-actions{display:flex;gap:.8rem;margin-top:1.5rem;justify-content:center;flex-wrap:wrap}
+.cv-note{margin-top:1rem;color:var(--dim);max-width:44ch;line-height:1.5}
+.cv-lines{margin-top:1.7rem;color:var(--muted);letter-spacing:.18em}
+.cv-mail{margin-top:.45rem}
+.cv-mail a{color:var(--fg);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){.cv-frag{width:clamp(78px,21vw,104px)}
+  .cv-frag img{height:clamp(50px,13vw,66px)}
+  .cv-thread{width:min(72vw,560px)}}
+html[data-mode="editorial"] #engage .stage{background:var(--void);color:var(--fg)}
+html[data-mode="editorial"] .cv-room,html[data-mode="editorial"] .cv-frags{display:none}
+html[data-mode="editorial"] .cv-core{height:auto;padding:3rem var(--gut)}
+html[data-mode="editorial"] .cv-head .ln i{transform:none;transition:none}
+html[data-mode="editorial"] .cv-thread{transform:scaleX(1)}
+
+/* ══ S8 · FINALE — "The Aperture Closes" ════════════════════════════════
+   The founder scored the old finale 0/10. This is a three-act arrival: blades
+   fly home along their own centroid rays carrying the names of the scenes just
+   passed, the ground changes from the conversion deck's cream to void, the mark
+   LOCKS to exact canonical geometry and holds, then the statement prints and
+   the gate opens. Closing type is deliberately unlike the hero. */
+#finale .stage{background:var(--void);overflow:clip}
+/* the stage the mark arrives onto: a floor with a horizon, atmospheric falloff
+   and a receding plane grid. Restrained — no particles, no screensaver. */
+.fin-stage{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:var(--stage-o,0)}
+.fin-stage{will-change:transform}
+.fin-stage .floor{position:absolute;left:-20%;right:-20%;bottom:-6%;height:58%;
+  background:
+    repeating-linear-gradient(to right,rgba(247,246,243,.05) 0 1px,transparent 1px 90px),
+    linear-gradient(180deg,rgba(247,246,243,.05) 0%,rgba(247,246,243,0) 72%);
+  transform:perspective(760px) rotateX(74deg);transform-origin:50% 100%}
+/* the red in the room comes from the red plane itself: a pool of its light on
+   the floor under the mark — shaped, placed, and small. Not a blob. */
+.fin-stage .pool{position:absolute;left:4%;bottom:2%;width:min(48vh,440px);height:min(22vh,200px);
+  background:radial-gradient(58% 74% at 50% 100%,rgba(218,31,38,.14),transparent 72%)}
+.fin-stage .horizon{position:absolute;left:0;right:0;top:42%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(247,246,243,.16) 22%,rgba(247,246,243,.16) 78%,transparent)}
+.fin-mark::after{content:"";position:absolute;left:6%;right:6%;bottom:-14%;height:16%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,0,0,.75),transparent 70%);
+  filter:blur(6px);z-index:0}
+html[data-mode="editorial"] .fin-stage{display:none}
+.fin-plate{position:relative;z-index:2;display:grid;grid-template-columns:1fr;
+  gap:clamp(1.2rem,3vh,2.2rem);align-content:center}
+@media(min-width:960px){
+  .fin-plate{grid-template-columns:repeat(12,1fr);column-gap:clamp(16px,1.6vw,28px);
+    row-gap:clamp(1.1rem,2.6vh,2rem)}
+  .fin-mark{grid-column:1/5;grid-row:1;justify-self:start;align-self:center}
+  .fin-words{grid-column:6/13;grid-row:1;align-self:center}
+  .fin-gate{grid-column:6/13;grid-row:2}
+  .fin-meta{grid-column:6/13;grid-row:3}
+}
+.fin-mark{position:relative;width:clamp(150px,17vw,244px);aspect-ratio:1}
+.fin-mark svg{width:100%;height:100%;overflow:visible;position:relative;z-index:2}
+.fin-mark polygon{fill:var(--markink,var(--fg));transform-box:fill-box;transform-origin:center;
+  will-change:transform,opacity}
+.fin-mark polygon:nth-child(3){fill:var(--signal)}
+.fin-core{position:absolute;inset:-12%;z-index:1;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 50%,rgba(218,31,38,.5),transparent 60%)}
+/* the mark stands ON the floor: a mirrored trace below the baseline. The blur
+   lives on the reflection only — never on the mark. */
+.fin-reflect{position:absolute;left:0;top:99%;width:100%;aspect-ratio:1;z-index:0;
+  pointer-events:none;transform:scaleY(-1);opacity:0;filter:blur(2px);
+  -webkit-mask-image:linear-gradient(0deg,transparent 40%,rgba(0,0,0,.55) 100%);
+  mask-image:linear-gradient(0deg,transparent 40%,rgba(0,0,0,.55) 100%)}
+.fin-reflect svg{width:100%;height:100%}
+.fin-reflect polygon{fill:var(--fg)}
+.fin-reflect polygon:nth-child(3){fill:var(--signal)}
+/* each blade carries the name of a scene the visitor has passed */
+.fin-tag{position:absolute;left:50%;top:50%;z-index:3;pointer-events:none;opacity:0;
+  font-family:var(--f-machine);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);white-space:nowrap;will-change:transform,opacity}
+
+/* the closing statement — three authored lines, not a centred sentence */
+.fin-words h2{margin:0}
+.fin-words .l1,.fin-words .l2,.fin-words .l3{display:block;overflow:clip}
+.fin-words .l1 i,.fin-words .l2 i,.fin-words .l3 i{display:block;font-style:normal;will-change:transform;transform:translateY(110%);transition:transform 620ms var(--ease)}
+.fin-words i.set{transform:none}
+.fin-words .l1,.fin-words .l2{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 300,'SOFT' 40,'WONK' 0;font-weight:300;
+  font-size:clamp(2.6rem,7vw,6.4rem);line-height:.94;letter-spacing:-.032em;color:var(--fg)}
+.fin-words .l3 i{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 40,'WONK' 0;font-style:italic;
+  font-size:clamp(1.9rem,4.8vw,4.2rem);line-height:1;letter-spacing:-.016em;color:var(--signal)}
+.fin-words .l3{margin-left:clamp(14px,2.2vw,42px);margin-top:.08em}
+.fin-seam{display:block;height:1px;background:var(--signal);transform-origin:left;
+  transform:rotate(-4.8deg) scaleX(var(--seam,0));margin-top:clamp(.9rem,2vh,1.5rem);max-width:340px}
+
+/* the gate — APERTURE geometry, obviously a control, not a pill */
+.fin-gate{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;visibility:hidden}
+.fin-gate.on{visibility:visible}
+.gate{display:inline-flex;align-items:stretch;border:1px solid var(--fg);color:var(--fg);
+  min-height:52px;position:relative;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 100%,14px 100%,0 calc(100% - 14px));
+  transition:color 200ms var(--ease),border-color 200ms var(--ease)}
+.gate::before{content:"";position:absolute;inset:0;background:var(--signal);z-index:0;
+  transform:scaleX(var(--gate,0));transform-origin:left;transition:transform 420ms var(--ease)}
+.gate:hover::before,.gate:focus-visible::before{transform:scaleX(1)}
+.gate:hover,.gate:focus-visible{border-color:var(--signal);color:#fff}
+.gate-verb{position:relative;z-index:1;display:flex;align-items:center;padding:.9rem 1.4rem;
+  font-family:var(--f-work);font-stretch:88%;font-weight:700;font-size:1.05rem;
+  letter-spacing:.02em;text-transform:uppercase}
+.gate-tick{position:relative;z-index:1;display:flex;align-items:center;padding:0 1rem;
+  border-left:1px solid currentColor;font-family:var(--f-machine)}
+.gate-sub{color:var(--dim)}
+.fin-meta{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;align-items:baseline;
+  border-top:1px solid var(--hair);padding-top:clamp(.8rem,1.8vh,1.2rem)}
+.fin-mail{color:var(--fg);text-decoration:underline;text-decoration-color:var(--signal);
+  text-underline-offset:5px;text-decoration-thickness:2px}
+
+/* ══ EDITORIAL EDITION — the composed no-JS / reduced-motion document ════ */
+html[data-mode="editorial"] .scene{padding:clamp(3rem,8vh,6rem) 0;min-height:0}
+html[data-mode="editorial"] .scene .stage{position:static;height:auto;display:block;
+  padding-top:0;overflow:visible}
+html[data-mode="editorial"] .hero-film{height:auto;aspect-ratio:16/9;clip-path:none!important}
+html[data-mode="editorial"] .reel{transform:none!important;opacity:1!important}
+/* the two fact lines are stacked and crossfaded by the focus handoff in the
+   cinematic edition; with no JS they must simply sit one after the other */
+html[data-mode="editorial"] .rc-facts{min-height:0}
+html[data-mode="editorial"] .rc-f{position:static;opacity:1!important;margin-bottom:.7rem;max-width:38ch}
+html[data-mode="editorial"] .rc-name{opacity:1!important}
+html[data-mode="editorial"] .rc-thread{display:none}
+html[data-mode="editorial"] .reel-centre{opacity:1!important}
+html[data-mode="editorial"] .reel-wall{grid-template-columns:1fr;gap:1.4rem}
+html[data-mode="editorial"] .dun-surface{width:100%!important}
+html[data-mode="editorial"] .dun-view{height:auto!important;overflow:visible}
+html[data-mode="editorial"] .dun-view img{position:static;transform:none!important;
+  opacity:1!important;width:100%!important}
+html[data-mode="editorial"] .dun-view img+img{margin-top:1rem}
+html[data-mode="editorial"] .pt-track{flex-wrap:wrap;transform:none!important;height:auto;
+  gap:1.2rem;justify-content:flex-start}
+html[data-mode="editorial"] .pt-fig img{height:auto!important;width:min(320px,44vw)}
+html[data-mode="editorial"] .pt-fig.lift,html[data-mode="editorial"] .pt-fig.drop{margin:0}
+html[data-mode="editorial"] .pt-gutter{display:none}
+html[data-mode="editorial"] .pt-rail{display:none}
+html[data-mode="editorial"] #engage .stage{background:var(--field);color:var(--ink)}
+html[data-mode="editorial"] .fin-mark polygon{transform:none!important;opacity:1!important}
+html[data-mode="editorial"] .tech-rule{transform:scaleX(1)}
+html[data-mode="editorial"] .pt-rail i{transform:scaleX(1)}
+
+@media print{
+  .nav,.menu,.loader,.motion-toggle{display:none!important}
+  body{background:#fff;color:#000}
+}
+
+/* ══ MOBILE RE-AUTHORING (founder §43) ═══════════════════════════════════
+   Not inherited desktop timing. On a short viewport the absolutely-positioned
+   scene heads have nowhere to go, so they are returned to normal flow and each
+   stage becomes a centred column. Media is resized so head + media + caption
+   fit one viewport with the header safe zone intact — which is what stops type
+   landing on a face at 390px. */
+@media (max-width:900px){
+  html[data-mode="cinematic"] .scene[data-len] .stage{
+    display:flex;flex-direction:column;justify-content:center;gap:.9rem;
+    padding-inline:0;padding-bottom:1rem}
+  .com-head,.tech-hud,.field-head,.field-note{position:static;left:auto;top:auto;
+    bottom:auto;right:auto;max-width:none;width:100%;padding-inline:var(--gut)}
+  .tech-hud{flex-wrap:wrap;gap:.4rem .9rem;padding-bottom:.5rem}
+  .tech-hud .rd{margin-left:0;width:100%;justify-content:space-between}
+  .field-note{order:9;font-size:.6rem}
+
+  .hero-rail{margin-bottom:.9rem}
+
+  /* S2 reels — ORIGINAL mobile interpretation. The reference simply hides this
+     section below md, so there is nothing to copy. Two 9:16 reels cannot sit
+     side by side at 390px and stay legible, so the same idea is compressed:
+     the pair OVERLAPS in staggered depth, keeps the opposing tilt at a reduced
+     angle, and the focus handoff swaps which one is in front. */
+  .reel-wall{grid-template-columns:1fr;grid-template-rows:auto auto;gap:1rem}
+  .reel{--reel-h:min(44svh,380px)}
+  .reel-a{grid-area:1/1;justify-self:start}
+  .reel-b{grid-area:1/1;justify-self:end;margin-top:7svh}
+  .reel-centre{grid-area:2/1}
+  .reel-centre{text-align:left;align-items:flex-start;padding-inline:var(--gut)}
+  .rc-facts{min-height:6.4em}
+  .rc-f{text-align:left;max-width:none}
+
+  /* S3 the surface leads; copy sits beneath it.
+     LC-UX-003: tightened vertical spend so the WHOLE copy block — including the
+     "Visit the live site" close — fits the pinned stage with the JS surface
+     budget. Nothing here may push content past 100svh. */
+  .tech-body{display:flex;flex-direction:column-reverse;gap:.55rem;padding-top:0}
+  .tech-copy .factline{max-width:none;font-size:.9rem;line-height:1.5}
+  .tech-copy .t-tech{font-size:clamp(1.3rem,6.6vw,1.9rem)}
+  .tech-copy .t-tech br{display:none}
+  .tech-rule{margin:.55rem 0 .7rem}
+  .route-ribbon{margin-top:.5rem}
+  .tech-copy [data-beat="tech-note"] .spec{margin-top:.45rem!important}
+  .tech-facts{margin-top:.55rem}
+  .tech-hud{gap:.3rem .9rem;padding-bottom:.4rem}
+}
+@media (max-width:380px){
+  .tech-copy .factline{font-size:.84rem}
+
+  /* S4 photography: shorter frames so captions clear the fold */
+  .pt-fig.tall img{height:min(46svh,420px)}
+  .pt-fig.mid img,.pt-fig.wide img{height:min(34svh,320px)}
+  .pt-fig.small img{height:min(26svh,250px)}
+  .pt-fig.hero-wide img{height:min(40svh,380px)}
+  .pt-fig.lift,.pt-fig.drop{align-self:center;margin:0}
+  .pt-plate{width:76vw;min-width:0}
+
+
+  /* S7 conversion */
+
+  /* S8 finale */
+  .fin-body{gap:1rem}
+  .fin-mark{width:clamp(96px,26vw,150px)}
+  .fin-base{gap:.8rem}
+}
+@media (max-width:520px){
+  .reel-rig{gap:10px}
+  .reel{--reel-h:min(34svh,290px)}
+  .t-display{font-size:clamp(2.1rem,10vw,3rem)}
+}
+
+/* ══ FOOTER — practical utility, kept distinct from the emotional finale ══ */
+.foot{display:grid;gap:2rem;padding:clamp(2.4rem,6vw,4.5rem) var(--gut) 2rem;
+  border-top:1px solid var(--hair);align-items:start}
+@media(min-width:820px){.foot{grid-template-columns:1.5fr 1fr 1fr}}
+.foot-mark{display:block;width:34px;margin-bottom:.9rem}
+.foot-mark svg{width:100%;height:auto;fill:var(--fg)}
+.foot-mark svg polygon:nth-child(3){fill:var(--signal)}
+.foot ul{list-style:none;margin:.6rem 0 0;padding:0;display:grid;gap:.4rem}
+.foot a:hover{color:var(--signal)}
+.foot .social{display:flex;gap:.7rem;margin-top:.8rem}
+.soc{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--hair);
+  color:var(--muted);transition:color 200ms var(--ease),border-color 200ms var(--ease)}
+.soc svg{width:19px;height:19px;display:block}
+/* pending state: inert on purpose — nothing here pretends to be a link */
+.soc-note{margin-top:.7rem;color:var(--dim);max-width:30ch;line-height:1.5}
+/* when real URLs arrive these become <a class="soc"> and light up on hover */
+a.soc:hover,a.soc:focus-visible{color:var(--fg);border-color:var(--signal)}
+
+/* the studio key light and grain are decoration for the pinned scene only. In the
+   editorial edition the stage is static, so an absolutely-positioned 118vh light
+   resolves against a different containing block and pushes the page sideways. */
+html[data-mode="editorial"] .st-key,
+html[data-mode="editorial"] .st-grain{display:none}
+html[data-mode="editorial"] .st-prints{height:auto;display:flex;flex-wrap:wrap;gap:.8rem}
+html[data-mode="editorial"] .st-plate{position:static;opacity:1!important;transform:none!important;
+  width:min(200px,44vw)}
+html[data-mode="editorial"] .st-plate img{height:auto}
+html[data-mode="editorial"] .st-row{opacity:1!important;transform:none!important}
+html[data-mode="editorial"] .fin-core{display:none}
+html[data-mode="editorial"] .fin-mark polygon{transform:none!important;opacity:1!important;fill:var(--fg)}
+html[data-mode="editorial"] .fin-mark polygon:nth-child(3){fill:var(--signal)}
+html[data-mode="editorial"] .fin-words i{transform:none!important;transition:none}
+html[data-mode="editorial"] .fin-gate{visibility:visible}
+html[data-mode="editorial"] .fin-seam{transform:scaleX(1)}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   V12 · SITE DOCUMENT LAYER (LC-UX-001)
+   One language for every route. The homepage above is untouched; everything
+   below gives the document pages (Work / Services / Engagements / Studio /
+   Contact / Case study) the same V11 voice: three type families, one token
+   set, one chrome, one control grammar. Compositions stay page-appropriate —
+   the SYSTEM propagates, not the homepage's scenes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── compat tokens: sub-page markup speaks these names ── */
+:root{
+  --chalk:var(--fg);
+  --line:var(--hair);
+  --max:1500px;                     /* container authority resolved: V11's 1500 */
+  --measure:66ch;
+  --sec:clamp(4rem,8.5vw,8.5rem);
+  --t-lede:clamp(1.05rem,1.5vw,1.25rem);
+  --t-h4:1.05rem;
+  --t-label:.7rem;
+  /* motion tokens (LC-UX-001/028): the V11 easings, now with named durations */
+  --d-micro:180ms;
+  --d-reveal:720ms;
+  --d-nav:420ms;
+  --d-trans:620ms;
+  /* accessible derived reds (LC-UX-011/021): small interactive text only.
+     Canonical --signal stays for marks, rules, large display and emitted light. */
+  --signal-text:#ff6b6e;            /* on void/plane ≥6:1 */
+  --signal-text-ink:#a3161d;        /* on the light field ≥6:1 */
+}
+
+/* ── skip link: visible when focused (found during LC-UX-001) ── */
+.sr-only:focus-visible,a.sr-only:focus{
+  position:fixed;left:1rem;top:1rem;width:auto;height:auto;margin:0;
+  clip:auto;clip-path:none;white-space:normal;overflow:visible;
+  background:var(--signal);color:#fff;padding:.7rem 1.1rem;z-index:300;
+  font-family:var(--f-machine);font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase}
+
+/* ── document scaffold ── */
+.pg section{padding-block:var(--sec);position:relative;background:var(--pg-bg,var(--void));color:var(--pg-fg,var(--fg))}
+.pg .wrap{max-width:var(--max)}
+.wrap-narrow{max-width:940px;margin-inline:auto;padding-inline:var(--gut);width:100%}
+.grid{display:grid;gap:clamp(1.4rem,3vw,3rem)}
+.g-2{grid-template-columns:1fr}
+@media(min-width:820px){.g-2{grid-template-columns:1fr 1fr}}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.measure{max-width:var(--measure)}
+
+/* fields — CUT's authored surfaces, in V11 values */
+.field-light{--pg-bg:var(--field);--pg-fg:var(--ink);--muted:#5d5b57;--dim:#6d6b66;
+  --line:rgba(0,0,0,.15);--hair:rgba(0,0,0,.15)}
+.field-plane{--pg-bg:var(--plane)}
+.field-signal{--pg-bg:var(--signal);--pg-fg:#fff;--muted:rgba(255,255,255,.94);
+  --dim:rgba(255,255,255,.8);--line:rgba(255,255,255,.3);--hair:rgba(255,255,255,.3)}
+.red-band{background:var(--signal);color:#fff;padding-block:clamp(3rem,7vw,5.5rem)}
+.red-band .wrap{display:grid;gap:1.6rem;align-items:center;grid-template-columns:1fr;padding-block:.4rem}
+@media(min-width:860px){.red-band .wrap{grid-template-columns:1.4fr auto}}
+.red-band h2{color:#fff;max-width:18ch}
+.red-band .label{color:rgba(255,255,255,.85)}
+
+/* ── document type roles: the V11 voices on reading pages ── */
+.pg h1{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 144,'wght' 320,'SOFT' 0,'WONK' 0;font-weight:320;
+  font-size:clamp(2.5rem,6vw,4.9rem);line-height:.98;letter-spacing:-.026em;
+  margin:0;text-wrap:balance}
+.pg h1 em{font-style:italic;color:var(--signal);text-decoration:none}
+.pg h2 em{font-style:italic;color:var(--signal);text-decoration:none}
+.pg .mega{font-size:clamp(2.7rem,7vw,6rem);line-height:.95;letter-spacing:-.03em}
+.pg h2{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 420,'SOFT' 20,'WONK' 0;font-weight:420;
+  font-size:clamp(1.65rem,3.3vw,2.7rem);line-height:1.06;letter-spacing:-.014em;
+  margin:0;text-wrap:balance}
+.pg h3{font-family:var(--f-work);font-stretch:94%;font-weight:650;
+  font-size:var(--t-h4);line-height:1.25;letter-spacing:.002em;margin:0}
+.pg p{margin:0 0 1.05em}
+.pg .lede{font-family:var(--f-work);font-size:var(--t-lede);line-height:1.5;
+  color:var(--pg-fg,var(--fg));max-width:58ch}
+.field-signal .lede{color:#fff}
+.pg em{font-style:normal;font-weight:600;text-decoration:underline;
+  text-decoration-color:var(--signal);text-decoration-thickness:2px;text-underline-offset:3px}
+.field-signal em{text-decoration-color:#fff}
+.pg strong{font-weight:650}
+.num{font-variant-numeric:tabular-nums;font-family:var(--f-machine)}
+.cap{font-family:var(--f-machine);font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid var(--line);padding:.34rem .6rem;
+  color:var(--muted);display:inline-block}
+a.cap:hover,a.cap:focus-visible{border-color:var(--signal);color:var(--pg-fg,var(--fg))}
+
+/* eyebrow → the V11 label-sig grammar */
+.eyebrow{display:flex;gap:.9rem;align-items:baseline;margin-bottom:1.5rem}
+.eyebrow .n{font-family:var(--f-machine);font-size:.7rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--pg-fg,var(--fg));
+  border-left:2px solid var(--signal);padding-left:.62em}
+.eyebrow .label{color:var(--dim)}
+.field-signal .eyebrow .n{border-left-color:#fff;color:#fff}
+
+/* notices + provisional truth chips */
+.notice{border-left:2px solid var(--signal);padding:.9rem 0 .9rem 1.1rem;margin:1.6rem 0;
+  background:linear-gradient(90deg,rgba(218,31,38,.08),transparent 72%)}
+.notice p:last-child{margin-bottom:0}
+.provisional{display:inline-block;font-family:var(--f-machine);font-size:.58rem;
+  letter-spacing:.13em;text-transform:uppercase;background:var(--signal);color:#fff;
+  padding:.24rem .5rem}
+
+/* ── reveals: clip-not-fade, armed late (ported architecture, V11 easing) ── */
+.reveal-type{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.reveal-type>span{display:block;transform:none;transition:transform var(--d-reveal) var(--ease)}
+.rv-armed .reveal-type>span,.reveal-type.rv-armed>span{transform:translateY(102%)}
+.rv-armed.revealed .reveal-type>span,.reveal-type.rv-armed.revealed>span,
+.revealed .reveal-type>span,.reveal-type.revealed>span{transform:translateY(0)}
+.rv{clip-path:none;transition:clip-path 860ms var(--ease)}
+.rv.rv-armed{clip-path:inset(0 0 100% 0)}
+.rv.rv-armed.revealed,.rv.revealed{clip-path:inset(0 0 0 0)}
+.rv-safe{clip-path:none!important}
+.fstep,.fnav,form{scroll-margin-top:100px}
+
+/* ── media ── */
+.media{position:relative;width:100%;height:100%;overflow:hidden;background:var(--edge)}
+.media.real{background:#000}
+.media.real img,.media.real video{width:100%;height:100%;object-fit:cover;display:block}
+.rm-poster{display:none;width:100%;height:100%;object-fit:cover}
+@media(prefers-reduced-motion:reduce){
+  .pg video[data-auto]{display:none}
+  .pg .rm-poster{display:block}
+}
+/* the aperture crop — the mark's own two ratios, unchanged geometry */
+.ap-mask{position:relative;overflow:hidden}
+.ap-mask>.media{clip-path:polygon(0 9%,100% 0,100% 96%,0 100%);
+  transition:clip-path var(--d-reveal) var(--ease)}
+.ap-mask:hover>.media{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+@media(hover:none){.ap-mask:hover>.media{clip-path:polygon(0 9%,100% 0,100% 96%,0 100%)}}
+.ap-plane{position:relative;overflow:hidden}
+.ap-plane .sheet{position:absolute;inset:-2px;background:var(--plane);
+  transform:translateX(-102%);transition:transform 900ms var(--ease)}
+.ap-plane.rv-armed .sheet{transform:translateX(0)}
+.ap-plane.rv-armed.revealed .sheet,.ap-plane.revealed .sheet{transform:translateX(-102%) skewX(-7deg)}
+/* placeholder media: honest, labelled, and quiet (no gradient theatrics) */
+.ph{position:absolute;inset:0;background:
+  repeating-linear-gradient(101deg,rgba(247,246,243,.05) 0 1px,transparent 1px 42px),var(--plane)}
+.ph::after{content:attr(data-ph);position:absolute;left:.9rem;bottom:.75rem;
+  font-family:var(--f-machine);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.62);background:rgba(0,0,0,.42);padding:.28rem .5rem}
+
+/* ── work page structures ── */
+.screens{position:relative;display:grid;gap:clamp(.8rem,1.6vw,1.4rem);grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.screens{grid-template-columns:minmax(0,1fr) minmax(0,.34fr);align-items:end}}
+.screen{position:relative;overflow:hidden;background:#0d1220;border:1px solid var(--edge)}
+.screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.screen.desk{aspect-ratio:16/10}
+.screen.phone{aspect-ratio:9/16}
+.screen .cap{position:absolute;left:0;bottom:0;border:0;background:rgba(10,10,11,.82);
+  color:var(--muted);padding:.42rem .7rem;backdrop-filter:blur(4px)}
+.viewports{display:flex;gap:1px;background:var(--hair);border:1px solid var(--hair);
+  margin-top:clamp(1rem,2vw,1.6rem);flex-wrap:wrap}
+.viewports>div{background:var(--void);padding:.9rem 1.1rem;flex:1 1 150px;min-width:0}
+.field-plane .viewports>div{background:var(--plane)}
+.viewports dt{font-family:var(--f-machine);font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim)}
+.viewports dd{margin:.35rem 0 0;font-size:.95rem}
+.route-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.route-list span{font-family:var(--f-machine);font-size:.68rem;letter-spacing:.06em;
+  border:1px solid var(--edge);padding:.32rem .55rem;color:var(--muted)}
+.commercial{display:grid;gap:clamp(1rem,2.4vw,2rem);grid-template-columns:minmax(0,1fr)}
+@media(min-width:940px){.commercial{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vwork{position:relative;display:block;color:inherit;min-width:0;max-width:min(430px,100%);justify-self:center}
+.vwork .frame{position:relative;width:100%;max-width:100%;aspect-ratio:9/16;overflow:hidden;
+  background:#000;border-radius:clamp(10px,2.2vw,18px)}   /* rounded media, sharp structure */
+.vwork .frame img,.vwork .frame video{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.vwork .meta{padding-top:1rem}
+.vwork .meta h3{font-family:var(--f-work);font-stretch:118%;font-weight:600;
+  font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.15;margin:.4rem 0 .5rem}
+.vwork .meta p{color:var(--muted);font-size:.94rem;max-width:44ch;margin:0}
+.vwork .tagrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+@media(min-width:940px){.commercial .vwork:nth-child(2) .frame{margin-top:clamp(1.5rem,4vw,4rem)}}
+.evidence{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:2rem}
+.evidence,.evidence .row{min-width:0}
+.evidence .row>*{min-width:0;overflow-wrap:anywhere}
+.evidence .row{background:var(--void);padding:1.1rem clamp(1rem,2vw,1.6rem);
+  display:grid;gap:.6rem;align-items:baseline;grid-template-columns:1fr}
+@media(min-width:760px){.evidence .row{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) auto}}
+.field-light .evidence .row{background:#efede8}
+.field-light .evidence .cap-note{color:#4a4a4c}
+.evidence .cap-name{font-family:var(--f-work);font-stretch:112%;font-weight:600;font-size:1.12rem}
+.evidence .cap-note{color:var(--muted);font-size:.92rem}
+.badge-ev{font-family:var(--f-machine);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.32rem .55rem;border:1px solid var(--edge);color:var(--muted);white-space:nowrap;justify-self:start}
+.badge-ev[data-s="published"]{color:var(--pg-fg,var(--fg));border-color:var(--signal)}
+.field-light .badge-ev{border-color:var(--line);color:#4a4a4c}
+.field-light .badge-ev[data-s="published"]{color:var(--ink);border-color:var(--signal)}
+
+/* ── services / engagements structures ── */
+.pillar{border-top:1px solid var(--line);padding-block:clamp(1.5rem,3vw,2.6rem);position:relative}
+.pillar-head{display:grid;grid-template-columns:1fr;gap:.8rem;align-items:baseline;cursor:pointer}
+@media(min-width:760px){.pillar-head{grid-template-columns:3.2rem 1fr 1.6rem}}
+.pillar-verb{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 440,'SOFT' 20,'WONK' 0;font-weight:440;
+  font-size:clamp(1.55rem,3.2vw,2.5rem);letter-spacing:-.014em;line-height:1.02;margin:0}
+.pillar-sub{color:var(--muted);font-size:.95rem;margin:.5rem 0 0}
+.pillar-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-trans) var(--ease)}
+.pillar[data-open="true"] .pillar-body{grid-template-rows:1fr}
+.pillar-body>div{overflow:hidden}
+.pillar-open{font-family:var(--f-machine);font-size:1.5rem;line-height:1;color:var(--signal);
+  transition:transform 400ms var(--ease);justify-self:end}
+.pillar[data-open="true"] .pillar-open{transform:rotate(45deg)}
+.bands{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
+@media(min-width:900px){.bands{grid-template-columns:repeat(4,1fr)}}
+.band{background:var(--pg-bg,var(--void));padding:clamp(1.2rem,2.2vw,1.8rem);
+  display:flex;flex-direction:column;gap:.75rem;position:relative;overflow:hidden}
+.band .aperture-bar{height:3px;background:var(--signal);width:var(--w,25%)}
+.band h3{font-family:var(--f-work);font-stretch:112%;font-weight:650;font-size:1.02rem;letter-spacing:-.008em}
+.band dl{margin:0;display:grid;gap:.5rem}
+.band dt{font-family:var(--f-machine);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.band dd{margin:0;font-size:.88rem;line-height:1.45}
+.stat-rail{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border-top:1px solid var(--hair)}
+.stat-rail>div{padding:1.2rem 1.2rem 0 0;border-right:1px solid var(--hair)}
+.stat-rail>div:last-child{border-right:0}
+.stat-rail dt{font-family:var(--f-machine);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.stat-rail dd{margin:.5rem 0 0;font-size:1.05rem}
+
+/* ── team (Studio page · LC-UX-002): the homepage's credit-row thesis,
+      restated for a document page — row + print, all five identical ── */
+.team{margin-top:2.4rem;border-top:1px solid var(--line)}
+.team-member{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;
+  gap:.2rem 1.2rem;align-items:center;padding:clamp(.9rem,2vw,1.3rem) 0;
+  border-bottom:1px solid var(--line)}
+.team-member .idx{font-family:var(--f-machine);font-size:.7rem;letter-spacing:.1em;
+  color:var(--dim);font-variant-numeric:tabular-nums;grid-row:span 2;align-self:center}
+.team-member h3{font-family:var(--f-studio);font-optical-sizing:none;
+  font-variation-settings:'opsz' 60,'wght' 400,'SOFT' 40,'WONK' 0;font-weight:400;
+  font-size:clamp(1.4rem,3vw,2.3rem);line-height:1.05;letter-spacing:-.016em;margin:0}
+.team-member .role{font-family:var(--f-machine);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:.3rem 0 0}
+.team-portrait{grid-row:span 2;width:clamp(84px,12vw,132px);margin:0}
+.team-portrait img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
+  border-radius:12px;background:var(--plane);box-shadow:0 18px 44px rgba(0,0,0,.45)}
+
+/* ── forms (contact) — hairline inputs in V11 tokens ── */
+.steps{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.step-pip{display:flex;align-items:center;gap:.55rem;font-family:var(--f-machine);
+  font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.step-pip .bar{width:clamp(38px,7vw,72px);height:2px;background:var(--line)}
+.step-pip[aria-current="step"]{color:var(--pg-fg,var(--fg))}
+.step-pip[aria-current="step"] .bar{background:var(--signal)}
+.step-pip[data-state="done"] .bar{background:var(--muted)}
+.fstep{display:none}
+.fstep[data-active="true"]{display:block}
+.fgroup{margin-bottom:1.5rem}
+.fgroup label{display:block;font-family:var(--f-machine);font-size:.64rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.55rem}
+.fgroup .req{color:var(--signal-text-ink)}
+.fgroup input,.fgroup select,.fgroup textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+  border-radius:0;padding:.72rem 0;font:inherit;font-size:1rem;color:var(--pg-fg,var(--fg));
+  transition:border-color var(--d-micro) var(--ease)}
+.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-bottom-color:var(--signal)}
+.fgroup select{cursor:pointer}
+.fgroup select option{background:var(--plane);color:var(--fg)}
+.field-light .fgroup select option{background:var(--field);color:var(--ink)}
+.fgroup textarea{resize:vertical;min-height:104px}
+.err{display:block;color:var(--signal-text);font-size:.8rem;margin-top:.45rem;min-height:1.1em}
+.field-light .err{color:var(--signal-text-ink)}
+.fgroup[data-invalid="true"] input,.fgroup[data-invalid="true"] select,
+.fgroup[data-invalid="true"] textarea{border-bottom-color:var(--signal)}
+.fnav{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;align-items:center}
+.success{border:1px solid var(--signal);padding:clamp(1.4rem,3vw,2.2rem);display:none}
+.success[data-shown="true"]{display:block}
+
+/* red-band + field-signal button variants (V11 grammar on loud grounds) */
+.red-band .btn,.field-signal .btn{border-color:#fff;color:#fff}
+.red-band .btn::before,.field-signal .btn::before{background:#fff}
+.red-band .btn:hover,.red-band .btn:focus-visible,
+.field-signal .btn:hover,.field-signal .btn:focus-visible{color:var(--signal);border-color:#fff}
+.red-band .btn-solid,.field-signal .btn-solid{background:#fff;border-color:#fff;color:var(--signal)}
+.red-band .btn-solid::before,.field-signal .btn-solid::before{background:var(--void)}
+.red-band .btn-solid:hover,.red-band .btn-solid:focus-visible,
+.field-signal .btn-solid:hover,.field-signal .btn-solid:focus-visible{color:#fff;border-color:var(--void)}
+.field-light .btn{color:var(--ink)}
+.field-light .btn:hover,.field-light .btn:focus-visible{color:#fff;border-color:var(--signal)}
+.field-light .btn-solid{color:#fff}
+.field-light .btn-solid:hover,.field-light .btn-solid:focus-visible{color:var(--void);border-color:var(--ink)}
+.field-light .btn-solid::before{background:var(--field)}
+.field-light .btn-solid:hover{color:var(--ink)}
+
+/* ── case-study figures: moderate portrait crop at phone width (LC-UX-025) ── */
+.cs-frame{position:relative;aspect-ratio:2.22/1;overflow:hidden;margin:0}
+@media(max-width:640px){.cs-frame{aspect-ratio:3/2}
+  .cs-frame img{object-fit:cover}}
+
+/* ── no-JS: the document is complete without enhancement ── */
+.no-js .loader{display:none}
+.no-js .rv{clip-path:none}
+.no-js .reveal-type>span{transform:none}
+.no-js .ap-plane .sheet{transform:translateX(-102%)}
+.no-js .ap-mask>.media{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.no-js .fstep{display:block!important;border-top:1px solid var(--line);padding-top:1.4rem;margin-top:1.4rem}
+.no-js .fstep:first-child{border-top:0;padding-top:0;margin-top:0}
+.no-js [data-next],.no-js [data-prev]{display:none}
+.no-js .steps{display:none}
+.no-js .pillar-body{grid-template-rows:1fr}
+@media(max-width:899px){
+  .no-js .menu-btn{display:none}
+  .no-js .menu{position:static;inset:auto;clip-path:none;visibility:visible;
+    flex-direction:column;justify-content:flex-start;padding:5.2rem var(--gut) 1rem;
+    border-bottom:1px solid var(--hair)}
+  .no-js .menu nav a{font-size:1.05rem}
+  .no-js .menu-close{display:none}
+}
+.noscript-note{display:block;padding:.8rem var(--gut);background:var(--plane);
+  border-bottom:1px solid var(--hair);font-size:.8rem;color:var(--dim)}
+
+/* ── reduced motion on document pages: composed, not disabled ── */
+@media(prefers-reduced-motion:reduce){
+  .pg .rv,.pg .rv.rv-armed{clip-path:none}
+  .rv-armed .reveal-type>span,.reveal-type.rv-armed>span{transform:none}
+  .ap-plane.rv-armed .sheet{transform:translateX(-102%)}
+}
+
+/* ── print ── */
+@media print{
+  .rv,.rv.rv-armed{clip-path:none!important}
+  .reveal-type>span{transform:none!important}
+  .ap-plane .sheet{display:none!important}
+  video[data-auto]{display:none!important}
+  .rm-poster{display:block!important}
+}
+
+/* ── EXPRESSION F · the route shutter (LC-UX-004) ──
+   The cinema edit's diagonal blade, covering the viewport between routes.
+   Sits above everything including the menu; inert to input; hidden at rest. */
+.route-shutter{position:fixed;inset:0;z-index:240;background:var(--void);
+  pointer-events:none;visibility:hidden;will-change:clip-path}
+html[data-mode="editorial"] .route-shutter{display:none}
+
+/* ── unified menu details (LC-UX-023/038): the instruments register carries a
+   quiet index; the lower half holds the two facts a lost visitor needs. ── */
+.menu nav a .idx{font-family:var(--f-machine);font-size:.64rem;color:var(--dim);
+  vertical-align:.55em;margin-right:.7rem;letter-spacing:.1em}
+.menu nav a[aria-current="page"]{color:var(--fg)}
+.menu nav a[aria-current="page"] .idx{color:var(--signal)}
+.menu-contact{margin-top:2.2rem;border-top:1px solid var(--hair);padding-top:1.1rem}
+.menu-contact a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--signal)}
+/* social chips: 44px touch floor now that one is live (LC-UX-033) */
+.soc{width:44px;height:44px}
+.soc svg{width:20px;height:20px}
+.soc-pending{opacity:.5}
+a.soc{color:var(--muted)}
+a.soc:hover,a.soc:focus-visible{color:var(--fg);border-color:var(--signal)}
+
+/* ══ P1 CORRECTIONS ═══════════════════════════════════════════════════════ */
+
+/* LC-UX-007 · pressed states: every pressable acknowledges the pointer at
+   press time — ~120ms, restrained, no bounce. */
+.btn,.gate,.soc{transition-property:color,border-color,background-color,transform;
+  transition-duration:180ms,180ms,180ms,120ms;
+  transition-timing-function:var(--ease)}
+.btn:active,.gate:active,a.soc:active,.menu-btn:active{transform:scale(.98)}
+.nav-links a:active{opacity:.55}
+.foot a:active{opacity:.6}
+.pillar-head:active .pillar-verb{transform:translateY(1px)}
+.pillar-verb{transition:transform 120ms var(--ease)}
+
+/* LC-UX-011/021 · derived reds for small interactive text; canonical red
+   stays on marks, rules, large display and the emitted-light thread. */
+.foot a:hover,.foot a:focus-visible{color:var(--signal-text)}
+.st-row.lit .st-n{color:var(--signal-text)}
+.st-row.lit .st-role{color:var(--signal-text)}
+.menu nav a[aria-current="page"] .idx{color:var(--signal-text)}
+.hero-id .spec a:hover,.fin-mail:hover{color:var(--fg)}   /* underline carries the red */
+
+/* LC-UX-006 · the motion control's designed home: safe-area aware, under the
+   menu, dimming when idle, docking above the footer (JS drives .docked). */
+.motion-toggle{z-index:115;
+  right:calc(1rem + env(safe-area-inset-right,0px));
+  bottom:calc(1rem + env(safe-area-inset-bottom,0px));
+  transition:opacity 300ms var(--ease),transform 120ms var(--ease)}
+.motion-toggle:active{transform:scale(.98)}
+.motion-toggle[data-idle="true"]:not(:hover):not(:focus-visible){opacity:.4}
+.motion-toggle.docked{position:absolute}
+@media(max-width:700px){.motion-toggle{font-size:.6rem;padding:.5rem .65rem;letter-spacing:.1em}}
+
+/* LC-UX-009 · the payoff on portrait viewports: the whole group, letterboxed
+   between void bars — the neighbour scene's language — never a two-face crop. */
+@media(max-width:700px){
+  .ph-payoff{background:var(--void)}
+  .ph-payoff img{object-fit:contain;object-position:50% 50%}
+}
+
+/* LC-UX-012 · editorial Dunamis: three designed excerpts instead of the
+   full-height capture walls. Cinematic mode never shows this block. */
+.dun-editorial{display:none}
+html[data-mode="editorial"] .dun-surface{display:none}
+html[data-mode="editorial"] .dun-editorial{display:grid;gap:1.2rem;margin-top:1rem}
+html[data-mode="editorial"] .dun-editorial figure{margin:0;border:1px solid rgba(150,175,225,.30);background:#0a0e16}
+html[data-mode="editorial"] .dun-editorial img{width:100%;height:auto;display:block}
+html[data-mode="editorial"] .dun-editorial figcaption{font-family:var(--f-machine);font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;color:#8e9bb5;padding:.55rem .7rem;
+  border-top:1px solid rgba(150,175,225,.22)}
+@media(min-width:700px){html[data-mode="editorial"] .dun-editorial{grid-template-columns:1fr 1fr}
+  html[data-mode="editorial"] .dun-editorial figure:first-child{grid-column:1/-1}}
+
+/* ══ P2 CORRECTIONS ═══════════════════════════════════════════════════════ */
+
+/* LC-UX-018 · one restrained scroll instrument in the hero: a hairline that
+   fills downward at reading pace. Gone on first scroll; absent in editorial. */
+.scroll-cue{position:absolute;left:var(--gut);bottom:clamp(1.2rem,4svh,2.6rem);
+  display:flex;align-items:center;gap:.55rem;margin:0;
+  font-family:var(--f-machine);font-size:.6rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--dim);z-index:4;
+  transition:opacity 500ms var(--ease)}
+.scroll-cue i{display:block;width:1px;height:30px;background:var(--hair);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;top:0;width:100%;height:38%;
+  background:var(--signal);animation:cueDrop 2.8s var(--ease-io) infinite}
+@keyframes cueDrop{0%{transform:translateY(-110%)}55%{transform:translateY(180%)}100%{transform:translateY(180%)}}
+.scroll-cue.off{opacity:0;pointer-events:none}
+html[data-mode="editorial"] .scroll-cue{display:none}
+@media(prefers-reduced-motion:reduce){.scroll-cue i::after{animation:none;transform:translateY(60%)}}
+@media(max-width:999px){.scroll-cue{bottom:auto;top:calc(var(--safe-top) + 2svh)}}
+
+/* LC-UX-019 · platform integration */
+html{color-scheme:dark;-webkit-tap-highlight-color:transparent}
+a,button,.btn,.menu-btn,.motion-toggle{touch-action:manipulation}
+.menu{overscroll-behavior:contain;
+  padding-left:max(var(--gut),env(safe-area-inset-left,0px));
+  padding-right:max(var(--gut),env(safe-area-inset-right,0px));
+  padding-bottom:max(var(--gut),env(safe-area-inset-bottom,0px))}
+.nav{padding-left:max(var(--gut),env(safe-area-inset-left,0px));
+  padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+.foot{padding-bottom:max(2rem,env(safe-area-inset-bottom,0px))}
+
+/* ── LC-UX-031 · user display preferences: materials go solid, edges harden ── */
+@media (prefers-reduced-transparency: reduce){
+  .nav.scrolled{background:rgba(10,10,11,.97);backdrop-filter:none}
+  .motion-toggle{background:#0a0a0b;backdrop-filter:none}
+  .dun-chrome{backdrop-filter:none}
+  .screen .cap{background:rgba(10,10,11,.97);backdrop-filter:none}
+}
+@media (prefers-contrast: more){
+  :root{--muted:#d6d5d1;--dim:#b8b7b3;--hair:rgba(255,255,255,.28)}
+  .nav.scrolled{background:#0a0a0b;backdrop-filter:none;border-bottom-color:rgba(255,255,255,.4)}
+  .btn{border-width:2px}
+  .field-light{--muted:#3a3936;--dim:#4a4946;--hair:rgba(0,0,0,.35);--line:rgba(0,0,0,.35)}
+}
