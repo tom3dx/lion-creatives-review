@@ -224,9 +224,117 @@
       if (document.hidden) { vids.forEach(function (v) { v.pause(); }); return; }
       if (document.documentElement.getAttribute('data-motion') === 'paused') return;
       vids.forEach(function (v) {
+        /* a clip-hidden cinema cut must not resume on tab return: with the
+           film-audio key it could be UNMUTED, and an invisible film must
+           never be audible */
+        if (getComputedStyle(v).visibility === 'hidden') return;
         var r = v.getBoundingClientRect();
         if (r.top < innerHeight && r.bottom > 0) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
       });
+    });
+  }
+
+  /* ---------- VIDFLOW STREAMS ----------
+     The three event films are Vidflow-hosted (founder request 2026-08-28).
+     Vidflow's gallery iframe is click-to-play with its own chrome and no
+     external API, so each <video data-vidflow> is fed the SAME adaptive
+     HLS (1080p/4K) the Vidflow player itself streams — native HLS where the
+     browser has it (Safari/iOS), hls.js (vendored, loaded once on demand)
+     everywhere else, progressive MP4 as the last resort. The editorial
+     edition never attaches a stream: the posters carry the frame. Non-hero
+     films attach only when their scene approaches, so nothing below the fold
+     costs bandwidth on load. */
+  function vidflow() {
+    var vids = $$('video[data-vidflow]');
+    if (!vids.length || !cinematic) return;
+    var probe = document.createElement('video');
+    var native = probe.canPlayType('application/vnd.apple.mpegurl');
+    var libP = null;
+    function lib() {
+      if (!libP) libP = new Promise(function (res, rej) {
+        var s = document.createElement('script');
+        s.src = 'assets/vendor/hls-1.6.13.min.js'; s.async = true;
+        s.onload = function () { res(window.Hls); }; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+      return libP;
+    }
+    function kick(v) {
+      if (document.documentElement.getAttribute('data-motion') === 'paused') return;
+      var r = v.getBoundingClientRect();
+      if (r.top < innerHeight * 2 && r.bottom > -innerHeight) {
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
+    }
+    function attach(v) {
+      if (v.__vf) return; v.__vf = true;
+      /* §2 privacy minimisation: Vidflow's CDN filenames can carry client
+         names, so the URLs sit base64-encoded in the markup — never as
+         indexable page text. Decoded only here, at attach time. */
+      var hls = atob(v.getAttribute('data-vidflow'));
+      var mp4 = v.getAttribute('data-vidflow-mp4');
+      mp4 = mp4 && atob(mp4);
+      if (native) {
+        v.src = hls; v.load();
+        v.addEventListener('loadedmetadata', function () { kick(v); }, { once: true });
+        return;
+      }
+      lib().then(function (Hls) {
+        if (Hls && Hls.isSupported()) {
+          var h = new Hls({ capLevelToPlayerSize: true, maxBufferLength: 30, backBufferLength: 30 });
+          h.loadSource(hls); h.attachMedia(v);
+          h.on(Hls.Events.MANIFEST_PARSED, function () { kick(v); });
+        } else if (mp4) { v.src = mp4; v.load(); }
+      }).catch(function () { if (mp4) { v.src = mp4; v.load(); } });
+    }
+    var lazy = [];
+    vids.forEach(function (v) {
+      if (v.hasAttribute('data-hero')) attach(v); else lazy.push(v);
+    });
+    if (!lazy.length) return;
+    if (!('IntersectionObserver' in window)) { lazy.forEach(attach); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) { attach(en.target); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '150% 0px 150% 0px', threshold: 0 });
+    lazy.forEach(function (v) { io.observe(v); });
+  }
+
+  /* ---------- FILM AUDIO ----------
+     Every Vidflow-fed film autoplays MUTED and stays muted until the visitor
+     asks for sound; the key toggles the actual media element, never a facade.
+     Each film's key is independent — a new film always starts muted. The key
+     is appended LAST inside its container: the cinema scrub reads the cut's
+     firstElementChild as the media, and the hero engine addresses the film
+     by selector, so order is load-bearing. */
+  function filmAudio() {
+    if (!cinematic) return;
+    var OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.5 8.5H3.5v7h3L11 19z"/><path d="m16 9.5 5 5m0-5-5 5"/></svg>';
+    var ON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.5 8.5H3.5v7h3L11 19z"/><path d="M15.5 9a4.7 4.7 0 0 1 0 6"/><path d="M18 6.6a8.4 8.4 0 0 1 0 10.8"/></svg>';
+    $$('video[data-vidflow]').forEach(function (v) {
+      var host = v.closest('.cut') || v.parentElement;
+      if (!host) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'film-audio';
+      function paint() {
+        b.innerHTML = v.muted ? OFF : ON;
+        b.setAttribute('aria-pressed', String(!v.muted));
+        b.setAttribute('aria-label', v.muted ? 'Turn sound on' : 'Mute video');
+        b.title = v.muted ? 'Turn sound on' : 'Mute video';
+      }
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        v.muted = !v.muted;
+        if (!v.muted) {
+          v.volume = 1;
+          if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        }
+        paint();
+      });
+      v.addEventListener('volumechange', paint);
+      paint();
+      host.appendChild(b);
     });
   }
 
@@ -583,8 +691,9 @@
     film.style.clipPath = poly;
 
     /* the film scales up into the cinema state and eases back for the panel.
-       width:100% + height:auto keeps its native 2.22:1 — letterboxed, never cropped
-       and never upscaled (1600w source shown at 1440 = 0.9x).
+       The Vidflow stream is 16:9 4K; its box holds the site's 2.22:1 band
+       (aspect-ratio in CSS) and the stream cover-crops into it, so the
+       letterbox geometry here is unchanged from the local-excerpt build.
        STATE 3: the media also translates LEFT with the closing clip, so the
        subject physically moves into the left panel — the black that used to eat
        the frame from the right was the founder's §9 rejection. */
@@ -597,6 +706,17 @@
       var dxOpen = mobile ? 0 : mix(8, 0, toFull);
       var dx = (mobile ? 0 : mix(0, -24, toLeft)) + dxOpen; // vw
       media.style.transform = 'translate(-50%,-50%) translateX(' + dx + 'vw) scale(' + (s1 * s3) + ')';
+    }
+
+    /* the film-audio key rides the aperture: parked inside the facet's
+       lower-right corner at rest, it glides to the letterbox's lower-left
+       as the film opens — always inside the visible picture, so the clip
+       never strands a focusable control off-screen */
+    var fa = $('.film-audio', film);
+    if (fa) {
+      var fx = mobile ? mix(80, 0, toFull) : mix(88, 0, toFull);   // vw right
+      var fy = mobile ? mix(-48, 0, toFull) : mix(-20, 0, toFull); // svh up
+      fa.style.transform = 'translate(' + fx + 'vw,' + fy + 'svh)';
     }
 
     /* the opening statement leaves before the cinema state, so nothing is over
@@ -947,7 +1067,8 @@
   }
 
   /* ---------- S5 CINEMA — "The Edit" ----------
-     Scroll advances a six-cut edit of one couple's real day. Bars close first
+     Scroll advances a six-cut edit: a second couple's ask, then the hero
+     couple's day in true order. Bars close first
      and size themselves so the 20:9 frame sits exactly between them; each cut
      arrives through a diagonal blade wipe whose easing is baked into the
      scroll mapping (hard-scrubbed, Apple-style); every cut keeps a slow live
@@ -1286,7 +1407,7 @@
   }
 
   function init() {
-    safeZone(); loader(); nav(); video(); motionToggle(); dunTypewriter(); scrollCue();
+    safeZone(); loader(); nav(); vidflow(); video(); filmAudio(); motionToggle(); dunTypewriter(); scrollCue();
     routeShutter(); reveals(); pillars(); enquiry();
     engine();
   }

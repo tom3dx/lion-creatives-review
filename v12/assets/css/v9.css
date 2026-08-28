@@ -149,6 +149,25 @@ i.sig,em.sig{font-style:italic}
   color:var(--fg);cursor:pointer;backdrop-filter:blur(6px)}
 .motion-toggle:hover,.motion-toggle:focus-visible{border-color:var(--signal)}
 
+/* ══ FILM AUDIO — the sound key on the Vidflow-fed films ═════════════════
+   One key per film, injected by filmAudio() only in the cinematic edition.
+   It lives INSIDE the film plane, so the hero's aperture clip and the cinema
+   blade wipes carry it naturally — it belongs to the picture, not the chrome.
+   Films always START muted; the key hands the visitor the original audio. */
+.film-audio{position:absolute;z-index:7;width:44px;height:44px;margin:0;
+  display:grid;place-items:center;padding:0;cursor:pointer;
+  color:var(--fg);background:rgba(10,10,11,.62);border:1px solid var(--edge);
+  border-radius:50%;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:border-color .2s,background-color .2s}
+.film-audio svg{width:17px;height:17px;display:block;fill:none;
+  stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.film-audio:hover,.film-audio:focus-visible{border-color:var(--signal)}
+.film-audio[aria-pressed="true"]{background:rgba(10,10,11,.85)}
+.hero-film .film-audio{left:calc(var(--gut) + .2rem);bottom:calc(var(--gut) + .4rem)}
+.cut .film-audio{right:calc(var(--gut) + .2rem);
+  bottom:calc(var(--barh,0px) + 1.15rem)}
+html[data-mode="editorial"] .film-audio{display:none}
+
 /* ══ LOADER — V1 integrity treatment, unchanged (founder-approved cat G) ══ */
 .loader{position:fixed;inset:0;z-index:200;background:var(--void);
   display:grid;place-items:center;
@@ -184,9 +203,10 @@ html[data-mode="editorial"] [data-beat]{opacity:1;transform:none;visibility:visi
 
 /* ══ S1 · HERO — aperture → cinema → project ═════════════════════════════
    The film spans the whole stage and is revealed by an interpolated polygon.
-   State 2 shows it FULL WIDTH at its native 2.22:1 with letterbox rather than
-   cropping to fill: the source is 1600x720, so full-width at 1440 is a 0.9x
-   downscale — genuinely sharp, and nothing is cut off the frame. */
+   State 2 shows it FULL WIDTH in the site's 2.22:1 letterbox band. The film is
+   now a Vidflow 16:9 4K stream, so the band is held by an explicit aspect-ratio
+   box and the stream cover-crops into it — the same reframe the earlier local
+   excerpts were cut with, so composition and choreography are unchanged. */
 /* NEVER set position/display here: an ID selector outranks the engine's
    `html[data-mode=cinematic] .scene[data-len] .stage{position:sticky}` and the
    scene silently stops pinning. This exact trap has now bitten three scenes. */
@@ -196,6 +216,11 @@ html[data-mode="editorial"] [data-beat]{opacity:1;transform:none;visibility:visi
 .hero-film video,.hero-film .rm-poster{position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);width:100%;height:auto;min-height:0;
   object-fit:contain;will-change:transform}
+/* the Vidflow stream is 16:9; the band stays 1600:720 and the film covers it
+   (per-film vertical bias is inline on the element, matched to its poster) */
+.hero-film video{aspect-ratio:1600/720;object-fit:cover}
+/* phones re-frame the same stream to the approved 720x900 portrait crop */
+@media(max-width:640px){.hero-film video{aspect-ratio:720/900}}
 .hero-film .rm-poster{display:none}
 html[data-mode="editorial"] .hero-film video{display:none}
 html[data-mode="editorial"] .hero-film .rm-poster{display:block}
@@ -521,8 +546,9 @@ html[data-mode="editorial"] .ph-payoff{position:static;opacity:1;height:min(70sv
   transform:scaleX(var(--ptp,0))}
 
 /* ══ S5 · CINEMA — "The Edit" ════════════════════════════════════════════
-   Six full-bleed cuts of one couple's real day, in true order, on void between
-   letterbox bars. Scroll advances the edit: each frame arrives through a
+   Six full-bleed cuts on void between letterbox bars: a second couple's ask
+   opens the edit (portfolio breadth — the hero owns the water footage), then
+   the hero couple's day runs in true order. Scroll advances the edit: each frame arrives through a
    diagonal blade wipe (hard-scrubbed; the easing lives in the scroll mapping),
    and every cut keeps a slow live settle so no still ever sits dead. The bars
    carry ALL type — nothing is ever written over the picture. */
@@ -531,6 +557,9 @@ html[data-mode="editorial"] .ph-payoff{position:static;opacity:1;height:min(70sv
 .cut{position:absolute;inset:0;margin:0;visibility:hidden;will-change:clip-path}
 .cut img,.cut video{position:absolute;left:50%;top:50%;width:100%;height:auto;
   transform:translate(-50%,-50%);will-change:transform}
+/* the two Vidflow-fed cuts keep the stills' 1600:720 band; the 16:9 stream
+   cover-crops into it exactly as the earlier local excerpts were reframed */
+.cut video{aspect-ratio:1600/720;object-fit:cover}
 /* captions are for the editorial edition and assistive tech; the bars carry
    the visible slate in cinematic mode */
 .cut-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);
@@ -844,7 +873,7 @@ html[data-mode="editorial"] .tech-rule{transform:scaleX(1)}
 html[data-mode="editorial"] .pt-rail i{transform:scaleX(1)}
 
 @media print{
-  .nav,.menu,.loader,.motion-toggle{display:none!important}
+  .nav,.menu,.loader,.motion-toggle,.film-audio{display:none!important}
   body{background:#fff;color:#000}
 }
 

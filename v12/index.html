@@ -86,10 +86,20 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
 <section class="scene" id="hero" data-len="4" aria-label="Introduction">
   <div class="stage">
     <div class="hero-film" data-clearance="public">
-      <video data-auto data-hero autoplay muted playsinline loop preload="auto" poster="assets/media/pw-hero-t76-1600.webp" aria-label="Film excerpt: a couple at golden hour on the water, the ring just revealed">
-        <source src="assets/media/pw-hero-t76-portrait-12s.mp4" type="video/mp4" media="(max-width:640px)">
-        <source src="assets/media/pw-hero-t76-12s.mp4" type="video/mp4">
-      </video>
+      <!-- Vidflow-hosted stream (founder request 2026-08-28). The gallery iframe
+           embed is click-to-play with its own chrome and no external API, so the
+           film is fed the same HLS/MP4 the Vidflow player itself streams —
+           adaptive 1080p/4K, attached by the vidflow() module in v9.js. The
+           object-position matches the poster's crop of the 16:9 master.
+           §2 privacy minimisation: Vidflow's CDN filenames carry the clients'
+           names, so the stream URLs are base64-encoded — the names never sit in
+           the indexable page text. The network layer necessarily sees them; the
+           durable fix is renaming the file inside Vidflow (founder decision). -->
+      <video data-auto data-hero autoplay muted playsinline loop preload="auto" crossorigin="anonymous"
+        data-vidflow="aHR0cHM6Ly9zZTIxZWVmLTEudmYtY2RuLm5ldC84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy91MjlmbGZnOC1vZHB3aTBwai91L0VwaHJlbVJhaHdhRW5nYWdlbWVudDRLX0hvbWVfVmVyX21hc3Rlci5tM3U4"
+        data-vidflow-mp4="aHR0cHM6Ly9zdHJlYW0udmlkZmxvdy5jby84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy91MjlmbGZnOC1vZHB3aTBwai91L0VwaHJlbVJhaHdhRW5nYWdlbWVudDRLX0hvbWVfVmVyX21haW4ubXA0"
+        style="object-position:50% 28%"
+        poster="assets/media/vf-boat-t76-1600.webp" aria-label="Film excerpt: a couple at golden hour on the water, the ring just revealed"></video>
       <img class="rm-poster" src="assets/media/pw-hero-t76-1600.webp" alt="A couple at golden hour on the water, the ring just revealed" loading="eager" decoding="async">
     </div>
 
@@ -339,12 +349,19 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
 </section>
 
 <!-- ══ S5 · CINEMA — the letterbox carries the title; frames stay clean ══ -->
-<section class="scene bars" id="cinema" data-len="3.8" aria-label="The wedding film — a proposal, then a wedding">
+<section class="scene bars" id="cinema" data-len="3.8" aria-label="The wedding films — two proposals, then a wedding">
   <div class="stage">
     <div class="cin-frame" data-clearance="public">
+      <!-- Cut 01 carries a SECOND couple's ask (founder request 2026-08-28): the
+           hero already owns the water footage, so repeating it here read as a
+           one-client portfolio. Vidflow stream, same mechanism as the hero. -->
       <figure class="cut" data-cut="0">
-        <video data-auto muted playsinline loop preload="none" poster="assets/media/pw-the-kneel-1600.webp" aria-label="Film excerpt: the proposal at the flower-dressed bow of the boat"><source src="assets/media/pw-proposal-hero-12s.mp4" type="video/mp4"></video>
-        <figcaption class="cut-cap">01 — The ask · golden hour, on the water</figcaption>
+        <video data-auto muted playsinline loop preload="none" crossorigin="anonymous"
+          data-vidflow="aHR0cHM6Ly9zZTIxZWVmLTEudmYtY2RuLm5ldC84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy9yOWNobXBncS1lNjVuM29uZS91LzRrX1ZpZGVvX21hc3Rlci5tM3U4"
+          data-vidflow-mp4="aHR0cHM6Ly9zdHJlYW0udmlkZmxvdy5jby84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy9yOWNobXBncS1lNjVuM29uZS91LzRrX1ZpZGVvX21haW4ubXA0"
+          style="object-position:50% 18.5%"
+          poster="assets/media/vf-golf-ask-1600.webp" aria-label="Film excerpt: a different couple's proposal — on one knee on the green"></video>
+        <figcaption class="cut-cap">01 — Another ask · on the green</figcaption>
       </figure>
       <figure class="cut" data-cut="1">
         <img src="assets/media/pw-ring-macro-1600.webp" srcset="assets/media/pw-ring-macro-1600.webp 1600w, assets/media/pw-ring-macro-2880.webp 2880w" sizes="100vw" width="1600" height="720" loading="lazy" decoding="async" alt="The ring — a close detail of joined hands">
@@ -355,7 +372,11 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
         <figcaption class="cut-cap">03 — The night · a toast on the water</figcaption>
       </figure>
       <figure class="cut" data-cut="3">
-        <video data-auto muted playsinline loop preload="none" poster="assets/media/pw-nave-wide-1600.webp" aria-label="Film excerpt: the crowned couple before the congregation"><source src="assets/media/pw-ceremony-12s.mp4" type="video/mp4"></video>
+        <video data-auto muted playsinline loop preload="none" crossorigin="anonymous"
+          data-vidflow="aHR0cHM6Ly9zZTIxZWVmLTEudmYtY2RuLm5ldC84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy9rY2cxYjUwcy12MDZreHJpMi91L0MxMjgwMV8xX21hc3Rlci5tM3U4"
+          data-vidflow-mp4="aHR0cHM6Ly9zdHJlYW0udmlkZmxvdy5jby84OTcxMGExOTAvc3R1ZGlvL3dpd2lkMHNyL3ZpZGVvcy9rY2cxYjUwcy12MDZreHJpMi91L0MxMjgwMV8xX21haW4ubXA0"
+          style="object-position:50% 46%"
+          poster="assets/media/vf-church-nave-1600.webp" aria-label="Film excerpt: the crowned couple before the congregation"></video>
         <figcaption class="cut-cap">04 — The ceremony · the church</figcaption>
       </figure>
       <figure class="cut" data-cut="4">
@@ -371,7 +392,7 @@ try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
       <p class="cin-t">A proposal, <i>then a wedding.</i></p>
     </div>
     <div class="cin-bot" aria-hidden="true">
-      <span class="slate">01 / 06 — THE ASK · GOLDEN HOUR, ON THE WATER</span>
+      <span class="slate">01 / 06 — ANOTHER ASK · ON THE GREEN</span>
       <span class="slate">02 / 06 — THE RING · THE DETAIL</span>
       <span class="slate">03 / 06 — THE NIGHT · A TOAST ON THE WATER</span>
       <span class="slate">04 / 06 — THE CEREMONY · THE CHURCH</span>
